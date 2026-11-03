@@ -1,0 +1,62 @@
+{
+  "experiment": "reasc_pgm",
+  "model_id": "google/gemma-3-4b-it",
+  "model_revision": "093f9f388b31de276ce2de164bdc2081324b9767",
+  "temperature": 1.0,
+  "top_p": 0.95,
+  "top_k": 64,
+  "cache_dir": "artifacts/hf_cache",
+  "data_dir": "artifacts/data/reasc_pgm",
+  "run_dir": "artifacts/runs/reasc_pgm",
+  "gpus": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "generation_gpus": [
+    4,
+    5
+  ],
+  "feature_gpu": 6,
+  "judge_gpu": 7,
+  "samples_per_question": 16,
+  "capacity": 32,
+  "judge": {
+    "model_id": "IAAR-Shanghai/xVerify-3B-Ia",
+    "model_revision": "67fdb1841f332753c2c9c597ea66e60e75476641",
+    "source_commit": "3f50a37912992ab89c51bdc8a83a655c85714079",
+    "decoding": "greedy",
+    "max_tokens": 2048
+  },
+  "runtime_deviations": [
+    "Python3.10.12 vs source3.10.16; critical framework pins matched",
+    "Original xVerify-3B-I alias is unavailable; pinned public xVerify-3B-Ia used for all methods",
+    "Low GPU memory fraction and max context8192 for shared devices",
+    "Final extraction overwrite performed per question instead of a second whole-dataset pass; shared bank controlled-port, not byte-identical historical reproduction",
+    "Calibration IDs drawn with isolated Random(0) before model initialization",
+    "Before policy lock: generation switched from serial16 TP2 eager to independent TP1 GPU4/5 replicas, CUDA decode graphs and cross-question batch128. Existing completed records and calibration first responses retained; provenance recorded per response and manifest. New request RNG seed is a deterministic seed0-based hash per question/sample/phase; stochastic temperature/top_p/top_k unchanged."
+  ],
+  "label": "official-policy controlled reproduction; judge/execution adaptations explicitly recorded",
+  "train": {
+    "seed": 42,
+    "epochs": 120,
+    "patience": 20,
+    "lr": 0.001,
+    "weight_decay": 0.001,
+    "question_batch": 32
+  },
+  "caps": [
+    8,
+    16
+  ],
+  "lambdas": [
+    0.0,
+    1e-06,
+    3e-06,
+    1e-05,
+    3e-05,
+    0.0001
+  ],
+  "generation_runtime": "tp1_batched_replicas"
+}

@@ -1,0 +1,10 @@
+# Reuse the host PyTorch/CUDA build in a --system-site-packages venv.
+# Install with pip rather than resolving a replacement CUDA stack with uv.
+transformers==4.57.6
+datasets==4.8.5
+accelerate==1.15.0
+scikit-learn==1.9.1
+math-verify[antlr4_13_2]==0.9.0
+safetensors==0.8.0
+pyarrow==26.0.0
+pytest==9.2.0

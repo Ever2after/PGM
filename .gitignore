@@ -1,0 +1,65 @@
+# Local environments and Python build/test output
+.venv*/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage*
+htmlcov/
+build/
+dist/
+
+# Generated banks, model downloads, weights, logs and runtime state
+/artifacts/
+/data/
+/checkpoints/
+/outputs/
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.joblib
+*.pkl
+*.npz
+*.npy
+*.jsonl
+*.parquet
+*.arrow
+*.log
+*.pid
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+.ipynb_checkpoints/
+
+# Upstream checkouts are installed at pinned commits by scripts/setup_references.py
+/third_party/reasc_official/
+/third_party/reasc_reference/
+/third_party/xverify_official/
+
+# Credentials and machine-specific configuration
+.env
+.env.*
+!.env.example
+.aws/
+.ssh/
+.codex/
+.agents/
+*.pem
+*.key
+credentials.json
+token.json
+
+# Editor / OS files
+.idea/
+.vscode/
+.DS_Store
+._*
+Thumbs.db
+*.swp
+*.swo
+*~

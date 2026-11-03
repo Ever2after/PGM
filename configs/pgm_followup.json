@@ -1,0 +1,38 @@
+{
+  "created_at": "2026-11-02T11:11:01.745069+00:00",
+  "jobs": [
+    "configs/pgm_followup/gemma4b_math.json",
+    "configs/pgm_followup/qwen3b_math.json",
+    "configs/pgm_followup/gemma4b_gsm8k.json",
+    "configs/pgm_followup/qwen3b_gsm8k.json",
+    "configs/pgm_followup/qwen7b_math.json",
+    "configs/pgm_followup/qwen7b_gsm8k.json",
+    "configs/pgm_followup/gemma4b_omnimath.json",
+    "configs/pgm_followup/qwen3b_omnimath.json",
+    "configs/pgm_followup/qwen7b_omnimath.json"
+  ],
+  "gpus": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "train_seeds": [
+    42,
+    43,
+    44
+  ],
+  "primary_seed": 42,
+  "primary_operating_point": "dev-selected no-value; minimum2 patience1 cap16; minimize total output tokens at SC16 dev accuracy minus1pp",
+  "secondary_operating_point": "global-T calibrated fixed0.95; same min/patience/cap",
+  "primary_ablation_contrasts": [
+    "mixture vs alpha1",
+    "mixture vs random",
+    "mixture vs candidate_confidence",
+    "mixture vs deepsets_embedding"
+  ],
+  "multiple_testing": "Holm across four primary structure contrasts per dataset/model; raw CIs also reported",
+  "primary_new_MATH_holdout": "confirm500; existing math500/previous_fresh exploratory",
+  "omni_protocol": "Transfer every model-specific MATH head, calibrator, threshold and baseline offline calibration without Omni labels",
+  "cohort_manifest_sha256": "88af00d38e8ec8810fd56dd0eae4787cc18844939ff82a1acbf6c31acb84f945"
+}

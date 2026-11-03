@@ -1,0 +1,174 @@
+{
+  "experiment": "pgm_asc",
+  "common": {
+    "model_id": "google/gemma-3-4b-it",
+    "model_revision": "093f9f388b31de276ce2de164bdc2081324b9767",
+    "dataset_id": "EleutherAI/hendrycks_math",
+    "dataset_revision": "21a5633873b6a120296cce3e2df9d5550074f4a3",
+    "subjects": [
+      "algebra",
+      "counting_and_probability",
+      "geometry",
+      "intermediate_algebra",
+      "number_theory",
+      "prealgebra",
+      "precalculus"
+    ],
+    "seed": 42,
+    "max_new_tokens": 4096,
+    "temperature": 0.7,
+    "top_p": 0.95,
+    "top_k": 0,
+    "dtype": "bfloat16",
+    "max_model_len": 8192,
+    "max_num_seqs": 128,
+    "max_num_batched_tokens": 8192,
+    "request_chunk_size": 256,
+    "tf_batch_size": 8,
+    "tf_max_batch_tokens": 16384,
+    "logit_chunk_size": 256,
+    "middle_layer": 17,
+    "early_fraction": 0.8,
+    "prompt_suffix": "Solve the problem step by step. Put your final answer inside \\boxed{}.",
+    "cache_dir": "artifacts/hf_cache",
+    "bank_lock_timeout_seconds": 86400
+  },
+  "selector": {
+    "selection_seed": 20261101,
+    "samples_per_question": 32,
+    "gpu_memory_utilization": 0.6,
+    "followup_sizes": {
+      "calibration_a": 150,
+      "calibration_b": 300,
+      "test": 500
+    },
+    "followup_methods": [
+      "mixture",
+      "single",
+      "alpha1",
+      "random",
+      "candidate_mlp",
+      "cges",
+      "asc",
+      "reasc"
+    ],
+    "refit_methods": [
+      "mixture",
+      "single",
+      "alpha1",
+      "random"
+    ],
+    "followup_stages": [
+      "s0_global",
+      "s1_minimum",
+      "s2_patience",
+      "s3_cap",
+      "s4_prefix_calibration",
+      "s5_prefix_loss",
+      "s6_continuation"
+    ],
+    "prefix_buckets": [
+      [
+        1,
+        1
+      ],
+      [
+        2,
+        2
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        5,
+        8
+      ],
+      [
+        9,
+        16
+      ],
+      [
+        17,
+        32
+      ]
+    ],
+    "minimum_grid": [
+      1,
+      2,
+      4,
+      8
+    ],
+    "patience_grid": [
+      1,
+      2,
+      3
+    ],
+    "cap_grid": [
+      8,
+      16,
+      32
+    ],
+    "continuation_lambda_grid": [
+      0.0,
+      1e-06,
+      3e-06,
+      1e-05,
+      3e-05,
+      0.0001
+    ],
+    "continuation_horizon": 4,
+    "followup_epochs": 120
+  },
+  "state": {
+    "selection_seed": 20261105,
+    "samples_per_question": 8,
+    "gpu_memory_utilization": 0.45,
+    "followup_sizes": {
+      "calibration_a": 150,
+      "calibration_b": 300,
+      "test": 1000
+    },
+    "train_gpu": 4,
+    "bank_gpus": [
+      4,
+      5
+    ],
+    "state_epochs": 100,
+    "state_batch_size": 128,
+    "state_lr": 0.003,
+    "state_weight_decay": 0.001,
+    "state_seeds": [
+      42,
+      43,
+      44
+    ],
+    "state_train_questions": 900,
+    "state_dev_questions": 700,
+    "state_folds": 5,
+    "state_kinds": [
+      "mlp",
+      "unmasked",
+      "masked"
+    ],
+    "selectors": [
+      "M",
+      "S"
+    ],
+    "primary_model": "S_masked_seed42",
+    "lambda_grid": [
+      0,
+      1e-06,
+      3e-06,
+      1e-05,
+      3e-05
+    ],
+    "ridge_alpha": 10.0,
+    "bootstrap_repetitions": 10000
+  },
+  "baselines": {
+    "cges": {
+      "confidence": "lns_geom"
+    }
+  }
+}

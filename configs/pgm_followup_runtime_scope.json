@@ -1,0 +1,21 @@
+{
+  "created_at": "2026-11-02T15:20:59.873038+00:00",
+  "original_protocol_sha256": "8d5763f816baea87809c6c2c32c4c66dc41407e58cfcc5780dd1b493acc3f466",
+  "active_jobs": [
+    "configs/pgm_followup/qwen7b_math.json",
+    "configs/pgm_followup/qwen7b_gsm8k.json"
+  ],
+  "deferred_jobs": [
+    "configs/pgm_followup/gemma4b_omnimath.json",
+    "configs/pgm_followup/qwen3b_omnimath.json",
+    "configs/pgm_followup/qwen7b_omnimath.json"
+  ],
+  "reason": "User explicitly deferred Omni-MATH and requested finishing Qwen7B only.",
+  "generation_gpu_by_dataset": {
+    "math": 4,
+    "gsm8k": 5
+  },
+  "feature_gpu": 6,
+  "judge_gpu": 7,
+  "scientific_settings_unchanged": true
+}

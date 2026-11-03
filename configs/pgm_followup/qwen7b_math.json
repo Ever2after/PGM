@@ -1,0 +1,54 @@
+{
+  "cache_dir": "artifacts/hf_cache",
+  "judge": {
+    "model_id": "IAAR-Shanghai/xVerify-3B-Ia",
+    "model_revision": "67fdb1841f332753c2c9c597ea66e60e75476641",
+    "source_commit": "3f50a37912992ab89c51bdc8a83a655c85714079",
+    "decoding": "greedy",
+    "max_tokens": 2048
+  },
+  "gpus": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "generation_gpus": [
+    4,
+    5
+  ],
+  "feature_gpu": 6,
+  "judge_gpu": 7,
+  "train": {
+    "seed": 42,
+    "epochs": 120,
+    "patience": 20,
+    "lr": 0.001,
+    "weight_decay": 0.001,
+    "question_batch": 32
+  },
+  "model_id": "Qwen/Qwen2.5-7B-Instruct",
+  "model_revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+  "model_tag": "qwen7b",
+  "dataset": "math",
+  "run_dir": "artifacts/runs/pgm_followup/qwen7b_math",
+  "data_dir": "artifacts/data/pgm_followup/math",
+  "max_new_tokens": 1024,
+  "evaluation_splits": [
+    "math500",
+    "confirm"
+  ],
+  "train_seeds": [
+    42,
+    43,
+    44
+  ],
+  "capacity": 32,
+  "samples_per_question": 16,
+  "rounded_parameters": 7000000000.0,
+  "label": "PGM necessity study: matched supervision; no continuation; pinned official-model defaults",
+  "temperature": 0.7,
+  "top_p": 0.8,
+  "top_k": 20,
+  "repetition_penalty": 1.05
+}

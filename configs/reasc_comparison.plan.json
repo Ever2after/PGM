@@ -1,0 +1,83 @@
+{
+  "status": "plan_only_not_runnable",
+  "execute": false,
+  "official_commit": "8ee1c76ea0c04bb3cdb81d09bc2655dbc3a8cecb",
+  "model_id": "google/gemma-3-4b-it",
+  "model_revision": "093f9f388b31de276ce2de164bdc2081324b9767",
+  "sampling": {
+    "temperature": 1.0,
+    "top_p": 0.95,
+    "top_k": 64,
+    "requested_logprobs": 20,
+    "samples_per_question": 16,
+    "max_new_tokens": 1024,
+    "seed": 0,
+    "must_verify_resolved_model_defaults": true
+  },
+  "runtime_target": {
+    "vllm": "0.11.0",
+    "torch": "2.8.0",
+    "transformers": "4.56.2",
+    "tensor_parallel_size": 2,
+    "gpus": [
+      4,
+      5
+    ]
+  },
+  "questions": {
+    "train": 800,
+    "dev": 200,
+    "calibration": 128,
+    "math500_benchmark": 500,
+    "fresh_holdout": 500
+  },
+  "planned_responses": 34048,
+  "pgm": {
+    "architecture": "positive_support_partition_mixture",
+    "candidate_capacity": 32,
+    "bank_length": 16,
+    "active_prefix_buckets": [
+      [
+        1,
+        1
+      ],
+      [
+        2,
+        2
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        5,
+        8
+      ],
+      [
+        9,
+        16
+      ]
+    ],
+    "minimum": 2,
+    "patience": 1,
+    "cap_grid": [
+      8,
+      16
+    ],
+    "continuation_horizon": 4,
+    "train_seed": 42
+  },
+  "primary_contrast": {
+    "dataset": "fresh_holdout",
+    "method": "PGM-mixture-full",
+    "baseline": "ReASC-offline-code"
+  },
+  "reference_source": "third_party/reasc_official",
+  "plan": "docs/REASC_PGM_COMPARISON_PLAN.md",
+  "unresolved_before_execution": [
+    "xVerify checkpoint and revision",
+    "exact-runtime compatibility and resolved sampling defaults",
+    "reference policy parity",
+    "frozen cohort membership"
+  ]
+}

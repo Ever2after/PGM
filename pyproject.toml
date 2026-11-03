@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pgm-asc"
+version = "0.1.0"
+description = "Probabilistic graphical models for adaptive self-consistency"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{name = "ever2after"}]
+dependencies = [
+  "numpy>=2,<3",
+  "scipy>=1.14,<2",
+  "torch>=2.8,<3",
+  "scikit-learn>=1.7,<2",
+  "pandas>=2.2,<4",
+  "joblib>=1.4,<2",
+  "filelock>=3.16,<5",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=8,<10", "math-verify[antlr4_13_2]==0.9.0"]
+legacy = ["math-verify[antlr4_13_2]==0.9.0", "matplotlib>=3.9"]
+
+[project.scripts]
+pgm-asc = "pgm_asc.cli:main"
+
+[project.urls]
+Repository = "https://github.com/ever2after/PGM"
+
+[tool.setuptools.packages.find]
+include = ["pgm_asc*"]
+exclude = ["tests*", "third_party*"]

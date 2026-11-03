@@ -1,0 +1,16 @@
+# Recorded environment for ReASC comparison and the model/dataset follow-up.
+# Python 3.10.12; install in a dedicated environment, separate from legacy pins.
+torch==2.8.0
+vllm==0.11.0
+transformers==4.56.2
+datasets==3.6.0
+scikit-learn==1.7.2
+numpy==2.2.6
+scipy==1.15.3
+pandas==2.3.3
+pyarrow==25.0.1
+huggingface-hub==0.36.2
+tokenizers==0.22.2
+safetensors==0.8.0
+filelock==4.1.0
+pytest==8.4.2

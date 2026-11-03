@@ -1,0 +1,42 @@
+{
+  "source_pins.json": {
+    "source": "artifacts/runs/pgm_followup/source_pins.json",
+    "sha256": "726bfca4ed460f9cb80c2e0fb32ac9db8c67a854039fe4b3722bd0e8b3e366a2"
+  },
+  "followup_cohorts.json": {
+    "source": "artifacts/data/pgm_followup/manifest.json",
+    "sha256": "88af00d38e8ec8810fd56dd0eae4787cc18844939ff82a1acbf6c31acb84f945"
+  },
+  "reasc_cohorts.json": {
+    "source": "artifacts/data/reasc_pgm/manifest.json",
+    "sha256": "b4b4705a9e5804ce17c8c5d2c128759b9d2e88913339007a6df272eeea4f384b"
+  },
+  "excluded_problem_hashes.json": {
+    "source": "artifacts/data/pgm_asc/excluded_problem_hashes.json",
+    "sha256": "c30aee5b01ef9c5bfe3f23686cfc0f6b6f2dbb569dcb51f4c7f7897664708493"
+  },
+  "gemma4b_gsm8k_selection_lock.json": {
+    "source": "artifacts/runs/pgm_followup/gemma4b_gsm8k/selection_lock.json",
+    "sha256": "d05bacbf33907ad0ffb0818470013bbf10cef91f7a77d3b113a000130c3d676a"
+  },
+  "gemma4b_math_selection_lock.json": {
+    "source": "artifacts/runs/pgm_followup/gemma4b_math/selection_lock.json",
+    "sha256": "4572eb249b5011602b43afa08acc7e33a5fd75b4c54a35d205155ffe966228df"
+  },
+  "qwen3b_gsm8k_selection_lock.json": {
+    "source": "artifacts/runs/pgm_followup/qwen3b_gsm8k/selection_lock.json",
+    "sha256": "b46a6decb961ca023ea471677b7bc1af48217b2cf13487bcb3deb97e53f53d10"
+  },
+  "qwen3b_math_selection_lock.json": {
+    "source": "artifacts/runs/pgm_followup/qwen3b_math/selection_lock.json",
+    "sha256": "fa89f49701704630a9fdcc9058187632323c1926a8e2a21ac2852e363342f023"
+  },
+  "qwen7b_gsm8k_selection_lock.json": {
+    "source": "artifacts/runs/pgm_followup/qwen7b_gsm8k/selection_lock.json",
+    "sha256": "2ebb5f06fe6859fd796bbf01aadb0e7c9ccaafd9e142fe5b0140c1637e8be875"
+  },
+  "qwen7b_math_selection_lock.json": {
+    "source": "artifacts/runs/pgm_followup/qwen7b_math/selection_lock.json",
+    "sha256": "3261775f19dd60fa3f0c25214c8000daeea7cda2165c127a8884bc2b9aaff857"
+  }
+}
