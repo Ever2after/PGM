@@ -92,6 +92,11 @@ OMP_NUM_THREADS=4 python scripts/followup.py evaluate --cell qwen7b_math --split
 python scripts/followup.py export
 ```
 
+The exporter keeps evaluations already present in `results/followup/metrics.json`
+when their source JSON is absent locally, so a partial artifact bundle can add
+cells without dropping earlier ones. Point it at another bundle root with
+`python scripts/export_results.py --project <bundle root>`.
+
 The `fit` command trains small CPU heads, not the language model. `evaluate`
 replays banks and checks the existing lock. Neither command generates missing
 responses.
@@ -113,6 +118,13 @@ CUDA_VISIBLE_DEVICES=7 python -m pgm_asc.collection.study judge \
   --config configs/pgm_followup/qwen7b_math.json --split confirm --follow
 ```
 
+`scripts/run_cell.py --config <cell config>` runs these four workers itself
+(GPU order: two generation shards, TF features, judge; `--gpus` remaps), for
+calibration/train/dev, then fits and locks, then collects and replays each
+evaluation split. Transfer cells skip collection. `--limit N` is a smoke test
+that collects only the first N calibration questions. `scripts/slurm/cell.sbatch`
+submits it as a whole-node job from the repository root.
+
 Collection for evaluation splits requires the policy lock first. Use the same
 commands with train/dev/calibration to prepare fitting banks before fitting.
 Do not change shard count mid-run without reconciling generation manifests.
@@ -121,11 +133,54 @@ Completed shared Gemma banks are read-only links and must not be overwritten.
 `experiments/study_runner*`, `qwen7_only.py`, and `math_priority.py` are retained
 for the original supervised runs and their runtime amendments. Some reproduce
 an earlier queue or require already fitted cells. The full original queue also
-contains deferred Omni jobs; it is not the public default. Use the explicit
+contains the Omni jobs that were deferred at the time; it is not the public default. Use the explicit
 per-cell commands above for controlled work.
+
+## Omni-MATH and Llama-3.1-8B cells (2026-11-03/04)
+
+These cells were run on KISTI Hangang (one 4x GH200 aarch64 node per job),
+starting from the private artifact bundle `Ever2after/PGM-omni-resume`
+(Hugging Face dataset; snapshot of commit `9ec705a`) that holds the Gemma/Qwen
+locked MATH cells and the fixed 999-question Omni cohort. Gemma/Qwen MATH and
+GSM8K banks are not part of that bundle; their aggregates come from the original
+machine and are retained in `results/followup/metrics.json`. The bundle's own
+runners and manifest are archived in `scripts/omni_bundle/` and
+`results/followup/provenance/omni_bundle_manifest.json`.
+
+- **Omni transfer** (`<model>_omnimath`): each model's locked MATH cell is copied
+  unchanged; no Omni label is used for fitting or selection.
+- **Omni in-domain** (`<model>_omnimath_indomain`): Omni-MATH has no train split.
+  `scripts/prepare_omni_indomain.py` draws calibration/train/dev (128/800/200)
+  with seed 20261103 from the full release (`KbsdJames/Omni-MATH`, revision
+  `40ba231`; 4,428 rows) after removing every test question by normalized problem
+  identity and 14 duplicates. Its manifest is in
+  `results/followup/provenance/omnimath_indomain_cohorts.json`. The test cohort
+  file is copied byte-for-byte, and the in-domain and transfer cells share one test
+  bank through read-only links, so they replay identical responses.
+- **Llama-3.1-8B-Instruct** (`llama8b_*`, revision `0e9e39f`): native sampling
+  from its generation config (temperature 0.6, top-p 0.9; top-k and repetition
+  penalty absent, so vLLM 0.11 defaults 0 and 1.0), recorded in
+  `provenance/llama8b_source_pin.json`. Cohorts are the same as for the other
+  models; MATH is evaluated on MATH500 only.
+
+Two runtime wrappers live in `scripts/` rather than `pgm_asc/`, so source hashes
+registered in existing locks stay valid. `tf_worker.py` fills a missing pad token
+with EOS: padding is right-sided and attention-masked, so features are unchanged,
+and it is a no-op for Gemma/Qwen. `gen_worker.py` applies
+`PGM_GPU_MEMORY_UTILIZATION`. At the code's fixed 0.25 fraction, Llama's Omni
+generation got a 63k-token KV cache; preemption then tripped a vLLM 0.11
+prompt-logprob assertion. That one cell ran with 0.5 after 216 train questions
+had completed at 0.25. Sampling, seeds and request identities are unchanged.
+
+PyTorch publishes 2.8.0 for aarch64 only as a CUDA 12.9 build, so
+`torch==2.8.0+cu129` replaced the recorded CUDA 12.8 build; vLLM 0.11.0 and
+Transformers 4.56.2 match the record. The test-time `math-verify` dependency comes
+from the `[test]` extra, not `requirements-reasc.txt`.
 
 ## Interpretation
 
+- In-domain and cross-dataset results are reported separately. Omni transfer
+  operating points were selected on MATH dev only; in-domain Omni points on Omni dev.
 - MATH500 matches the official ReASC benchmark problem set. Follow-up confirm500
   is a distinct subset of original MATH test, excluding historical cohorts.
 - MATH train/dev are original-train questions. The inherited ReASC calibration

@@ -11,9 +11,10 @@
 | [ReASC execution notes](REASC_PGM_EXECUTION.md) | Sampling, extraction, judge, runtime adaptations |
 | [Reference audit](REASC_REFERENCE_AUDIT.md) | Original archive and official implementation comparison |
 
-The recorded protocol includes an Omni-MATH transfer experiment. That part was
-subsequently deferred; the retained configs are planned cells, not completed
-results. Current MATH/GSM8K learned policies have no continuation head.
+Results are reported in-domain (MATH500, GSM8K, Omni-MATH fitted on Omni-MATH)
+and as MATH → Omni-MATH transfer. The Omni and Llama-3.1-8B cells were added
+after the original protocol; see the reproduction guide for their cohorts and
+runtime notes. Current learned policies have no continuation head.
 
 ## Historical V2/V5 work
 

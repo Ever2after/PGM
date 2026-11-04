@@ -1,0 +1,6612 @@
+{
+  "created_at": "2026-11-03T20:40:19.512792+00:00",
+  "holdout_accessed": false,
+  "dataset": "omnimath",
+  "model_tag": "qwen7b",
+  "methods": {
+    "mixture_s42": {
+      "checkpoint": "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/mixture/seed42/checkpoint.pt",
+      "spec": {
+        "mode": "mixture"
+      },
+      "seed": 42,
+      "calibrator": {
+        "kind": "global",
+        "T": 1.0838212075195846,
+        "fit": {
+          "T": 1.0838212075195846,
+          "nll": 0.9022700146029252,
+          "before_nll": 0.9050628052204017,
+          "log_T_bounds": [
+            -4,
+            4
+          ]
+        }
+      },
+      "selected": {
+        "accuracy": 0.33,
+        "mean_tokens": 10555.78,
+        "mean_samples": 12.17,
+        "policy": {
+          "minimum": 2,
+          "patience": 1,
+          "cap": 16,
+          "gamma": 0.5
+        },
+        "feasible": true
+      },
+      "fixed95": {
+        "minimum": 2,
+        "patience": 1,
+        "cap": 16,
+        "gamma": 0.95
+      },
+      "candidates": [
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 10555.78,
+          "mean_samples": 12.17,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.5
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 10934.505,
+          "mean_samples": 12.685,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.6
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 11357.86,
+          "mean_samples": 13.215,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.7
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 11753.555,
+          "mean_samples": 13.775,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.8
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12030.925,
+          "mean_samples": 14.19,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.85
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12311.255,
+          "mean_samples": 14.64,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.9
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12408.325,
+          "mean_samples": 14.86,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.925
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12491.92,
+          "mean_samples": 15.025,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.95
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12643.975,
+          "mean_samples": 15.355,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.975
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12713.02,
+          "mean_samples": 15.565,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.99
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12758.975,
+          "mean_samples": 15.71,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.995
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12828.115,
+          "mean_samples": 16.0,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": null
+          },
+          "feasible": true
+        }
+      ]
+    },
+    "uniform_s42": {
+      "checkpoint": "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/uniform/seed42/checkpoint.pt",
+      "spec": {
+        "mode": "uniform"
+      },
+      "seed": 42,
+      "calibrator": {
+        "kind": "global",
+        "T": 1.0970633765666755,
+        "fit": {
+          "T": 1.0970633765666755,
+          "nll": 0.9048599051504722,
+          "before_nll": 0.9085948998372768,
+          "log_T_bounds": [
+            -4,
+            4
+          ]
+        }
+      },
+      "selected": {
+        "accuracy": 0.335,
+        "mean_tokens": 10422.455,
+        "mean_samples": 12.05,
+        "policy": {
+          "minimum": 2,
+          "patience": 1,
+          "cap": 16,
+          "gamma": 0.5
+        },
+        "feasible": true
+      },
+      "fixed95": {
+        "minimum": 2,
+        "patience": 1,
+        "cap": 16,
+        "gamma": 0.95
+      },
+      "candidates": [
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 10422.455,
+          "mean_samples": 12.05,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.5
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 10930.105,
+          "mean_samples": 12.685,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.6
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 11186.455,
+          "mean_samples": 13.045,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.7
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 11617.81,
+          "mean_samples": 13.61,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.8
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 11939.71,
+          "mean_samples": 14.045,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.85
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12291.33,
+          "mean_samples": 14.655,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.9
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12394.71,
+          "mean_samples": 14.87,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.925
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12478.315,
+          "mean_samples": 15.015,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.95
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12658.405,
+          "mean_samples": 15.4,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.975
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12729.465,
+          "mean_samples": 15.62,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.99
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12773.33,
+          "mean_samples": 15.755,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.995
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12828.115,
+          "mean_samples": 16.0,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": null
+          },
+          "feasible": true
+        }
+      ]
+    },
+    "random_s42": {
+      "checkpoint": "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/random/seed42/checkpoint.pt",
+      "spec": {
+        "mode": "random"
+      },
+      "seed": 42,
+      "calibrator": {
+        "kind": "global",
+        "T": 1.0856316604251413,
+        "fit": {
+          "T": 1.0856316604251413,
+          "nll": 0.9033247828987856,
+          "before_nll": 0.9062332787005767,
+          "log_T_bounds": [
+            -4,
+            4
+          ]
+        }
+      },
+      "selected": {
+        "accuracy": 0.33,
+        "mean_tokens": 10477.32,
+        "mean_samples": 12.1,
+        "policy": {
+          "minimum": 2,
+          "patience": 1,
+          "cap": 16,
+          "gamma": 0.5
+        },
+        "feasible": true
+      },
+      "fixed95": {
+        "minimum": 2,
+        "patience": 1,
+        "cap": 16,
+        "gamma": 0.95
+      },
+      "candidates": [
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 10477.32,
+          "mean_samples": 12.1,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.5
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 10920.36,
+          "mean_samples": 12.675,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.6
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 11357.1,
+          "mean_samples": 13.21,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.7
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 11743.07,
+          "mean_samples": 13.75,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.8
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12025.75,
+          "mean_samples": 14.18,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.85
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12299.345,
+          "mean_samples": 14.62,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.9
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12395.225,
+          "mean_samples": 14.845,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.925
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12475.745,
+          "mean_samples": 14.995,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.95
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12646.055,
+          "mean_samples": 15.355,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.975
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12714.455,
+          "mean_samples": 15.57,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.99
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12755.87,
+          "mean_samples": 15.7,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.995
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12828.115,
+          "mean_samples": 16.0,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": null
+          },
+          "feasible": true
+        }
+      ]
+    },
+    "alpha1_s42": {
+      "checkpoint": "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/alpha1/seed42/checkpoint.pt",
+      "spec": {
+        "mode": "mixture",
+        "alpha": 1.0
+      },
+      "seed": 42,
+      "calibrator": {
+        "kind": "global",
+        "T": 1.08172438770799,
+        "fit": {
+          "T": 1.08172438770799,
+          "nll": 0.9224135216353253,
+          "before_nll": 0.9250731487716126,
+          "log_T_bounds": [
+            -4,
+            4
+          ]
+        }
+      },
+      "selected": {
+        "accuracy": 0.335,
+        "mean_tokens": 10617.65,
+        "mean_samples": 12.205,
+        "policy": {
+          "minimum": 2,
+          "patience": 1,
+          "cap": 16,
+          "gamma": 0.5
+        },
+        "feasible": true
+      },
+      "fixed95": {
+        "minimum": 2,
+        "patience": 1,
+        "cap": 16,
+        "gamma": 0.95
+      },
+      "candidates": [
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 10617.65,
+          "mean_samples": 12.205,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.5
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 11039.145,
+          "mean_samples": 12.72,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.6
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 11404.79,
+          "mean_samples": 13.19,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.7
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 11762.98,
+          "mean_samples": 13.76,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.8
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 11991.29,
+          "mean_samples": 14.19,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.85
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12278.605,
+          "mean_samples": 14.69,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.9
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12380.87,
+          "mean_samples": 14.91,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.925
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12481.65,
+          "mean_samples": 15.095,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.95
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12646.515,
+          "mean_samples": 15.46,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.975
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12756.305,
+          "mean_samples": 15.71,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.99
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12773.155,
+          "mean_samples": 15.755,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.995
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12828.115,
+          "mean_samples": 16.0,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": null
+          },
+          "feasible": true
+        }
+      ]
+    },
+    "single_partition_s42": {
+      "checkpoint": "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/single_partition/seed42/checkpoint.pt",
+      "spec": {
+        "mode": "single",
+        "partition": 1
+      },
+      "seed": 42,
+      "calibrator": {
+        "kind": "global",
+        "T": 1.0949702269975163,
+        "fit": {
+          "T": 1.0949702269975163,
+          "nll": 0.9153622262251315,
+          "before_nll": 0.9188865150019708,
+          "log_T_bounds": [
+            -4,
+            4
+          ]
+        }
+      },
+      "selected": {
+        "accuracy": 0.335,
+        "mean_tokens": 10706.33,
+        "mean_samples": 12.345,
+        "policy": {
+          "minimum": 2,
+          "patience": 1,
+          "cap": 16,
+          "gamma": 0.5
+        },
+        "feasible": true
+      },
+      "fixed95": {
+        "minimum": 2,
+        "patience": 1,
+        "cap": 16,
+        "gamma": 0.95
+      },
+      "candidates": [
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 10706.33,
+          "mean_samples": 12.345,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.5
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 11033.98,
+          "mean_samples": 12.775,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.6
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 11349.305,
+          "mean_samples": 13.155,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.7
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 11769.61,
+          "mean_samples": 13.75,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.8
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 11976.98,
+          "mean_samples": 14.085,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.85
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12242.41,
+          "mean_samples": 14.54,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.9
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12324.56,
+          "mean_samples": 14.7,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.925
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12406.105,
+          "mean_samples": 14.895,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.95
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12554.77,
+          "mean_samples": 15.2,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.975
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12692.15,
+          "mean_samples": 15.5,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.99
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12725.945,
+          "mean_samples": 15.6,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.995
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12828.115,
+          "mean_samples": 16.0,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": null
+          },
+          "feasible": true
+        }
+      ]
+    },
+    "all_one_s42": {
+      "checkpoint": "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/all_one/seed42/checkpoint.pt",
+      "spec": {
+        "mode": "single",
+        "partition": 0
+      },
+      "seed": 42,
+      "calibrator": {
+        "kind": "global",
+        "T": 1.0800559080995134,
+        "fit": {
+          "T": 1.0800559080995134,
+          "nll": 0.9077499730353873,
+          "before_nll": 0.9102995774753432,
+          "log_T_bounds": [
+            -4,
+            4
+          ]
+        }
+      },
+      "selected": {
+        "accuracy": 0.33,
+        "mean_tokens": 10730.45,
+        "mean_samples": 12.405,
+        "policy": {
+          "minimum": 2,
+          "patience": 1,
+          "cap": 16,
+          "gamma": 0.5
+        },
+        "feasible": true
+      },
+      "fixed95": {
+        "minimum": 2,
+        "patience": 1,
+        "cap": 16,
+        "gamma": 0.95
+      },
+      "candidates": [
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 10730.45,
+          "mean_samples": 12.405,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.5
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 10978.825,
+          "mean_samples": 12.74,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.6
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 11352.07,
+          "mean_samples": 13.2,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.7
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 11717.185,
+          "mean_samples": 13.735,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.8
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 11980.1,
+          "mean_samples": 14.085,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.85
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12193.755,
+          "mean_samples": 14.465,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.9
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12354.26,
+          "mean_samples": 14.755,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.925
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12446.43,
+          "mean_samples": 14.945,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.95
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12581.05,
+          "mean_samples": 15.245,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.975
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12698.39,
+          "mean_samples": 15.515,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.99
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12725.34,
+          "mean_samples": 15.605,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.995
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12828.115,
+          "mean_samples": 16.0,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": null
+          },
+          "feasible": true
+        }
+      ]
+    },
+    "singletons_s42": {
+      "checkpoint": "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/singletons/seed42/checkpoint.pt",
+      "spec": {
+        "mode": "single",
+        "partition": 5
+      },
+      "seed": 42,
+      "calibrator": {
+        "kind": "global",
+        "T": 1.0817243767326583,
+        "fit": {
+          "T": 1.0817243767326583,
+          "nll": 0.9224135175707777,
+          "before_nll": 0.925073144007015,
+          "log_T_bounds": [
+            -4,
+            4
+          ]
+        }
+      },
+      "selected": {
+        "accuracy": 0.335,
+        "mean_tokens": 10617.65,
+        "mean_samples": 12.205,
+        "policy": {
+          "minimum": 2,
+          "patience": 1,
+          "cap": 16,
+          "gamma": 0.5
+        },
+        "feasible": true
+      },
+      "fixed95": {
+        "minimum": 2,
+        "patience": 1,
+        "cap": 16,
+        "gamma": 0.95
+      },
+      "candidates": [
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 10617.65,
+          "mean_samples": 12.205,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.5
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 11039.145,
+          "mean_samples": 12.72,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.6
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 11404.79,
+          "mean_samples": 13.19,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.7
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 11762.98,
+          "mean_samples": 13.76,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.8
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 11991.29,
+          "mean_samples": 14.19,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.85
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12278.605,
+          "mean_samples": 14.69,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.9
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12380.87,
+          "mean_samples": 14.91,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.925
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12481.65,
+          "mean_samples": 15.095,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.95
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12646.515,
+          "mean_samples": 15.46,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.975
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12756.305,
+          "mean_samples": 15.71,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.99
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12773.155,
+          "mean_samples": 15.755,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.995
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12828.115,
+          "mean_samples": 16.0,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": null
+          },
+          "feasible": true
+        }
+      ]
+    },
+    "candidate_counts_s42": {
+      "checkpoint": "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/candidate_counts/seed42/checkpoint.pt",
+      "spec": {
+        "mode": "candidate_mlp",
+        "count_only": true
+      },
+      "seed": 42,
+      "calibrator": {
+        "kind": "global",
+        "T": 1.0298806822575746,
+        "fit": {
+          "T": 1.0298806822575746,
+          "nll": 0.9616182239341513,
+          "before_nll": 0.961968613770178,
+          "log_T_bounds": [
+            -4,
+            4
+          ]
+        }
+      },
+      "selected": {
+        "accuracy": 0.335,
+        "mean_tokens": 9789.705,
+        "mean_samples": 11.165,
+        "policy": {
+          "minimum": 2,
+          "patience": 1,
+          "cap": 16,
+          "gamma": 0.5
+        },
+        "feasible": true
+      },
+      "fixed95": {
+        "minimum": 2,
+        "patience": 1,
+        "cap": 16,
+        "gamma": 0.95
+      },
+      "candidates": [
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 9789.705,
+          "mean_samples": 11.165,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.5
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 10935.33,
+          "mean_samples": 12.745,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.6
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 11334.855,
+          "mean_samples": 13.305,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.7
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12746.94,
+          "mean_samples": 15.82,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.8
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12828.115,
+          "mean_samples": 16.0,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.85
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12828.115,
+          "mean_samples": 16.0,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.9
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12828.115,
+          "mean_samples": 16.0,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.925
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12828.115,
+          "mean_samples": 16.0,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.95
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12828.115,
+          "mean_samples": 16.0,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.975
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12828.115,
+          "mean_samples": 16.0,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.99
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12828.115,
+          "mean_samples": 16.0,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.995
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12828.115,
+          "mean_samples": 16.0,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": null
+          },
+          "feasible": true
+        }
+      ]
+    },
+    "candidate_confidence_s42": {
+      "checkpoint": "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/candidate_confidence/seed42/checkpoint.pt",
+      "spec": {
+        "mode": "candidate_mlp"
+      },
+      "seed": 42,
+      "calibrator": {
+        "kind": "global",
+        "T": 1.0652188561894793,
+        "fit": {
+          "T": 1.0652188561894793,
+          "nll": 0.8856254499513059,
+          "before_nll": 0.8873420746863183,
+          "log_T_bounds": [
+            -4,
+            4
+          ]
+        }
+      },
+      "selected": {
+        "accuracy": 0.335,
+        "mean_tokens": 10597.905,
+        "mean_samples": 12.14,
+        "policy": {
+          "minimum": 2,
+          "patience": 1,
+          "cap": 16,
+          "gamma": 0.5
+        },
+        "feasible": true
+      },
+      "fixed95": {
+        "minimum": 2,
+        "patience": 1,
+        "cap": 16,
+        "gamma": 0.95
+      },
+      "candidates": [
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 10597.905,
+          "mean_samples": 12.14,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.5
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 11093.83,
+          "mean_samples": 12.795,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.6
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 11601.875,
+          "mean_samples": 13.455,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.7
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 11945.52,
+          "mean_samples": 13.95,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.8
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12241.275,
+          "mean_samples": 14.435,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.85
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12424.62,
+          "mean_samples": 14.77,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.9
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12516.805,
+          "mean_samples": 14.99,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.925
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12663.905,
+          "mean_samples": 15.41,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.95
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12758.18,
+          "mean_samples": 15.67,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.975
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12804.205,
+          "mean_samples": 15.825,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.99
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12821.99,
+          "mean_samples": 15.93,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.995
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12828.115,
+          "mean_samples": 16.0,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": null
+          },
+          "feasible": true
+        }
+      ]
+    },
+    "deepsets_confidence_s42": {
+      "checkpoint": "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/deepsets_confidence/seed42/checkpoint.pt",
+      "spec": {
+        "mode": "deepsets"
+      },
+      "seed": 42,
+      "calibrator": {
+        "kind": "global",
+        "T": 1.1368301235159008,
+        "fit": {
+          "T": 1.1368301235159008,
+          "nll": 0.9511277565814695,
+          "before_nll": 0.958406452840926,
+          "log_T_bounds": [
+            -4,
+            4
+          ]
+        }
+      },
+      "selected": {
+        "accuracy": 0.335,
+        "mean_tokens": 10442.375,
+        "mean_samples": 12.065,
+        "policy": {
+          "minimum": 2,
+          "patience": 1,
+          "cap": 16,
+          "gamma": 0.5
+        },
+        "feasible": true
+      },
+      "fixed95": {
+        "minimum": 2,
+        "patience": 1,
+        "cap": 16,
+        "gamma": 0.95
+      },
+      "candidates": [
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 10442.375,
+          "mean_samples": 12.065,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.5
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 11084.775,
+          "mean_samples": 12.855,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.6
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 11465.055,
+          "mean_samples": 13.34,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.7
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 11948.02,
+          "mean_samples": 14.08,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.8
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12191.86,
+          "mean_samples": 14.455,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.85
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12374.17,
+          "mean_samples": 14.82,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.9
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12469.01,
+          "mean_samples": 14.985,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.925
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12547.71,
+          "mean_samples": 15.15,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.95
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12669.05,
+          "mean_samples": 15.425,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.975
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12732.075,
+          "mean_samples": 15.625,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.99
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12771.745,
+          "mean_samples": 15.75,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.995
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12828.115,
+          "mean_samples": 16.0,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": null
+          },
+          "feasible": true
+        }
+      ]
+    },
+    "deepsets_embedding_s42": {
+      "checkpoint": "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/deepsets_embedding/seed42/checkpoint.pt",
+      "spec": {
+        "mode": "deepsets",
+        "use_embeddings": true
+      },
+      "seed": 42,
+      "calibrator": {
+        "kind": "global",
+        "T": 1.1239598845348069,
+        "fit": {
+          "T": 1.1239598845348069,
+          "nll": 0.8780712219264339,
+          "before_nll": 0.8838099791265769,
+          "log_T_bounds": [
+            -4,
+            4
+          ]
+        }
+      },
+      "selected": {
+        "accuracy": 0.33,
+        "mean_tokens": 11109.65,
+        "mean_samples": 12.9,
+        "policy": {
+          "minimum": 2,
+          "patience": 1,
+          "cap": 16,
+          "gamma": 0.5
+        },
+        "feasible": true
+      },
+      "fixed95": {
+        "minimum": 2,
+        "patience": 1,
+        "cap": 16,
+        "gamma": 0.95
+      },
+      "candidates": [
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 11109.65,
+          "mean_samples": 12.9,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.5
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 11489.605,
+          "mean_samples": 13.365,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.6
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 11733.23,
+          "mean_samples": 13.705,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.7
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 11970.245,
+          "mean_samples": 14.035,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.8
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12034.59,
+          "mean_samples": 14.145,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.85
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12142.125,
+          "mean_samples": 14.315,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.9
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12208.01,
+          "mean_samples": 14.43,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.925
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12279.595,
+          "mean_samples": 14.58,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.95
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12362.21,
+          "mean_samples": 14.77,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.975
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12455.71,
+          "mean_samples": 14.945,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.99
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12511.745,
+          "mean_samples": 15.06,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.995
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12828.115,
+          "mean_samples": 16.0,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": null
+          },
+          "feasible": true
+        }
+      ]
+    },
+    "same_head_single_s42": {
+      "checkpoint": "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/same_head_single/seed42/checkpoint.pt",
+      "seed": 42,
+      "calibrator": {
+        "kind": "global",
+        "T": 1.1275959618753628,
+        "fit": {
+          "T": 1.1275959618753628,
+          "nll": 0.9155684447910595,
+          "before_nll": 0.9219784827969328,
+          "log_T_bounds": [
+            -4,
+            4
+          ]
+        }
+      },
+      "selected": {
+        "accuracy": 0.335,
+        "mean_tokens": 10921.305,
+        "mean_samples": 12.575,
+        "policy": {
+          "minimum": 2,
+          "patience": 1,
+          "cap": 16,
+          "gamma": 0.5
+        },
+        "feasible": true
+      },
+      "fixed95": {
+        "minimum": 2,
+        "patience": 1,
+        "cap": 16,
+        "gamma": 0.95
+      },
+      "intervention_from": "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/mixture/seed42/checkpoint.pt"
+    },
+    "mixture_s43": {
+      "checkpoint": "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/mixture/seed43/checkpoint.pt",
+      "spec": {
+        "mode": "mixture"
+      },
+      "seed": 43,
+      "calibrator": {
+        "kind": "global",
+        "T": 1.0648916374958048,
+        "fit": {
+          "T": 1.0648916374958048,
+          "nll": 0.8953543725121923,
+          "before_nll": 0.8970181824506143,
+          "log_T_bounds": [
+            -4,
+            4
+          ]
+        }
+      },
+      "selected": {
+        "accuracy": 0.34,
+        "mean_tokens": 10593.185,
+        "mean_samples": 12.23,
+        "policy": {
+          "minimum": 2,
+          "patience": 1,
+          "cap": 16,
+          "gamma": 0.5
+        },
+        "feasible": true
+      },
+      "fixed95": {
+        "minimum": 2,
+        "patience": 1,
+        "cap": 16,
+        "gamma": 0.95
+      },
+      "candidates": [
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 10593.185,
+          "mean_samples": 12.23,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.5
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 10881.02,
+          "mean_samples": 12.575,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.6
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 11276.305,
+          "mean_samples": 13.15,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.7
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 11699.54,
+          "mean_samples": 13.695,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.8
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 11943.65,
+          "mean_samples": 14.025,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.85
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 12187.205,
+          "mean_samples": 14.505,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.9
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 12274.79,
+          "mean_samples": 14.69,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.925
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 12414.02,
+          "mean_samples": 14.94,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.95
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 12576.205,
+          "mean_samples": 15.26,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.975
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 12668.835,
+          "mean_samples": 15.455,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.99
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 12714.165,
+          "mean_samples": 15.59,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.995
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 12828.115,
+          "mean_samples": 16.0,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": null
+          },
+          "feasible": true
+        }
+      ]
+    },
+    "uniform_s43": {
+      "checkpoint": "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/uniform/seed43/checkpoint.pt",
+      "spec": {
+        "mode": "uniform"
+      },
+      "seed": 43,
+      "calibrator": {
+        "kind": "global",
+        "T": 1.1153976120738456,
+        "fit": {
+          "T": 1.1153976120738456,
+          "nll": 0.899374662873943,
+          "before_nll": 0.904540493129298,
+          "log_T_bounds": [
+            -4,
+            4
+          ]
+        }
+      },
+      "selected": {
+        "accuracy": 0.335,
+        "mean_tokens": 10396.79,
+        "mean_samples": 12.005,
+        "policy": {
+          "minimum": 2,
+          "patience": 1,
+          "cap": 16,
+          "gamma": 0.5
+        },
+        "feasible": true
+      },
+      "fixed95": {
+        "minimum": 2,
+        "patience": 1,
+        "cap": 16,
+        "gamma": 0.95
+      },
+      "candidates": [
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 10396.79,
+          "mean_samples": 12.005,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.5
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 10896.835,
+          "mean_samples": 12.605,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.6
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 11273.295,
+          "mean_samples": 13.15,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.7
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 11652.545,
+          "mean_samples": 13.64,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.8
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 11938.695,
+          "mean_samples": 14.09,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.85
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12268.33,
+          "mean_samples": 14.62,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.9
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12366.995,
+          "mean_samples": 14.81,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.925
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12492.54,
+          "mean_samples": 15.045,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.95
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12616.855,
+          "mean_samples": 15.315,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.975
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12685.185,
+          "mean_samples": 15.505,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.99
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12729.705,
+          "mean_samples": 15.635,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.995
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12828.115,
+          "mean_samples": 16.0,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": null
+          },
+          "feasible": true
+        }
+      ]
+    },
+    "random_s43": {
+      "checkpoint": "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/random/seed43/checkpoint.pt",
+      "spec": {
+        "mode": "random"
+      },
+      "seed": 43,
+      "calibrator": {
+        "kind": "global",
+        "T": 1.0674453854604147,
+        "fit": {
+          "T": 1.0674453854604147,
+          "nll": 0.8968968053323013,
+          "before_nll": 0.8986897674619394,
+          "log_T_bounds": [
+            -4,
+            4
+          ]
+        }
+      },
+      "selected": {
+        "accuracy": 0.335,
+        "mean_tokens": 10584.03,
+        "mean_samples": 12.225,
+        "policy": {
+          "minimum": 2,
+          "patience": 1,
+          "cap": 16,
+          "gamma": 0.5
+        },
+        "feasible": true
+      },
+      "fixed95": {
+        "minimum": 2,
+        "patience": 1,
+        "cap": 16,
+        "gamma": 0.95
+      },
+      "candidates": [
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 10584.03,
+          "mean_samples": 12.225,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.5
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 10891.675,
+          "mean_samples": 12.6,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.6
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 11286.375,
+          "mean_samples": 13.16,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.7
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 11707.465,
+          "mean_samples": 13.705,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.8
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 11947.18,
+          "mean_samples": 14.03,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.85
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12178.22,
+          "mean_samples": 14.485,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.9
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12272.03,
+          "mean_samples": 14.695,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.925
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12408.93,
+          "mean_samples": 14.93,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.95
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12575.245,
+          "mean_samples": 15.265,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.975
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12668.905,
+          "mean_samples": 15.455,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.99
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12715.94,
+          "mean_samples": 15.6,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.995
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12828.115,
+          "mean_samples": 16.0,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": null
+          },
+          "feasible": true
+        }
+      ]
+    },
+    "alpha1_s43": {
+      "checkpoint": "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/alpha1/seed43/checkpoint.pt",
+      "spec": {
+        "mode": "mixture",
+        "alpha": 1.0
+      },
+      "seed": 43,
+      "calibrator": {
+        "kind": "global",
+        "T": 1.0748958644108852,
+        "fit": {
+          "T": 1.0748958644108852,
+          "nll": 0.9125015154128938,
+          "before_nll": 0.9147194316923897,
+          "log_T_bounds": [
+            -4,
+            4
+          ]
+        }
+      },
+      "selected": {
+        "accuracy": 0.34,
+        "mean_tokens": 10604.505,
+        "mean_samples": 12.21,
+        "policy": {
+          "minimum": 2,
+          "patience": 1,
+          "cap": 16,
+          "gamma": 0.5
+        },
+        "feasible": true
+      },
+      "fixed95": {
+        "minimum": 2,
+        "patience": 1,
+        "cap": 16,
+        "gamma": 0.95
+      },
+      "candidates": [
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 10604.505,
+          "mean_samples": 12.21,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.5
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 11007.545,
+          "mean_samples": 12.755,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.6
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 11223.285,
+          "mean_samples": 13.06,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.7
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 11721.67,
+          "mean_samples": 13.76,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.8
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 11945.595,
+          "mean_samples": 14.125,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.85
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 12153.49,
+          "mean_samples": 14.52,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.9
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 12292.79,
+          "mean_samples": 14.77,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.925
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 12439.22,
+          "mean_samples": 15.075,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.95
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 12561.815,
+          "mean_samples": 15.32,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.975
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 12680.675,
+          "mean_samples": 15.59,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.99
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 12762.29,
+          "mean_samples": 15.76,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.995
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 12828.115,
+          "mean_samples": 16.0,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": null
+          },
+          "feasible": true
+        }
+      ]
+    },
+    "single_partition_s43": {
+      "checkpoint": "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/single_partition/seed43/checkpoint.pt",
+      "spec": {
+        "mode": "single",
+        "partition": 1
+      },
+      "seed": 43,
+      "calibrator": {
+        "kind": "global",
+        "T": 1.0861447815054666,
+        "fit": {
+          "T": 1.0861447815054666,
+          "nll": 0.9094530701083869,
+          "before_nll": 0.9123395118215815,
+          "log_T_bounds": [
+            -4,
+            4
+          ]
+        }
+      },
+      "selected": {
+        "accuracy": 0.345,
+        "mean_tokens": 10707.735,
+        "mean_samples": 12.33,
+        "policy": {
+          "minimum": 2,
+          "patience": 1,
+          "cap": 16,
+          "gamma": 0.5
+        },
+        "feasible": true
+      },
+      "fixed95": {
+        "minimum": 2,
+        "patience": 1,
+        "cap": 16,
+        "gamma": 0.95
+      },
+      "candidates": [
+        {
+          "accuracy": 0.345,
+          "mean_tokens": 10707.735,
+          "mean_samples": 12.33,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.5
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.345,
+          "mean_tokens": 11085.88,
+          "mean_samples": 12.85,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.6
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.345,
+          "mean_tokens": 11380.43,
+          "mean_samples": 13.215,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.7
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.345,
+          "mean_tokens": 11848.935,
+          "mean_samples": 13.865,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.8
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.345,
+          "mean_tokens": 11992.28,
+          "mean_samples": 14.14,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.85
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.345,
+          "mean_tokens": 12189.865,
+          "mean_samples": 14.525,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.9
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.345,
+          "mean_tokens": 12244.98,
+          "mean_samples": 14.64,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.925
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.345,
+          "mean_tokens": 12365.855,
+          "mean_samples": 14.84,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.95
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.345,
+          "mean_tokens": 12503.595,
+          "mean_samples": 15.135,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.975
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.345,
+          "mean_tokens": 12621.755,
+          "mean_samples": 15.37,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.99
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.345,
+          "mean_tokens": 12690.615,
+          "mean_samples": 15.55,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.995
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.345,
+          "mean_tokens": 12828.115,
+          "mean_samples": 16.0,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": null
+          },
+          "feasible": true
+        }
+      ]
+    },
+    "all_one_s43": {
+      "checkpoint": "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/all_one/seed43/checkpoint.pt",
+      "spec": {
+        "mode": "single",
+        "partition": 0
+      },
+      "seed": 43,
+      "calibrator": {
+        "kind": "global",
+        "T": 1.1035309424906847,
+        "fit": {
+          "T": 1.1035309424906847,
+          "nll": 0.9046017657901961,
+          "before_nll": 0.9087773737582459,
+          "log_T_bounds": [
+            -4,
+            4
+          ]
+        }
+      },
+      "selected": {
+        "accuracy": 0.34,
+        "mean_tokens": 10719.435,
+        "mean_samples": 12.37,
+        "policy": {
+          "minimum": 2,
+          "patience": 1,
+          "cap": 16,
+          "gamma": 0.5
+        },
+        "feasible": true
+      },
+      "fixed95": {
+        "minimum": 2,
+        "patience": 1,
+        "cap": 16,
+        "gamma": 0.95
+      },
+      "candidates": [
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 10719.435,
+          "mean_samples": 12.37,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.5
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 11022.49,
+          "mean_samples": 12.78,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.6
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 11433.6,
+          "mean_samples": 13.29,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.7
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 11670.92,
+          "mean_samples": 13.62,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.8
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 11956.8,
+          "mean_samples": 14.01,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.85
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 12144.945,
+          "mean_samples": 14.395,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.9
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 12287.08,
+          "mean_samples": 14.69,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.925
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 12410.04,
+          "mean_samples": 14.89,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.95
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 12518.57,
+          "mean_samples": 15.11,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.975
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 12654.585,
+          "mean_samples": 15.41,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.99
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 12700.52,
+          "mean_samples": 15.545,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.995
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 12828.115,
+          "mean_samples": 16.0,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": null
+          },
+          "feasible": true
+        }
+      ]
+    },
+    "singletons_s43": {
+      "checkpoint": "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/singletons/seed43/checkpoint.pt",
+      "spec": {
+        "mode": "single",
+        "partition": 5
+      },
+      "seed": 43,
+      "calibrator": {
+        "kind": "global",
+        "T": 1.0748958700393767,
+        "fit": {
+          "T": 1.0748958700393767,
+          "nll": 0.912501512321326,
+          "before_nll": 0.9147194289383697,
+          "log_T_bounds": [
+            -4,
+            4
+          ]
+        }
+      },
+      "selected": {
+        "accuracy": 0.34,
+        "mean_tokens": 10604.505,
+        "mean_samples": 12.21,
+        "policy": {
+          "minimum": 2,
+          "patience": 1,
+          "cap": 16,
+          "gamma": 0.5
+        },
+        "feasible": true
+      },
+      "fixed95": {
+        "minimum": 2,
+        "patience": 1,
+        "cap": 16,
+        "gamma": 0.95
+      },
+      "candidates": [
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 10604.505,
+          "mean_samples": 12.21,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.5
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 11007.545,
+          "mean_samples": 12.755,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.6
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 11223.285,
+          "mean_samples": 13.06,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.7
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 11721.67,
+          "mean_samples": 13.76,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.8
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 11945.595,
+          "mean_samples": 14.125,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.85
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 12153.49,
+          "mean_samples": 14.52,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.9
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 12292.79,
+          "mean_samples": 14.77,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.925
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 12439.22,
+          "mean_samples": 15.075,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.95
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 12561.815,
+          "mean_samples": 15.32,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.975
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 12680.675,
+          "mean_samples": 15.59,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.99
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 12762.29,
+          "mean_samples": 15.76,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.995
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 12828.115,
+          "mean_samples": 16.0,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": null
+          },
+          "feasible": true
+        }
+      ]
+    },
+    "candidate_counts_s43": {
+      "checkpoint": "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/candidate_counts/seed43/checkpoint.pt",
+      "spec": {
+        "mode": "candidate_mlp",
+        "count_only": true
+      },
+      "seed": 43,
+      "calibrator": {
+        "kind": "global",
+        "T": 1.018673421244456,
+        "fit": {
+          "T": 1.018673421244456,
+          "nll": 0.9603781700379075,
+          "before_nll": 0.9605159704748095,
+          "log_T_bounds": [
+            -4,
+            4
+          ]
+        }
+      },
+      "selected": {
+        "accuracy": 0.335,
+        "mean_tokens": 9782.145,
+        "mean_samples": 11.15,
+        "policy": {
+          "minimum": 2,
+          "patience": 1,
+          "cap": 16,
+          "gamma": 0.5
+        },
+        "feasible": true
+      },
+      "fixed95": {
+        "minimum": 2,
+        "patience": 1,
+        "cap": 16,
+        "gamma": 0.95
+      },
+      "candidates": [
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 9782.145,
+          "mean_samples": 11.15,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.5
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 10121.17,
+          "mean_samples": 11.65,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.6
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 11323.36,
+          "mean_samples": 13.29,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.7
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12531.905,
+          "mean_samples": 15.415,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.8
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12828.115,
+          "mean_samples": 16.0,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.85
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12828.115,
+          "mean_samples": 16.0,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.9
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12828.115,
+          "mean_samples": 16.0,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.925
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12828.115,
+          "mean_samples": 16.0,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.95
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12828.115,
+          "mean_samples": 16.0,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.975
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12828.115,
+          "mean_samples": 16.0,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.99
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12828.115,
+          "mean_samples": 16.0,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.995
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12828.115,
+          "mean_samples": 16.0,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": null
+          },
+          "feasible": true
+        }
+      ]
+    },
+    "candidate_confidence_s43": {
+      "checkpoint": "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/candidate_confidence/seed43/checkpoint.pt",
+      "spec": {
+        "mode": "candidate_mlp"
+      },
+      "seed": 43,
+      "calibrator": {
+        "kind": "global",
+        "T": 1.0040782742791654,
+        "fit": {
+          "T": 1.0040782742791654,
+          "nll": 0.8908462999703642,
+          "before_nll": 0.8908532417991584,
+          "log_T_bounds": [
+            -4,
+            4
+          ]
+        }
+      },
+      "selected": {
+        "accuracy": 0.335,
+        "mean_tokens": 10545.895,
+        "mean_samples": 12.06,
+        "policy": {
+          "minimum": 2,
+          "patience": 1,
+          "cap": 16,
+          "gamma": 0.5
+        },
+        "feasible": true
+      },
+      "fixed95": {
+        "minimum": 2,
+        "patience": 1,
+        "cap": 16,
+        "gamma": 0.95
+      },
+      "candidates": [
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 10545.895,
+          "mean_samples": 12.06,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.5
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 11085.905,
+          "mean_samples": 12.695,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.6
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 11480.785,
+          "mean_samples": 13.24,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.7
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 11840.84,
+          "mean_samples": 13.81,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.8
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12071.33,
+          "mean_samples": 14.21,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.85
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12327.825,
+          "mean_samples": 14.65,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.9
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12465.025,
+          "mean_samples": 14.965,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.925
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12596.565,
+          "mean_samples": 15.26,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.95
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12749.92,
+          "mean_samples": 15.66,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.975
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12804.38,
+          "mean_samples": 15.845,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.99
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12822.845,
+          "mean_samples": 15.945,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.995
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12828.115,
+          "mean_samples": 16.0,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": null
+          },
+          "feasible": true
+        }
+      ]
+    },
+    "deepsets_confidence_s43": {
+      "checkpoint": "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/deepsets_confidence/seed43/checkpoint.pt",
+      "spec": {
+        "mode": "deepsets"
+      },
+      "seed": 43,
+      "calibrator": {
+        "kind": "global",
+        "T": 1.1192520080145816,
+        "fit": {
+          "T": 1.1192520080145816,
+          "nll": 0.9274477274616866,
+          "before_nll": 0.9329419563488566,
+          "log_T_bounds": [
+            -4,
+            4
+          ]
+        }
+      },
+      "selected": {
+        "accuracy": 0.32,
+        "mean_tokens": 10775.635,
+        "mean_samples": 12.425,
+        "policy": {
+          "minimum": 2,
+          "patience": 1,
+          "cap": 16,
+          "gamma": 0.5
+        },
+        "feasible": false
+      },
+      "fixed95": {
+        "minimum": 2,
+        "patience": 1,
+        "cap": 16,
+        "gamma": 0.95
+      },
+      "candidates": [
+        {
+          "accuracy": 0.32,
+          "mean_tokens": 10775.635,
+          "mean_samples": 12.425,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.5
+          },
+          "feasible": false
+        },
+        {
+          "accuracy": 0.32,
+          "mean_tokens": 11205.585,
+          "mean_samples": 13.0,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.6
+          },
+          "feasible": false
+        },
+        {
+          "accuracy": 0.32,
+          "mean_tokens": 11614.325,
+          "mean_samples": 13.525,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.7
+          },
+          "feasible": false
+        },
+        {
+          "accuracy": 0.32,
+          "mean_tokens": 11913.34,
+          "mean_samples": 14.0,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.8
+          },
+          "feasible": false
+        },
+        {
+          "accuracy": 0.32,
+          "mean_tokens": 12073.22,
+          "mean_samples": 14.28,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.85
+          },
+          "feasible": false
+        },
+        {
+          "accuracy": 0.32,
+          "mean_tokens": 12282.19,
+          "mean_samples": 14.68,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.9
+          },
+          "feasible": false
+        },
+        {
+          "accuracy": 0.32,
+          "mean_tokens": 12374.92,
+          "mean_samples": 14.86,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.925
+          },
+          "feasible": false
+        },
+        {
+          "accuracy": 0.32,
+          "mean_tokens": 12483.505,
+          "mean_samples": 15.06,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.95
+          },
+          "feasible": false
+        },
+        {
+          "accuracy": 0.32,
+          "mean_tokens": 12605.6,
+          "mean_samples": 15.3,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.975
+          },
+          "feasible": false
+        },
+        {
+          "accuracy": 0.32,
+          "mean_tokens": 12703.07,
+          "mean_samples": 15.545,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.99
+          },
+          "feasible": false
+        },
+        {
+          "accuracy": 0.32,
+          "mean_tokens": 12744.335,
+          "mean_samples": 15.67,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.995
+          },
+          "feasible": false
+        },
+        {
+          "accuracy": 0.32,
+          "mean_tokens": 12828.115,
+          "mean_samples": 16.0,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": null
+          },
+          "feasible": false
+        }
+      ]
+    },
+    "deepsets_embedding_s43": {
+      "checkpoint": "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/deepsets_embedding/seed43/checkpoint.pt",
+      "spec": {
+        "mode": "deepsets",
+        "use_embeddings": true
+      },
+      "seed": 43,
+      "calibrator": {
+        "kind": "global",
+        "T": 1.1055040092727244,
+        "fit": {
+          "T": 1.1055040092727244,
+          "nll": 0.8785715835369143,
+          "before_nll": 0.8829636832641903,
+          "log_T_bounds": [
+            -4,
+            4
+          ]
+        }
+      },
+      "selected": {
+        "accuracy": 0.335,
+        "mean_tokens": 11363.58,
+        "mean_samples": 13.19,
+        "policy": {
+          "minimum": 2,
+          "patience": 1,
+          "cap": 16,
+          "gamma": 0.5
+        },
+        "feasible": true
+      },
+      "fixed95": {
+        "minimum": 2,
+        "patience": 1,
+        "cap": 16,
+        "gamma": 0.95
+      },
+      "candidates": [
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 11363.58,
+          "mean_samples": 13.19,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.5
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 11649.345,
+          "mean_samples": 13.6,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.6
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 11819.235,
+          "mean_samples": 13.825,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.7
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12017.01,
+          "mean_samples": 14.105,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.8
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12106.71,
+          "mean_samples": 14.24,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.85
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12193.305,
+          "mean_samples": 14.39,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.9
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12237.61,
+          "mean_samples": 14.49,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.925
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12301.575,
+          "mean_samples": 14.61,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.95
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12417.905,
+          "mean_samples": 14.845,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.975
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12500.91,
+          "mean_samples": 15.03,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.99
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12545.9,
+          "mean_samples": 15.145,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.995
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12828.115,
+          "mean_samples": 16.0,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": null
+          },
+          "feasible": true
+        }
+      ]
+    },
+    "same_head_single_s43": {
+      "checkpoint": "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/same_head_single/seed43/checkpoint.pt",
+      "seed": 43,
+      "calibrator": {
+        "kind": "global",
+        "T": 1.1046720514859871,
+        "fit": {
+          "T": 1.1046720514859871,
+          "nll": 0.9077481105694247,
+          "before_nll": 0.9120455496937168,
+          "log_T_bounds": [
+            -4,
+            4
+          ]
+        }
+      },
+      "selected": {
+        "accuracy": 0.345,
+        "mean_tokens": 10824.1,
+        "mean_samples": 12.475,
+        "policy": {
+          "minimum": 2,
+          "patience": 1,
+          "cap": 16,
+          "gamma": 0.5
+        },
+        "feasible": true
+      },
+      "fixed95": {
+        "minimum": 2,
+        "patience": 1,
+        "cap": 16,
+        "gamma": 0.95
+      },
+      "intervention_from": "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/mixture/seed43/checkpoint.pt"
+    },
+    "mixture_s44": {
+      "checkpoint": "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/mixture/seed44/checkpoint.pt",
+      "spec": {
+        "mode": "mixture"
+      },
+      "seed": 44,
+      "calibrator": {
+        "kind": "global",
+        "T": 1.0799413031853378,
+        "fit": {
+          "T": 1.0799413031853378,
+          "nll": 0.9000006118535739,
+          "before_nll": 0.9025138508082523,
+          "log_T_bounds": [
+            -4,
+            4
+          ]
+        }
+      },
+      "selected": {
+        "accuracy": 0.33,
+        "mean_tokens": 10500.64,
+        "mean_samples": 12.105,
+        "policy": {
+          "minimum": 2,
+          "patience": 1,
+          "cap": 16,
+          "gamma": 0.5
+        },
+        "feasible": true
+      },
+      "fixed95": {
+        "minimum": 2,
+        "patience": 1,
+        "cap": 16,
+        "gamma": 0.95
+      },
+      "candidates": [
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 10500.64,
+          "mean_samples": 12.105,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.5
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 10894.15,
+          "mean_samples": 12.625,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.6
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 11359.305,
+          "mean_samples": 13.185,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.7
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 11729.3,
+          "mean_samples": 13.72,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.8
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 11927.855,
+          "mean_samples": 14.0,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.85
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12182.095,
+          "mean_samples": 14.54,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.9
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12283.065,
+          "mean_samples": 14.73,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.925
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12416.705,
+          "mean_samples": 14.935,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.95
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12571.805,
+          "mean_samples": 15.225,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.975
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12678.83,
+          "mean_samples": 15.475,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.99
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12723.165,
+          "mean_samples": 15.61,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.995
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12828.115,
+          "mean_samples": 16.0,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": null
+          },
+          "feasible": true
+        }
+      ]
+    },
+    "uniform_s44": {
+      "checkpoint": "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/uniform/seed44/checkpoint.pt",
+      "spec": {
+        "mode": "uniform"
+      },
+      "seed": 44,
+      "calibrator": {
+        "kind": "global",
+        "T": 1.0948215373269077,
+        "fit": {
+          "T": 1.0948215373269077,
+          "nll": 0.9021478314199353,
+          "before_nll": 0.9056576153919129,
+          "log_T_bounds": [
+            -4,
+            4
+          ]
+        }
+      },
+      "selected": {
+        "accuracy": 0.34,
+        "mean_tokens": 10405.44,
+        "mean_samples": 12.025,
+        "policy": {
+          "minimum": 2,
+          "patience": 1,
+          "cap": 16,
+          "gamma": 0.5
+        },
+        "feasible": true
+      },
+      "fixed95": {
+        "minimum": 2,
+        "patience": 1,
+        "cap": 16,
+        "gamma": 0.95
+      },
+      "candidates": [
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 10405.44,
+          "mean_samples": 12.025,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.5
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 10781.065,
+          "mean_samples": 12.48,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.6
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 11108.555,
+          "mean_samples": 12.94,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.7
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 11530.295,
+          "mean_samples": 13.5,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.8
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 11749.55,
+          "mean_samples": 13.855,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.85
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12153.815,
+          "mean_samples": 14.46,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.9
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12252.415,
+          "mean_samples": 14.7,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.925
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12420.57,
+          "mean_samples": 14.94,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.95
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12570.085,
+          "mean_samples": 15.21,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.975
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12685.785,
+          "mean_samples": 15.495,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.99
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12735.13,
+          "mean_samples": 15.66,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.995
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12828.115,
+          "mean_samples": 16.0,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": null
+          },
+          "feasible": true
+        }
+      ]
+    },
+    "random_s44": {
+      "checkpoint": "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/random/seed44/checkpoint.pt",
+      "spec": {
+        "mode": "random"
+      },
+      "seed": 44,
+      "calibrator": {
+        "kind": "global",
+        "T": 1.0819235283910194,
+        "fit": {
+          "T": 1.0819235283910194,
+          "nll": 0.9022672939659124,
+          "before_nll": 0.9049019549298998,
+          "log_T_bounds": [
+            -4,
+            4
+          ]
+        }
+      },
+      "selected": {
+        "accuracy": 0.33,
+        "mean_tokens": 10465.05,
+        "mean_samples": 12.125,
+        "policy": {
+          "minimum": 2,
+          "patience": 1,
+          "cap": 16,
+          "gamma": 0.5
+        },
+        "feasible": true
+      },
+      "fixed95": {
+        "minimum": 2,
+        "patience": 1,
+        "cap": 16,
+        "gamma": 0.95
+      },
+      "candidates": [
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 10465.05,
+          "mean_samples": 12.125,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.5
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 10890.985,
+          "mean_samples": 12.62,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.6
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 11342.66,
+          "mean_samples": 13.17,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.7
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 11726.8,
+          "mean_samples": 13.71,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.8
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 11934.65,
+          "mean_samples": 14.025,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.85
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12215.72,
+          "mean_samples": 14.585,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.9
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12293.815,
+          "mean_samples": 14.745,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.925
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12418.28,
+          "mean_samples": 14.94,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.95
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12577.125,
+          "mean_samples": 15.245,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.975
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12681.42,
+          "mean_samples": 15.485,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.99
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12725.935,
+          "mean_samples": 15.62,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.995
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12828.115,
+          "mean_samples": 16.0,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": null
+          },
+          "feasible": true
+        }
+      ]
+    },
+    "alpha1_s44": {
+      "checkpoint": "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/alpha1/seed44/checkpoint.pt",
+      "spec": {
+        "mode": "mixture",
+        "alpha": 1.0
+      },
+      "seed": 44,
+      "calibrator": {
+        "kind": "global",
+        "T": 1.0897681113204272,
+        "fit": {
+          "T": 1.0897681113204272,
+          "nll": 0.9173816377782504,
+          "before_nll": 0.9205450646842951,
+          "log_T_bounds": [
+            -4,
+            4
+          ]
+        }
+      },
+      "selected": {
+        "accuracy": 0.34,
+        "mean_tokens": 10707.07,
+        "mean_samples": 12.315,
+        "policy": {
+          "minimum": 2,
+          "patience": 1,
+          "cap": 16,
+          "gamma": 0.5
+        },
+        "feasible": true
+      },
+      "fixed95": {
+        "minimum": 2,
+        "patience": 1,
+        "cap": 16,
+        "gamma": 0.95
+      },
+      "candidates": [
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 10707.07,
+          "mean_samples": 12.315,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.5
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 11036.815,
+          "mean_samples": 12.75,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.6
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 11420.815,
+          "mean_samples": 13.28,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.7
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 11693.58,
+          "mean_samples": 13.67,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.8
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 11916.24,
+          "mean_samples": 14.065,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.85
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 12139.925,
+          "mean_samples": 14.505,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.9
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 12278.935,
+          "mean_samples": 14.77,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.925
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 12412.71,
+          "mean_samples": 15.015,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.95
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 12554.4,
+          "mean_samples": 15.32,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.975
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 12667.475,
+          "mean_samples": 15.555,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.99
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 12737.98,
+          "mean_samples": 15.7,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.995
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 12828.115,
+          "mean_samples": 16.0,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": null
+          },
+          "feasible": true
+        }
+      ]
+    },
+    "single_partition_s44": {
+      "checkpoint": "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/single_partition/seed44/checkpoint.pt",
+      "spec": {
+        "mode": "single",
+        "partition": 1
+      },
+      "seed": 44,
+      "calibrator": {
+        "kind": "global",
+        "T": 1.0788576988676348,
+        "fit": {
+          "T": 1.0788576988676348,
+          "nll": 0.9065281754938488,
+          "before_nll": 0.9089313254890793,
+          "log_T_bounds": [
+            -4,
+            4
+          ]
+        }
+      },
+      "selected": {
+        "accuracy": 0.335,
+        "mean_tokens": 10601.945,
+        "mean_samples": 12.2,
+        "policy": {
+          "minimum": 2,
+          "patience": 1,
+          "cap": 16,
+          "gamma": 0.5
+        },
+        "feasible": true
+      },
+      "fixed95": {
+        "minimum": 2,
+        "patience": 1,
+        "cap": 16,
+        "gamma": 0.95
+      },
+      "candidates": [
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 10601.945,
+          "mean_samples": 12.2,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.5
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 10939.015,
+          "mean_samples": 12.67,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.6
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 11327.56,
+          "mean_samples": 13.12,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.7
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 11604.725,
+          "mean_samples": 13.535,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.8
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 11889.605,
+          "mean_samples": 13.945,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.85
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12074.965,
+          "mean_samples": 14.32,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.9
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12201.925,
+          "mean_samples": 14.56,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.925
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12281.08,
+          "mean_samples": 14.705,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.95
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12436.03,
+          "mean_samples": 15.0,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.975
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12593.905,
+          "mean_samples": 15.305,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.99
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12661.58,
+          "mean_samples": 15.47,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.995
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12828.115,
+          "mean_samples": 16.0,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": null
+          },
+          "feasible": true
+        }
+      ]
+    },
+    "all_one_s44": {
+      "checkpoint": "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/all_one/seed44/checkpoint.pt",
+      "spec": {
+        "mode": "single",
+        "partition": 0
+      },
+      "seed": 44,
+      "calibrator": {
+        "kind": "global",
+        "T": 1.0664347860725933,
+        "fit": {
+          "T": 1.0664347860725933,
+          "nll": 0.900924169714048,
+          "before_nll": 0.9026558604394559,
+          "log_T_bounds": [
+            -4,
+            4
+          ]
+        }
+      },
+      "selected": {
+        "accuracy": 0.33,
+        "mean_tokens": 10568.1,
+        "mean_samples": 12.18,
+        "policy": {
+          "minimum": 2,
+          "patience": 1,
+          "cap": 16,
+          "gamma": 0.5
+        },
+        "feasible": true
+      },
+      "fixed95": {
+        "minimum": 2,
+        "patience": 1,
+        "cap": 16,
+        "gamma": 0.95
+      },
+      "candidates": [
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 10568.1,
+          "mean_samples": 12.18,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.5
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 10957.55,
+          "mean_samples": 12.725,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.6
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 11294.59,
+          "mean_samples": 13.105,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.7
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 11566.065,
+          "mean_samples": 13.485,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.8
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 11764.785,
+          "mean_samples": 13.805,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.85
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12064.395,
+          "mean_samples": 14.28,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.9
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12187.055,
+          "mean_samples": 14.525,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.925
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12310.075,
+          "mean_samples": 14.77,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.95
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12462.71,
+          "mean_samples": 15.04,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.975
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12637.305,
+          "mean_samples": 15.375,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.99
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12695.645,
+          "mean_samples": 15.52,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.995
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.33,
+          "mean_tokens": 12828.115,
+          "mean_samples": 16.0,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": null
+          },
+          "feasible": true
+        }
+      ]
+    },
+    "singletons_s44": {
+      "checkpoint": "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/singletons/seed44/checkpoint.pt",
+      "spec": {
+        "mode": "single",
+        "partition": 5
+      },
+      "seed": 44,
+      "calibrator": {
+        "kind": "global",
+        "T": 1.0897681252007314,
+        "fit": {
+          "T": 1.0897681252007314,
+          "nll": 0.9173816454043353,
+          "before_nll": 0.9205450732476598,
+          "log_T_bounds": [
+            -4,
+            4
+          ]
+        }
+      },
+      "selected": {
+        "accuracy": 0.34,
+        "mean_tokens": 10707.07,
+        "mean_samples": 12.315,
+        "policy": {
+          "minimum": 2,
+          "patience": 1,
+          "cap": 16,
+          "gamma": 0.5
+        },
+        "feasible": true
+      },
+      "fixed95": {
+        "minimum": 2,
+        "patience": 1,
+        "cap": 16,
+        "gamma": 0.95
+      },
+      "candidates": [
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 10707.07,
+          "mean_samples": 12.315,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.5
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 11036.815,
+          "mean_samples": 12.75,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.6
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 11420.815,
+          "mean_samples": 13.28,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.7
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 11693.58,
+          "mean_samples": 13.67,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.8
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 11916.24,
+          "mean_samples": 14.065,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.85
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 12139.925,
+          "mean_samples": 14.505,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.9
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 12278.935,
+          "mean_samples": 14.77,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.925
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 12412.71,
+          "mean_samples": 15.015,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.95
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 12554.4,
+          "mean_samples": 15.32,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.975
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 12667.475,
+          "mean_samples": 15.555,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.99
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 12737.98,
+          "mean_samples": 15.7,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.995
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 12828.115,
+          "mean_samples": 16.0,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": null
+          },
+          "feasible": true
+        }
+      ]
+    },
+    "candidate_counts_s44": {
+      "checkpoint": "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/candidate_counts/seed44/checkpoint.pt",
+      "spec": {
+        "mode": "candidate_mlp",
+        "count_only": true
+      },
+      "seed": 44,
+      "calibrator": {
+        "kind": "global",
+        "T": 1.0309972304503778,
+        "fit": {
+          "T": 1.0309972304503778,
+          "nll": 0.961443402253638,
+          "before_nll": 0.9618198067036029,
+          "log_T_bounds": [
+            -4,
+            4
+          ]
+        }
+      },
+      "selected": {
+        "accuracy": 0.335,
+        "mean_tokens": 9776.79,
+        "mean_samples": 11.14,
+        "policy": {
+          "minimum": 2,
+          "patience": 1,
+          "cap": 16,
+          "gamma": 0.5
+        },
+        "feasible": true
+      },
+      "fixed95": {
+        "minimum": 2,
+        "patience": 1,
+        "cap": 16,
+        "gamma": 0.95
+      },
+      "candidates": [
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 9776.79,
+          "mean_samples": 11.14,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.5
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 10822.87,
+          "mean_samples": 12.575,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.6
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 11334.855,
+          "mean_samples": 13.305,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.7
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12828.115,
+          "mean_samples": 16.0,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.8
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12828.115,
+          "mean_samples": 16.0,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.85
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12828.115,
+          "mean_samples": 16.0,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.9
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12828.115,
+          "mean_samples": 16.0,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.925
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12828.115,
+          "mean_samples": 16.0,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.95
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12828.115,
+          "mean_samples": 16.0,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.975
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12828.115,
+          "mean_samples": 16.0,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.99
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12828.115,
+          "mean_samples": 16.0,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.995
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12828.115,
+          "mean_samples": 16.0,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": null
+          },
+          "feasible": true
+        }
+      ]
+    },
+    "candidate_confidence_s44": {
+      "checkpoint": "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/candidate_confidence/seed44/checkpoint.pt",
+      "spec": {
+        "mode": "candidate_mlp"
+      },
+      "seed": 44,
+      "calibrator": {
+        "kind": "global",
+        "T": 1.0173905640098688,
+        "fit": {
+          "T": 1.0173905640098688,
+          "nll": 0.8875344995697689,
+          "before_nll": 0.8876618051039264,
+          "log_T_bounds": [
+            -4,
+            4
+          ]
+        }
+      },
+      "selected": {
+        "accuracy": 0.335,
+        "mean_tokens": 10543.54,
+        "mean_samples": 12.04,
+        "policy": {
+          "minimum": 2,
+          "patience": 1,
+          "cap": 16,
+          "gamma": 0.5
+        },
+        "feasible": true
+      },
+      "fixed95": {
+        "minimum": 2,
+        "patience": 1,
+        "cap": 16,
+        "gamma": 0.95
+      },
+      "candidates": [
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 10543.54,
+          "mean_samples": 12.04,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.5
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 11107.525,
+          "mean_samples": 12.73,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.6
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 11535.41,
+          "mean_samples": 13.3,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.7
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 11932.245,
+          "mean_samples": 13.95,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.8
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12158.15,
+          "mean_samples": 14.305,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.85
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12412.575,
+          "mean_samples": 14.84,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.9
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12509.64,
+          "mean_samples": 15.05,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.925
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12643.85,
+          "mean_samples": 15.365,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.95
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12771.93,
+          "mean_samples": 15.72,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.975
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12816.29,
+          "mean_samples": 15.905,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.99
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12825.035,
+          "mean_samples": 15.965,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.995
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.335,
+          "mean_tokens": 12828.115,
+          "mean_samples": 16.0,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": null
+          },
+          "feasible": true
+        }
+      ]
+    },
+    "deepsets_confidence_s44": {
+      "checkpoint": "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/deepsets_confidence/seed44/checkpoint.pt",
+      "spec": {
+        "mode": "deepsets"
+      },
+      "seed": 44,
+      "calibrator": {
+        "kind": "global",
+        "T": 1.1406896751776612,
+        "fit": {
+          "T": 1.1406896751776612,
+          "nll": 0.9119441615373645,
+          "before_nll": 0.9195979197148763,
+          "log_T_bounds": [
+            -4,
+            4
+          ]
+        }
+      },
+      "selected": {
+        "accuracy": 0.315,
+        "mean_tokens": 10599.44,
+        "mean_samples": 12.25,
+        "policy": {
+          "minimum": 2,
+          "patience": 1,
+          "cap": 16,
+          "gamma": 0.5
+        },
+        "feasible": false
+      },
+      "fixed95": {
+        "minimum": 2,
+        "patience": 1,
+        "cap": 16,
+        "gamma": 0.95
+      },
+      "candidates": [
+        {
+          "accuracy": 0.315,
+          "mean_tokens": 10599.44,
+          "mean_samples": 12.25,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.5
+          },
+          "feasible": false
+        },
+        {
+          "accuracy": 0.315,
+          "mean_tokens": 11014.24,
+          "mean_samples": 12.785,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.6
+          },
+          "feasible": false
+        },
+        {
+          "accuracy": 0.315,
+          "mean_tokens": 11458.985,
+          "mean_samples": 13.34,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.7
+          },
+          "feasible": false
+        },
+        {
+          "accuracy": 0.315,
+          "mean_tokens": 11859.74,
+          "mean_samples": 13.95,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.8
+          },
+          "feasible": false
+        },
+        {
+          "accuracy": 0.315,
+          "mean_tokens": 12001.34,
+          "mean_samples": 14.22,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.85
+          },
+          "feasible": false
+        },
+        {
+          "accuracy": 0.315,
+          "mean_tokens": 12163.705,
+          "mean_samples": 14.51,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.9
+          },
+          "feasible": false
+        },
+        {
+          "accuracy": 0.315,
+          "mean_tokens": 12241.855,
+          "mean_samples": 14.66,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.925
+          },
+          "feasible": false
+        },
+        {
+          "accuracy": 0.315,
+          "mean_tokens": 12335.04,
+          "mean_samples": 14.805,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.95
+          },
+          "feasible": false
+        },
+        {
+          "accuracy": 0.315,
+          "mean_tokens": 12440.915,
+          "mean_samples": 15.02,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.975
+          },
+          "feasible": false
+        },
+        {
+          "accuracy": 0.315,
+          "mean_tokens": 12539.16,
+          "mean_samples": 15.23,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.99
+          },
+          "feasible": false
+        },
+        {
+          "accuracy": 0.315,
+          "mean_tokens": 12605.195,
+          "mean_samples": 15.345,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.995
+          },
+          "feasible": false
+        },
+        {
+          "accuracy": 0.315,
+          "mean_tokens": 12828.115,
+          "mean_samples": 16.0,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": null
+          },
+          "feasible": false
+        }
+      ]
+    },
+    "deepsets_embedding_s44": {
+      "checkpoint": "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/deepsets_embedding/seed44/checkpoint.pt",
+      "spec": {
+        "mode": "deepsets",
+        "use_embeddings": true
+      },
+      "seed": 44,
+      "calibrator": {
+        "kind": "global",
+        "T": 1.2006911301443766,
+        "fit": {
+          "T": 1.2006911301443766,
+          "nll": 0.8985280333810197,
+          "before_nll": 0.9137372945738955,
+          "log_T_bounds": [
+            -4,
+            4
+          ]
+        }
+      },
+      "selected": {
+        "accuracy": 0.34,
+        "mean_tokens": 11313.415,
+        "mean_samples": 13.155,
+        "policy": {
+          "minimum": 2,
+          "patience": 1,
+          "cap": 16,
+          "gamma": 0.5
+        },
+        "feasible": true
+      },
+      "fixed95": {
+        "minimum": 2,
+        "patience": 1,
+        "cap": 16,
+        "gamma": 0.95
+      },
+      "candidates": [
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 11313.415,
+          "mean_samples": 13.155,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.5
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 11705.99,
+          "mean_samples": 13.675,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.6
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 11896.52,
+          "mean_samples": 13.925,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.7
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 12095.03,
+          "mean_samples": 14.21,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.8
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 12174.485,
+          "mean_samples": 14.34,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.85
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 12253.665,
+          "mean_samples": 14.485,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.9
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 12300.32,
+          "mean_samples": 14.6,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.925
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 12397.815,
+          "mean_samples": 14.78,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.95
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 12461.915,
+          "mean_samples": 14.915,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.975
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 12522.92,
+          "mean_samples": 15.055,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.99
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 12570.52,
+          "mean_samples": 15.155,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": 0.995
+          },
+          "feasible": true
+        },
+        {
+          "accuracy": 0.34,
+          "mean_tokens": 12828.115,
+          "mean_samples": 16.0,
+          "policy": {
+            "minimum": 2,
+            "patience": 1,
+            "cap": 16,
+            "gamma": null
+          },
+          "feasible": true
+        }
+      ]
+    },
+    "same_head_single_s44": {
+      "checkpoint": "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/same_head_single/seed44/checkpoint.pt",
+      "seed": 44,
+      "calibrator": {
+        "kind": "global",
+        "T": 1.126223245894915,
+        "fit": {
+          "T": 1.126223245894915,
+          "nll": 0.9122850469221379,
+          "before_nll": 0.9185527640442495,
+          "log_T_bounds": [
+            -4,
+            4
+          ]
+        }
+      },
+      "selected": {
+        "accuracy": 0.335,
+        "mean_tokens": 11004.7,
+        "mean_samples": 12.675,
+        "policy": {
+          "minimum": 2,
+          "patience": 1,
+          "cap": 16,
+          "gamma": 0.5
+        },
+        "feasible": true
+      },
+      "fixed95": {
+        "minimum": 2,
+        "patience": 1,
+        "cap": 16,
+        "gamma": 0.95
+      },
+      "intervention_from": "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/mixture/seed44/checkpoint.pt"
+    }
+  },
+  "reasc_offline": {
+    "mean": 11.033524150010422,
+    "std": 2.3372439858122216,
+    "zero_std_guard": false,
+    "gate": 14.060520521903527,
+    "target": 0.9,
+    "target_reached": true,
+    "no_correct_guard": false,
+    "lambda": 0.7,
+    "calibration_questions": 128,
+    "fit_score": "lowest_group",
+    "inference_score": "bottom10"
+  },
+  "native_tuned": {
+    "asc": {
+      "selected": {
+        "gamma": 0.8,
+        "accuracy": 0.335,
+        "mean_tokens": 6642.535,
+        "mean_samples": 7.405,
+        "feasible": true
+      },
+      "candidates": [
+        {
+          "gamma": 0.5,
+          "accuracy": 0.295,
+          "mean_tokens": 792.035,
+          "mean_samples": 1.0,
+          "feasible": false
+        },
+        {
+          "gamma": 0.6,
+          "accuracy": 0.295,
+          "mean_tokens": 792.035,
+          "mean_samples": 1.0,
+          "feasible": false
+        },
+        {
+          "gamma": 0.7,
+          "accuracy": 0.295,
+          "mean_tokens": 792.035,
+          "mean_samples": 1.0,
+          "feasible": false
+        },
+        {
+          "gamma": 0.8,
+          "accuracy": 0.335,
+          "mean_tokens": 6642.535,
+          "mean_samples": 7.405,
+          "feasible": true
+        },
+        {
+          "gamma": 0.85,
+          "accuracy": 0.34,
+          "mean_tokens": 7590.68,
+          "mean_samples": 8.47,
+          "feasible": true
+        },
+        {
+          "gamma": 0.9,
+          "accuracy": 0.34,
+          "mean_tokens": 8937.235,
+          "mean_samples": 10.135,
+          "feasible": true
+        },
+        {
+          "gamma": 0.925,
+          "accuracy": 0.335,
+          "mean_tokens": 9122.6,
+          "mean_samples": 10.32,
+          "feasible": true
+        },
+        {
+          "gamma": 0.95,
+          "accuracy": 0.335,
+          "mean_tokens": 9992.125,
+          "mean_samples": 11.475,
+          "feasible": true
+        },
+        {
+          "gamma": 0.975,
+          "accuracy": 0.335,
+          "mean_tokens": 10630.88,
+          "mean_samples": 12.33,
+          "feasible": true
+        },
+        {
+          "gamma": 0.99,
+          "accuracy": 0.335,
+          "mean_tokens": 11248.785,
+          "mean_samples": 13.2,
+          "feasible": true
+        },
+        {
+          "gamma": 0.995,
+          "accuracy": 0.335,
+          "mean_tokens": 11536.65,
+          "mean_samples": 13.675,
+          "feasible": true
+        },
+        {
+          "gamma": null,
+          "accuracy": 0.335,
+          "mean_tokens": 12828.115,
+          "mean_samples": 16.0,
+          "feasible": true
+        }
+      ]
+    },
+    "reasc": {
+      "selected": {
+        "gamma": 0.8,
+        "accuracy": 0.335,
+        "mean_tokens": 4587.995,
+        "mean_samples": 5.305,
+        "feasible": true
+      },
+      "candidates": [
+        {
+          "gamma": 0.5,
+          "accuracy": 0.295,
+          "mean_tokens": 792.035,
+          "mean_samples": 1.0,
+          "feasible": false
+        },
+        {
+          "gamma": 0.6,
+          "accuracy": 0.295,
+          "mean_tokens": 792.035,
+          "mean_samples": 1.0,
+          "feasible": false
+        },
+        {
+          "gamma": 0.7,
+          "accuracy": 0.295,
+          "mean_tokens": 792.035,
+          "mean_samples": 1.0,
+          "feasible": false
+        },
+        {
+          "gamma": 0.8,
+          "accuracy": 0.335,
+          "mean_tokens": 4587.995,
+          "mean_samples": 5.305,
+          "feasible": true
+        },
+        {
+          "gamma": 0.85,
+          "accuracy": 0.335,
+          "mean_tokens": 5646.13,
+          "mean_samples": 6.6,
+          "feasible": true
+        },
+        {
+          "gamma": 0.9,
+          "accuracy": 0.34,
+          "mean_tokens": 7687.655,
+          "mean_samples": 8.645,
+          "feasible": true
+        },
+        {
+          "gamma": 0.925,
+          "accuracy": 0.34,
+          "mean_tokens": 8163.68,
+          "mean_samples": 9.16,
+          "feasible": true
+        },
+        {
+          "gamma": 0.95,
+          "accuracy": 0.34,
+          "mean_tokens": 8779.64,
+          "mean_samples": 9.87,
+          "feasible": true
+        },
+        {
+          "gamma": 0.975,
+          "accuracy": 0.34,
+          "mean_tokens": 9496.475,
+          "mean_samples": 10.71,
+          "feasible": true
+        },
+        {
+          "gamma": 0.99,
+          "accuracy": 0.34,
+          "mean_tokens": 10029.515,
+          "mean_samples": 11.395,
+          "feasible": true
+        },
+        {
+          "gamma": 0.995,
+          "accuracy": 0.34,
+          "mean_tokens": 10362.21,
+          "mean_samples": 11.765,
+          "feasible": true
+        },
+        {
+          "gamma": null,
+          "accuracy": 0.34,
+          "mean_tokens": 11561.915,
+          "mean_samples": 13.45,
+          "feasible": true
+        }
+      ]
+    }
+  },
+  "dev_sc16_accuracy": 0.335,
+  "train_seeds": [
+    42,
+    43,
+    44
+  ],
+  "primary_seed": 42,
+  "selection_objective": "total output tokens, both extraction passes included",
+  "preprocessing": {
+    "representation": "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/representation.json",
+    "scalers": "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/scalers.json"
+  },
+  "selection_seconds": 3612.2926697870007,
+  "artifact_sha256": {
+    "artifacts/data/pgm_followup/manifest.json": "88af00d38e8ec8810fd56dd0eae4787cc18844939ff82a1acbf6c31acb84f945",
+    "artifacts/data/pgm_followup/omnimath_indomain/calibration.jsonl": "88824a14e1d98943f5f0a28f3942383bd38e65b928cd45808299abf8db5174b5",
+    "artifacts/data/pgm_followup/omnimath_indomain/calibration_gold.jsonl": "063530fa095c3645af214572e4caeb70d8013c8bae6a8e51f6d5879a6cfc4dd3",
+    "artifacts/data/pgm_followup/omnimath_indomain/dev.jsonl": "7f51613bc0d03a640de716ae6bef3689e71a217a432f7e79e9e25e064eff3ce2",
+    "artifacts/data/pgm_followup/omnimath_indomain/dev_gold.jsonl": "1022f203e1d08785ea5efbd1219e7eb1da925e8ec9ef7f9bdad0dc1f5c50cc36",
+    "artifacts/data/pgm_followup/omnimath_indomain/test.jsonl": "4a6dbdf9e86a46dbe1df45ef506a9f56089c9ce469a9908551015aebd0320516",
+    "artifacts/data/pgm_followup/omnimath_indomain/test_gold.jsonl": "85e07941ad2debe70cf24a5001f01d05d2c93c3852b567286eb3585982e49f96",
+    "artifacts/data/pgm_followup/omnimath_indomain/train.jsonl": "b0cd9bc704b8b98935b345d42db9294c92fe1037f93d260f01a7093be97a0c56",
+    "artifacts/data/pgm_followup/omnimath_indomain/train_gold.jsonl": "c68633c630cfaa27eca843a41b06d81d443c0ef015b375de4548bf30f37bdef8",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/all_one/seed42/checkpoint.pt": "b0a654cc00530d7284be5c3a7d7ae3a2765940f9ae2bbdf47a2c1e0b89c2a3a7",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/all_one/seed42/fit.json": "e36f582e1cface91a03de70454a91b119c844aa898c7444d9f45073c4df6de60",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/all_one/seed42/selection.json": "42231833893d0dd5534ac9bf18d1f9d3ef227f30b9a6de6d134611528fa99950",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/all_one/seed43/checkpoint.pt": "0cb38b758da37f6609f91703e9d2374784e2c9b9f14744d724f982c81e148658",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/all_one/seed43/fit.json": "a59e42d35c98fa415edbff81a80973555c812206dff4a1816756704c9cda4dd2",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/all_one/seed43/selection.json": "45f805f4b1a8f931ea3166dfc953b96d92c80e2c6b0e46a67d427c2cb741e28a",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/all_one/seed44/checkpoint.pt": "2d84ce811a2f39e6204175f3531b3c2af45f421eeb9b6f1878702d3130cb0002",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/all_one/seed44/fit.json": "81288ec171dd41b3e1e69ffd14e3328f52a81ad4fb4c4c98507f9f9b0ec35494",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/all_one/seed44/selection.json": "679f935d68a218744f7a854e5432a44a7ef5aa1cc9c90f75ceed128f93ee9cd3",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/alpha1/seed42/checkpoint.pt": "a96fad068e34ba0ab2332cecc50f63309eec0093aa1b3fec5b3177ff64a4a7f0",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/alpha1/seed42/fit.json": "386e138cbb06952479790bc8db5fb27d7a69a0bcf48ee99b0e9ffce84cee1cf9",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/alpha1/seed42/selection.json": "58663d622bb3b2e19413ab25c6c048c20394fcaf7d798ecdac2fe240f67f4a47",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/alpha1/seed43/checkpoint.pt": "a1fb5bb6ffecfadc6eac9abe04737f7d8da5af7056372a81255e75d1ab0efa56",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/alpha1/seed43/fit.json": "9b4784bcdac4a79db336d7c4daca01dc9e96f3feafa9f6abbd374c5779c8bfda",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/alpha1/seed43/selection.json": "c55bd7d71824f119888af4b1f5f67091b73d9de4b74025bf4e15f22f3e364634",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/alpha1/seed44/checkpoint.pt": "94b404f2055033ecaf327638076a687c1a29e953de46941aca5506a485c00d83",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/alpha1/seed44/fit.json": "33ad9df4fafc902bdf36e04433a104888fb5db1b44eb9859e14a7cb4e16e4ed3",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/alpha1/seed44/selection.json": "006081c3a51f4a0ce4f2ba9a2d0f668368784a1321f259bcc706bc34496e1fd2",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/candidate_confidence/seed42/checkpoint.pt": "c853bc3da88288f7b3cf1397285600880d28b6cc8360fb3d0844aa39792c7107",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/candidate_confidence/seed42/fit.json": "9581156b084c62773a93dec1a24c26416718237b61b6f08d6d3e14389cd7408b",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/candidate_confidence/seed42/selection.json": "18dca4b3307a293b53e29d5dd88ade645e03b6c8298d7e01c865d2af1372fc15",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/candidate_confidence/seed43/checkpoint.pt": "f1330a37ce98cf956e868cb3335c61bfbf8c466ceaaebf0327206f81cb19c929",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/candidate_confidence/seed43/fit.json": "b6f0a2c2cd86ede6bbd0717a0ad83f609191d6d49c2b603d2139297e58a87718",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/candidate_confidence/seed43/selection.json": "4f6aecbdeb5d0e7fbd5028e4cb65e49aad984663d968f478e62ae9113ce32266",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/candidate_confidence/seed44/checkpoint.pt": "dd9faf7ddb1d25c2f09dcaf264fe3f9358ff5f966190885f135ac4072674b3e4",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/candidate_confidence/seed44/fit.json": "d4e1b68d3b7dd7f57ffafcd5d7a353edb2e685c5ea44db673923c841bcb14264",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/candidate_confidence/seed44/selection.json": "99ab4a098b4bbf97bffca52bb5c99d2988604a36e70a365fd8e29c5abf791865",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/candidate_counts/seed42/checkpoint.pt": "172675d3a0aa829af52239802df02706a81f9a733b264bb7f59388fee117783b",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/candidate_counts/seed42/fit.json": "308b8b1188eb4dbfbcd54f53e91d1e1e8e9a7587a06f7da6b546f09a999ca157",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/candidate_counts/seed42/selection.json": "8095da4435918aff41ea5601268c616ba11dbb5724abfbf4841e486181328d69",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/candidate_counts/seed43/checkpoint.pt": "4d9dd57d00c1368da06e11b3425a492341886440a5c684bfae9f6c94a1d4aa90",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/candidate_counts/seed43/fit.json": "1a070699de396c5e2cdb4e303368d63acf3ca6964e7d8312d52102099f30e281",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/candidate_counts/seed43/selection.json": "932646aff4810df29f57720055ded8202b156944f941094467e64a89e5ff5e22",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/candidate_counts/seed44/checkpoint.pt": "32622518706b496750dd4d3f010464d4585c468e24e3d04582aaacf672613a51",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/candidate_counts/seed44/fit.json": "794c2d42b0f1e561c36476d1b5ffb3c006556664c33328e4190159f85fe55ba3",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/candidate_counts/seed44/selection.json": "6e00af42f4671ab0ed87c487649ebefca5e6319a936ab5215f9ad07c468b041c",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/deepsets_confidence/seed42/checkpoint.pt": "438c864bde5b1d152174b516b3eead8ab79d7a0bcb740fbd06267181eb270dd3",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/deepsets_confidence/seed42/fit.json": "3cf2c682790394d2caf752554fde331026f3546785b0df9312ce031a7d90aae6",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/deepsets_confidence/seed42/selection.json": "29150a5bf644fb3f120679f9ad04fde98a381d121c98d4fab0705124fe36d181",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/deepsets_confidence/seed43/checkpoint.pt": "78ab6fc6076673a1c989e9dc9f71633a3717862b46f1d812d70a0a818051bad9",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/deepsets_confidence/seed43/fit.json": "3d9ff1362cc2c773102a345def862cb394933d0efe845debe2f26cb60af1f5a1",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/deepsets_confidence/seed43/selection.json": "92ea0740fd1270536419844b70c8371f98bfb494334f8d06c7546b1cfe882fcc",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/deepsets_confidence/seed44/checkpoint.pt": "8550d067ee4f61e904f4bfc9c76c07f54cd19f0c9523501ec46acad5d4d857b4",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/deepsets_confidence/seed44/fit.json": "f42c96dd9a6e26de6533d11a8434dd3de328744de0db178c5084c7640ec0276d",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/deepsets_confidence/seed44/selection.json": "1d041301994125df1dac1464797a950d5072a9afd22916d52a8c34f0643e5c7f",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/deepsets_embedding/seed42/checkpoint.pt": "b704a6418e4903b26b5e30e03e68cb1b3c8f98ffb23df3028a16c5b6145d10ab",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/deepsets_embedding/seed42/fit.json": "4f6c3386762e30a6e841eb5140baf57d28dca9891dbbf620a0aec1ae29330dce",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/deepsets_embedding/seed42/selection.json": "8979411e19ddf946592465ec012e7b645716e7c89cf6014ff173bfd8f7368594",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/deepsets_embedding/seed43/checkpoint.pt": "24db50efa40856a248a6bdad20332b8b6aedb1ac55fe27f1cd9aeedea753a74a",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/deepsets_embedding/seed43/fit.json": "46dec80ec0dfcae0cb7e800915f33afdccddf85ab0a7a020c58852c802bbb45e",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/deepsets_embedding/seed43/selection.json": "dc3ba49f19c08c96c442940b070f9fcba0064645a1092ad46ea1b17b5f8aa00c",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/deepsets_embedding/seed44/checkpoint.pt": "150a4a44fae6f7cb552ae7f8911bef4b9f46a6ee3de30f923429f0f58b58fc1f",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/deepsets_embedding/seed44/fit.json": "83b02847782372d8cd1f4c754699151b2d88e7e3693003943c4ccd614568be5a",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/deepsets_embedding/seed44/selection.json": "0223793557f1f00823621b6d85ddb7bc91dd7c15d915aa38d13a7d6920c461fd",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/mixture/seed42/checkpoint.pt": "e831412973b5788d05fc43f56e05ac1be820cc59b163c8df5f458f666d4879b2",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/mixture/seed42/fit.json": "8878cc4c50e408da26e1a5ca3d09b80e4206ce993f9e702ff1b958b04ad19bcf",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/mixture/seed42/selection.json": "872e3df9ff34029b844e43d0c7930d2fac8207484932e6415a2fc32e87f769d7",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/mixture/seed43/checkpoint.pt": "001e7281b2d5fb617f5fc542eab5ae8c08131ef78e283f806a22bb3c8abbf051",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/mixture/seed43/fit.json": "a932577fcc6aeb1b43ca14d8712da2e8908db0a63e298360323e782e5e59daa9",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/mixture/seed43/selection.json": "650513a380cb0f57ac82cb8d121f4c7e1170c84dd48d298b9ef95896097df294",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/mixture/seed44/checkpoint.pt": "449396ef4e6b44f1bc25f079d6442d0129c1d2e22901c78ed5927ed50bdbb178",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/mixture/seed44/fit.json": "2deb71737ed409fb6eec1dab27c1aa9319a946b1c53f0f583af0284fa7210498",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/mixture/seed44/selection.json": "c72fda56a2b3070cd5f81b63d7c1760394b47861b5f27e6d4e6115c2d1f53dd5",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/random/seed42/checkpoint.pt": "216f77f8e3c9380bc2783beab7ab0e522a198438e4336002d1f56502262fd4a7",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/random/seed42/fit.json": "6e9677ce3a002348288b219c38da4e41922c3b1d9937e95d7cad7bdd0ee38e74",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/random/seed42/selection.json": "ebc25553aee7b49982c5a1d33fa6ad32ee62622d0f4f4b2ff5a3a5b39446ba9e",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/random/seed43/checkpoint.pt": "f7b2b7a9b231c24f165f24315f9ec36758d5c389f65cab26f40b72d1b08eb2a7",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/random/seed43/fit.json": "47f1f8464ad37e19a4c4deb41639319236ef2313310685dd5ad3770e8cc3ccc5",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/random/seed43/selection.json": "9edf843f1a7f5229181cc7b67549ae1ecd58ed31f3689198a173f8b0ccf133fa",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/random/seed44/checkpoint.pt": "de73ffcb6771fefbcd68ab76b53ad65873a6d5839e87007bcf656f483f66a510",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/random/seed44/fit.json": "7afc26bfed77a5ed656ca17b69ed4539eda031b443d3361ade8536b4ea5889aa",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/random/seed44/selection.json": "0ea41e4a591c795962548517e6f44189b0d246ea83cf0b7c78d47aa1c6e58fe8",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/same_head_single/seed42/checkpoint.pt": "13bf2fbca64cf8785fc560f2a651b803fe5e79aa01a1ea13c180b22ab0d5447d",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/same_head_single/seed43/checkpoint.pt": "8e9acc4198b416ca75026aea7780d34ea4a10bdd7f88f4b2f7f6ac41d66d33f4",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/same_head_single/seed44/checkpoint.pt": "61b65f25337cd29e5d42761fa8b3da740ae12fc6571b497854dacf2e3f2df1ba",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/single_partition/seed42/checkpoint.pt": "f2261453a32c1ae469f587af70cf51001da98ef951637732eba2a93f62367961",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/single_partition/seed42/fit.json": "3cccbd7bb379bc86f0fa8d6e3d7b125a3e84ca4f620cadb41c22c6de1c14f269",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/single_partition/seed42/selection.json": "46fdaeef8dfaf75118dd33dd882ef9574d03475acd71e694579d6eb572f7f010",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/single_partition/seed43/checkpoint.pt": "deedf0bd262a5bffce82fcd34714047d9e7eb1d66decce17f6f2a6e721f8a583",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/single_partition/seed43/fit.json": "4f840f2107c95a833385438e9bc3f1c5d21c07e5a3d0259dca258ae6b6416af5",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/single_partition/seed43/selection.json": "62168234a0d7d06c0bbeb82b90cdbdc12aa81eb2d3eb4148c46def117867a223",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/single_partition/seed44/checkpoint.pt": "d1a5293b8637927f4914305dbcd0797cc873cdb578052eee1f4959adf6d55660",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/single_partition/seed44/fit.json": "eecc61fce164d2a54f0a035a7941538517378791549a095c73823ba2629342e0",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/single_partition/seed44/selection.json": "740249940076e6ab84866930069d683545e633e96c72ed9b80cdf6110ee9c3f9",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/singletons/seed42/checkpoint.pt": "c989890cfa2f1a9f33cb83a0c664b2107993ebe32b0fdb7dbfcd03511e1fd2cd",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/singletons/seed42/fit.json": "d3cc1f2ca9005dc0a274fdc74af2272a19ce6ba60a181c96cb7962c937aa4683",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/singletons/seed42/selection.json": "fc666bcdb7b9486c17c66bf1dc9a854655a0415a20a0839612d13ce3bb8a1652",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/singletons/seed43/checkpoint.pt": "bb563e955c08719aa7a06a2560ee7466953060d608adcd5ce3e2f0f6ecad1883",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/singletons/seed43/fit.json": "d29b7b35f8b3a31bf300831f3f0a2cb80e8f28fe07461543b72c556c415719e6",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/singletons/seed43/selection.json": "da25cd46bf8814775d2cec0f845832483940f9278e6a6835ec494761ed13f992",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/singletons/seed44/checkpoint.pt": "92427ba0824055726bb188a8b11a37cfb7d1e03cec72ea9edd339fe5b0e456f4",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/singletons/seed44/fit.json": "0c185e08832a7ff4fcfdb99615962700d908645aff2a60cb209f78761c436d5e",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/singletons/seed44/selection.json": "af60db899a34ad8361eb7d2a056d4c58c7660e61763f454308d37e7d69734d67",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/uniform/seed42/checkpoint.pt": "c353b739d9d058378aa0f0ea53ef8fd4fa978a2a922ea6d29ae0fb9af79997cc",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/uniform/seed42/fit.json": "1913d9e95575498ab4d04e75eea36df8dd5c57baf68121405affeb5a55693af3",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/uniform/seed42/selection.json": "f98c3a46ff1d5ed71327fd0a2400035f2f81ff2f9b844237011ba2a6c1d6424c",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/uniform/seed43/checkpoint.pt": "595543461bd69e9486e923da0e67d375f1c96b08b39706dc9b8c917766b95840",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/uniform/seed43/fit.json": "5811d6286e119cdfefb4c6df2889dfef3ad5d1929e1987c2cdb6fc6a74c1a1d9",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/uniform/seed43/selection.json": "44f680af3143e241f0baaa2f62f54d4db1292f7af1ba300b879cbe1c2eafe136",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/uniform/seed44/checkpoint.pt": "7781660a298b171859f67eeb368af92e038fb606476eb9a61272d147db121df5",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/uniform/seed44/fit.json": "f617845a434460c292d1efc96fc287dc609c45de802bc2876ed193703bea46ed",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/models/uniform/seed44/selection.json": "15dc3faf7882a3aecdf3159b754f15ef38fff401c0353e9d3fb26872a6b12991",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/representation.json": "70f3e101bfa001b2b39163618e9cdcc42d98a82cd68b6aec14aa005f022e5a10",
+    "artifacts/runs/pgm_followup/qwen7b_omnimath_indomain/scalers.json": "57836c0c7d77efe13d7d02cda23e6120cb4036d5ed38eb8f382ce3dfa449b999",
+    "configs/pgm_followup/qwen7b_omnimath_indomain.json": "9536152731a874326e22fe73e9022dcb93d3ac5314b6a3d837837a10bba39adb",
+    "configs/pgm_followup.json": "8d5763f816baea87809c6c2c32c4c66dc41407e58cfcc5780dd1b493acc3f466",
+    "docs/PGM_FOLLOWUP_PLAN.md": "a5a02c4106cdf8217b00be8e1ac657a1ab966f07e4652f16bc6ddf4f0eca4abf",
+    "pgm_asc/__init__.py": "55e458a6b5852e53db2810161b8d29678954eb394ac1b15178799274d4b7dcb3",
+    "pgm_asc/__main__.py": "ff9e7346a8d371d2e2b73df84f85a147af918bedba2cfd699cae58bb0ef47a87",
+    "pgm_asc/cli.py": "2f323e6f16e8de10dfc24e038b0dcdbb28002b675f3076da84119c75fe61a80d",
+    "pgm_asc/collection/__init__.py": "30ee991b5699a89d29a09d6d9c6530ce4c43caf6292f2fb0b8cc22aa19879323",
+    "pgm_asc/collection/banks.py": "f88a0abbff2b3adff72f4d45af27de414663454be00d3b9746b54267ef2c4d1b",
+    "pgm_asc/collection/confidence.py": "f94ab6867adae22023470abbb4fc613a9dda5e16eb10421b85566230515c1a5f",
+    "pgm_asc/collection/reasc_bank.py": "641e438aa114d77136f4462b29e22d305711ad46fa582ebcf1882a9c20f0d897",
+    "pgm_asc/collection/reasc_fast.py": "6e3e997a12a32c5a8e3d3e2a3d089f20cd606158cde39d9e9292b8d2e0bbd1cd",
+    "pgm_asc/collection/reasc_judge.py": "d3438b04b2a230c1937286a2e831635bd61ca8a4834fcf15339941c53f09febe",
+    "pgm_asc/collection/study.py": "696cf54151a8a442089c045a3d472acd17e8f2ca65dfc7d05da6d3c6e6b9f6dc",
+    "pgm_asc/collection/teacher_forcing.py": "84cf47b7a074384963b764244b0e389f713b59e1308e193060f856962a70415b",
+    "pgm_asc/collection/token_stats.py": "ca1de6601f9f78f758ecc466816206ec37b7d71cc0089e107e681491605b6b08",
+    "pgm_asc/collection/vllm.py": "1acdf2a1495a568021e711adcd069d962367831eebb2553e14a52c79f6df0a3e",
+    "pgm_asc/core/__init__.py": "5b88758815499ff129c36a5eb692d2beb958023838d10600aad598a539ac0791",
+    "pgm_asc/core/answers.py": "bc9400a3c61d0c2d0ab996e6c902c300ea2f350cf112719939cce07937555fda",
+    "pgm_asc/core/config.py": "8a8c465cefe645eb08374c7d27daeec9987fa00a28e999437221d1976c9deb70",
+    "pgm_asc/core/integrity.py": "29717bbd81191e0117b3dc764bba0c59ce2c5d2abde213a46af6c8f3b09210e8",
+    "pgm_asc/core/io.py": "cc080f57d127c4ba54511b8f117eab4a4d4f0f576862f11c7a25e317442bdb76",
+    "pgm_asc/core/runtime.py": "868da6899f7ac7dc9335c887f6142295a34d93d240725089b53e7d03da0ceebe",
+    "pgm_asc/data/__init__.py": "4577c9cf351ffacd0e00d3776bebdba9ba5f023acd828046fae521c25aa1b7ce",
+    "pgm_asc/data/banks.py": "dae2448c18b8f2aa02d5161231294d05df43e0796ad5ed91e93a4684d43e2987",
+    "pgm_asc/data/features.py": "b34bceab91dcde1bca6dd2f5f3230313c7cf096cef289843adba40e217d04db2",
+    "pgm_asc/data/prefixes.py": "58e812b46953581d9324b53293d52130b4904563fb0f8f895572fed0e6a81d58",
+    "pgm_asc/data/reasc_bank.py": "1fdf3f890104b886efc72c96ca91f23378f2d48e06145a775719d2aad528cb84",
+    "pgm_asc/data/reasc_cohorts.py": "2de61ac35f7ae71c2d1363a200f088f07278adf99cd6c7119d8d8d381c680109",
+    "pgm_asc/data/scaling.py": "2c4d54f8cb741e78dfe43d40c5d797e7bf1464daff5b0f7bfd5c3fd35e87a465",
+    "pgm_asc/data/state.py": "6ea9402836e191953c2d4cae9b11e6d25c99c87e034dca6386825a275ed0b17f",
+    "pgm_asc/data/study.py": "b121f37ff2ccdcd4b43b58b81adbcc42e851c27f5e4f8049679f2b7427180b7e",
+    "pgm_asc/evaluation/__init__.py": "866d29fd60ae31ffce1a7691427f4b6e13141d250ebfd6e182e2195cd3ea5705",
+    "pgm_asc/evaluation/metrics.py": "ba71e48e69c550d169b37091065286c55aa4457fbf4effc85716f3405669f65b",
+    "pgm_asc/evaluation/reasc_comparison.py": "22265edef388b9c3bb29418a8ead77023bbc1b0cc890d13ad5e25009de9b11cd",
+    "pgm_asc/evaluation/replay.py": "a4486455ef28e226b47a29964b46112d126a97337695e2f9c0651edf5acea1d4",
+    "pgm_asc/evaluation/report.py": "93f12588604b485edb841e7ed03b8c2c0a00e4496053c2f54783c8b2e84bb951",
+    "pgm_asc/evaluation/selector.py": "d92ba093ab031f2dbbfce4207d1b7f48c1904886f5d691437c7a605824e262f7",
+    "pgm_asc/evaluation/state.py": "88470027708ab6076f11437e51ba54ad34c61f959fd90b223788c4cf24682728",
+    "pgm_asc/evaluation/study.py": "1a7b57dd297d7928bc32cdec765f1cb846fe8592a9280b802deb1213c46c6040",
+    "pgm_asc/experiments/__init__.py": "fa2622349f399bdb910dccbcd74b8f0ec02c6331d823af0519c036344d80268b",
+    "pgm_asc/experiments/math_priority.py": "7e9411cfa29656dbd6a9b11cdabd72ced8dd0c34acc8edb7ca3e2fae3e0de16e",
+    "pgm_asc/experiments/pipeline.py": "86bdac2e6c4006c857ee91a6fa9e16620edf2be2d80d759c3128680bef86927e",
+    "pgm_asc/experiments/qwen7_only.py": "107ef5cb20be2eeae0bbe920393d58796065eee4d96d761646c3075fffa03e76",
+    "pgm_asc/experiments/reasc_comparison.py": "90a6920ff7545ff5a353003aa10cfb6e6b6c677fa321741744f7717be17eb2bb",
+    "pgm_asc/experiments/reasc_runner.py": "73d6954d00fdeee8e1c87879a3d9d221017c0b60a551ee2d016bf0c2a0b93176",
+    "pgm_asc/experiments/reasc_transfer.py": "f7aa0e5db3c4bbd5ff3f57d3df084933ac2dee0ad96bb93458a91f08622a678e",
+    "pgm_asc/experiments/selector.py": "e61e590b494aa1af32ff777baecf49bbcda438b007703ca34e60efdd178794b6",
+    "pgm_asc/experiments/selector_context.py": "693a6b3b452d330c816c6f17af882c6cf4ed995e5dd1bea198959715ca5e1ced",
+    "pgm_asc/experiments/state.py": "8693bd1078088e97e619a8516930d0a65904485401a6981c130a25f213b3c381",
+    "pgm_asc/experiments/state_context.py": "8c1cd1a4f225429642209ab5bc7ac48b86b1f44a78bb9b87c27e38ff17b580c1",
+    "pgm_asc/experiments/study_assets.py": "099e3b0466f786833f9890665f5f759b45f791c499f750d51d7a5e8fcc319ce0",
+    "pgm_asc/experiments/study_fit.py": "6c4fc889b52e1c56fdbdcfef602967df42786ad4a7626cdc627f107cf66b106e",
+    "pgm_asc/experiments/study_runner.py": "f6694495644bf7ba8aea3201f069360a235ac6d06a55b79cad1833583bc384e2",
+    "pgm_asc/experiments/study_runner_health.py": "68313f47c82b34cf44421379be3529b7204ef993ec50d0bd52c07e4f68320a51",
+    "pgm_asc/experiments/validation.py": "af5caf6103d65f36284ac05fbc64359e044bf330818fb5b751165af8d134d1ef",
+    "pgm_asc/models/__init__.py": "6d7e0a07a6b8f7cff2182935770da41f2f0adf96e230f8a29529aa41e9c4f4be",
+    "pgm_asc/models/partitions.py": "dfc2bcc262424b816704753f74bedad577dc1789c68400e670dabd387a12e867",
+    "pgm_asc/models/selector.py": "1cfa08afbd86b6ef3c5989b8496db8c70a5932f9cdb90157dfd696ce54af882d",
+    "pgm_asc/models/state.py": "8e0f70be2bb5997b1bf6a6caca997d98cc2ab61085394049a0490decead161d8",
+    "pgm_asc/models/study.py": "027bde7e25aae4164c24e688de27896fd759c65ef02ba122c047e564bcdb0c3a",
+    "pgm_asc/models/value.py": "18ca8e5936f02cd18a02cd46c563bbbab50ff23f17dc44c3b0e1f5e274651c6c",
+    "pgm_asc/policies/__init__.py": "fb74381e7cdba2a71ddefbb6a52e8c8c325f0983de9bcbeee4bd64b506f1199b",
+    "pgm_asc/policies/baselines.py": "74b59ca8caf37495a78f54369d8bd2b4922ad1efa20c4056187ef8dd1425cab3",
+    "pgm_asc/policies/calibration.py": "af37a5b2f716a7d61501200ed60a1e9b7f44d77d66f335c9b5e4addef6afab6a",
+    "pgm_asc/policies/continuation.py": "ee6fece18196ba762bac57e8fe9d36ef66cb2535f23d5f34d3bb8fa12cbd85d5",
+    "pgm_asc/policies/reasc_reference.py": "f6b4ad71755a941bb788f49aaf94cfaecb9402c37fabb3a08da1fd8feb0bb135",
+    "pgm_asc/policies/stopping.py": "f3e90dd6ce881bbf85a10d47c06ee2611c48554ac9d8f7475b0e2051a929d881",
+    "pgm_asc/training/__init__.py": "aee3dc17ce8bf79a76ea42595bf4ba3ad9c26cc0117f9de9f290310161c813b5",
+    "pgm_asc/training/continuation.py": "f7eccaa026fa644a7245eadac28402266615ecb17ca092939e89cfa87e175026",
+    "pgm_asc/training/recipes.py": "0a46d0ee30acd0a616d2167c09fcae9b57a7f08975fd9824b2e50456a0b98f59",
+    "pgm_asc/training/selector.py": "9ad4d01be1b9906c5a9bdfbf6ffe720b81561238137b9ea92a726f6fb95be189",
+    "pgm_asc/training/state.py": "15e00e5354990074ace94476d37c4b90373f6b9088b80dfb9ffd822a8936637f",
+    "pgm_asc/training/value.py": "6e52ef7a26057626cd0d9a80c727b903b47e45587c61250fcf6c445e4fdef4d8"
+  }
+}
