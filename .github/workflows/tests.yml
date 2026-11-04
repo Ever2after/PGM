@@ -19,11 +19,7 @@ jobs:
         run: |
           python -m pip install torch==2.8.0 --index-url https://download.pytorch.org/whl/cpu
           python -m pip install -e '.[test]'
-      - name: Fetch pinned reference sources
-        run: python scripts/setup_references.py
-      - name: Run synthetic and reference tests
+      - name: Run tests
         env:
           OMP_NUM_THREADS: '2'
-          MKL_NUM_THREADS: '2'
-          OPENBLAS_NUM_THREADS: '2'
         run: python -m pytest -q

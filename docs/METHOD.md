@@ -1,62 +1,110 @@
-# Integrated PGM adaptive self-consistency
+# Method and protocol
 
-Historical V2 and V5 are now stages of one pipeline: **response bank → positive-support answer selector → optional temporal state/value model → calibration → locked evaluation**. This is a code and artifact reorganization. Existing model weights, cohort membership, policies, and numerical results are preserved; no new experiment was run during the refactor.
+An interactive version with diagrams is in [results/report.html](../results/report.html).
 
-## Shared generation and features
+## Setting
 
-- Frozen `google/gemma-3-4b-it`, revision `093f9f388b31de276ce2de164bdc2081324b9767`; no LLM fine-tuning.
-- `EleutherAI/hendrycks_math`, revision `21a5633873b6a120296cce3e2df9d5550074f4a3`.
-- vLLM sampling: temperature 0.7, top-p 0.95, max new tokens4096, context8192, seed42; deterministic question/sample seeds.
-- Teacher-forcing on the exact generated token IDs extracts confidence and final-layer reasoning embedding. ReASC uses separate full-vocabulary confidence. Gold labels are excluded from generation and inference inputs.
-- Feature preprocessing is fitted on the selector train800. Partition thresholds use 102,400 train-only sampled embedding pairs. Scalers and representation are shared by both stages.
+For a question $q$ the language model is sampled up to 16 times. After each response $y_t$ a policy
+either stops and answers, or asks for one more response. All responses come from a fixed bank, so every
+method replays the same samples in the same order with the same labels; only the aggregation and the
+stopping rule differ. The language models are frozen. The learned part is a head with a few thousand
+parameters.
 
-## Stage 1: positive-support selector and stopping policy (historical V2)
+## Inputs per response
 
-For response i, the support MLP maps nine observed features to a positive evidence weight. Six partition candidates comprise all-one, four cosine thresholds, and singletons, with duplicate partitions masked. Cluster evidence is discounted using learned alpha; a learned gate mixes their answer distributions. An OTHER head represents gold answers not yet observed. All these heads are jointly trained on the same 800 questions.
+| Input | Definition |
+|---|---|
+| Answer $a_j$ | Final answer from the response or from two short extraction prompts (ReASC procedure). Candidates are exact-string groups in first-observed order. |
+| $x_j \in \mathbb{R}^9$ | Teacher-forcing features on the sampled tokens: mean log-prob and entropy of the reasoning span, mean log-prob of the boxed answer, three log lengths, truncation/empty-span flags. |
+| $e_j$ | Mean last-layer hidden state over reasoning tokens, L2-normalized. |
+| $w_t \in \mathbb{R}^{25}$ | Prefix statistics: 8 vote statistics (counts, leader/runner-up share, margin, answer entropy) and mean/std of four response features over all responses and the leader's responses, plus the truncation rate. |
 
-| Module | Training / fitting data | Size | Selection data |
-|---|---|---:|---|
-| Support / gate / OTHER / alpha | MATH train800, 32 responses each |25,600 prefix histories, t1–32|MATH train dev200, 6,400 histories|
-| Prefix-balanced refit | Same train800 |Six equal-mass prefix buckets:1,2,3–4,5–8,9–16,17–32|Same dev200|
-| Global temperature | Fresh MATH-test calibration-A150 |4,800 prefix histories|—|
-| Minimum / patience / cap / gamma | No head fitting |Policy comparison on calibration-B300|Same B300|
-| ExtraTrees continuation | Same train800, t1–7 |5,600 histories|Same dev200, 1,400 histories; lambda on B300|
-| Locked evaluation | Separate MATH-test holdout500 |16,000-response bank|Evaluation only|
+## The PGM head
 
-The retained stage ladder is S0 global → S1 minimum → S2 patience → S3 cap → S4 prefix calibration → S5 prefix loss → S6 continuation. A/B cohorts are reused across this ladder. The final mixture uses minimum2, patience1, cap8, global temperature, prefix-balanced heads, and horizon4 continuation. Candidate changes need calibration cost improvement under the empirical accuracy constraint; not every stage is adopted.
+**Partitions.** Responses are clustered online by cosine similarity of $e_j$ to running cluster centroids.
+Six partitions are kept: $\mathcal P_0$ all-one, $\mathcal P_{1..4}$ with thresholds at the 10/40/70/90 %
+quantiles of pairwise train similarities, and $\mathcal P_5$ singletons. $|C_m(j)|$ is the size of the
+cluster of response $j$ in partition $m$; duplicate partitions are masked.
 
-ASC/CGES receive matched continuation controls in this stage; ReASC retains its earlier policy because the old training bank lacks its full-vocabulary confidence. These enhanced controls are distinct from the native baselines in stage2.
+**Candidate distribution per partition.**
 
-## Stage 2: frozen selector, temporal state, and continuation value (historical V5)
+$$s_j = \mathrm{softplus}(f_\text{sup}(x_j)),\qquad
+\ell_m(a) = \sum_{j\le t:\,a_j=a} |C_m(j)|^{\alpha-1} s_j,\qquad
+\ell(\texttt{OTHER}) = f_\text{oth}(w_t)$$
 
-Selector M uses the stage1 mixture. S fixes partition slot1 while keeping the same support/OTHER/alpha. A and I fix all-one/singleton partitions; N is the separately trained native single-partition checkpoint. Selector weights remain frozen.
+$$p_m(a) = \mathrm{softmax}_{a\in\mathcal A_t\cup\{\texttt{OTHER}\}}\,\ell_m(a),\qquad \alpha=\sigma(\beta).$$
 
-State U means the gold answer is unseen; W means seen but the selected answer is wrong; R means the selected answer is correct. MLP, unmasked chain, and masked chain share 43 observed features. Transition masks encode when a new answer or selector change makes a state transition possible. Inference is causal.
+$\alpha<1$ discounts responses that fall in large clusters; for singletons or $\alpha=1$ the head is a
+confidence-weighted vote. `OTHER` is the probability that the correct answer has not been sampled yet.
 
-| Module / role | Cohort | Size |
-|---|---|---:|
-| State/value train | Spent V2 A150+B300 and V3 A150+B300 |900 questions, first8 responses each;7,200 packed histories|
-| State direct NLL | Same train |6,300 nonzero-weight histories, t2–8|
-| State OOF | Question-level5-fold |720 train /180 held questions per fold; deployment uses full900 fit|
-| Fixed4 Ridge | Same train, t2–7 |5,400 rows, predicting correctness gain and added token cost|
-| Bellman Ridge | Same train, six decision times |900 rows per decision time per lambda|
-| Dev | Old selector dev200 + spent selector holdout500 |700 questions, first8 responses each|
-| Temperature calibration | New A150 |1,050 direct-loss prefixes, t2–8|
-| Threshold/lambda/family selection | New B300 |300 question-level decisions|
-| Locked holdout | New1,000 |8,000 responses, evaluation only|
+**Mixture.** $\pi_m = \mathrm{softmax}_m f_\text{gate}(g_m)$ with 12 structural features $g_m$ per
+partition, and $p_t(a)=\sum_m \pi_m p_m(a)$. $f_\text{sup}, f_\text{gate}, f_\text{oth}$ are 2-layer MLPs
+(width 32).
 
-Twelve arms use72 state-model fits including folds/full fits and2,232 Ridge fits including outer folds. Outer-fold held-question labels are excluded from the new state/scaler/value fitting. The frozen selector's historical policy selection did use450 of these900 training questions; this historical dependency is not covered by the new OOF claim. Inner value training still uses fitted state predictions.
+**Training.** Negative log-likelihood of the first correct candidate (or `OTHER` if none is correct) at
+every prefix $t=1..16$, weighted so that prefixes 1–2, 3–4, 5–8 and 9–16 each carry 0.4. AdamW
+(lr 1e-3, weight decay 1e-3), question batches of 32, gradient clipping 1, at most 120 epochs, early
+stopping on dev NLL with patience 20. Seeds 42/43/44; seed 42 is primary.
 
-Native SC/ASC/CGES/ReASC do not train a neural head on the900 questions. ASC selects its threshold on B300. CGES retains its historical confidence definition and fits temperature on A150. ReASC calibrates normalization/gate from the first response of each A question:150 response examples. All adaptive policies use minimum2 and cap8. Fresh responses total11,600.
+**Calibration and stopping.** A global temperature $T$ is fitted on the calibration cohort. With
+$\tilde p_t \propto p_t^{1/T}$ and $\hat a_t=\arg\max_a \tilde p_t(a)$, stop at the first
+$t\ge 2$ with $\tilde p_t(\hat a_t)\ge\gamma$ and $\tilde p_t(\hat a_t)>\tilde p_t(\texttt{OTHER})$; otherwise
+answer at $t=16$.
 
-## Canonical inputs and provenance
+**Operating points.** *Selected*: $\gamma\in\{.5,.6,.7,.8,.85,.9,.925,.95,.975,.99,.995,\text{never}\}$
+with the fewest dev output tokens among those with dev accuracy $\ge$ dev SC16 − 1 pp. *Fixed*:
+$\gamma=0.95$. Test data never selects anything.
 
-`artifacts/runs/pgm_asc/bootstrap/cache` stores the original selector training tensors, representation and scalers. `state/cache/train` and `state/cache/dev` are canonical packed inputs for the state/value training. Their question text and separate gold files are under `artifacts/data/pgm_asc/selector_train` and `state_train`.
+## Matched ablations
 
-V1/V3 raw generation banks and discarded models were deleted. Rebuilding their packed inputs from those raw files is intentionally unavailable; training from the retained packed inputs remains supported. V2/V5 calibration and evaluation response banks remain available. Historical question IDs are retained to preserve sample identity and random seeds.
+All arms share inputs, labels, optimizer, budget, calibration and stopping rule.
 
-`excluded_problem_hashes.json` preserves normalized identities from every previous cohort, including deleted experiments, to avoid resampling spent questions. Migrated integrity locks record current paths/hashes after evaluation; their original pre-holdout locking history is documented in EXPERIMENT_HISTORY.md. A migration lock is not a new preregistration.
+| Arm | Change |
+|---|---|
+| `mixture` | Full model |
+| `uniform` | Gate fixed to uniform weights |
+| `random` | Clusters replaced by random groupings with the same cluster-size multiset at every prefix |
+| `alpha1` | $\alpha=1$ (no cluster-size discount); equals `singletons` |
+| `single_partition`, `all_one`, `singletons` | One partition only ($\mathcal P_1$, $\mathcal P_0$, $\mathcal P_5$), trained separately |
+| `same_head_single` | The trained mixture restricted to $\mathcal P_1$, without retraining |
+| `candidate_counts` | MLP on per-candidate vote counts only (no teacher forcing needed) |
+| `candidate_confidence` | MLP on per-candidate counts and mean confidence/length |
+| `deepsets_confidence` | DeepSets over response features with per-candidate and global sum pooling |
+| `deepsets_embedding` | Same, with the reasoning embeddings $e_j$ as additional inputs |
 
-## Interpretation
+Primary contrasts (per cell, Holm-adjusted over four): mixture vs `alpha1`, `random`,
+`candidate_confidence`, `deepsets_embedding`, at the selected operating point, paired by question
+(10,000 bootstrap replicates; exact McNemar).
 
-Selector holdout500 and state holdout1000 differ. Compare methods within a cohort. The state-stage primary reduces token cost but loses too much accuracy; it is not promoted over the frozen selector. Cost is generated tokens, not end-to-end latency, and repeated development/calibration choices are exploratory rather than a population risk guarantee.
+## Baselines
+
+Implemented after the official ReASC notebooks (commit `8ee1c76`).
+
+| Method | Rule |
+|---|---|
+| `pass1`, `sc16` | First response; majority over 16 |
+| `asc` | Beta posterior of the top two vote counts ≥ 0.95 ([Aggarwal et al., 2023](https://aclanthology.org/2023.emnlp-main.761/)) |
+| `esc` | Stop at the first window of 4 identical answers ([Li et al., 2024](https://arxiv.org/abs/2401.10480)) |
+| `reasc_offline` | Votes weighted by $\max(1, e^{0.7z})$ of bottom-10 % windowed self-certainty; single-response gate; calibrated on the calibration cohort |
+| `reasc_online` | Same, calibrated label-free by a two-component GMM on the test questions' first responses |
+| `asc_dev_tuned`, `reasc_dev_tuned` | Same algorithms with the threshold chosen on dev by the PGM selection rule |
+
+## Cohorts
+
+| Dataset | Calibration / train / dev | Test |
+|---|---|---|
+| MATH | 128 (79 original-train, 49 original-test; disjoint from test) / 800 / 200 original-train questions | MATH500 |
+| GSM8K | 128 / 800 / 200 from the official train split (seed 20261103; test duplicates removed) | All 1,319 official test questions |
+| Omni-MATH | 128 / 800 / 200 from the full release (`KbsdJames/Omni-MATH` @ `40ba231`) after removing every test question by normalized text (seed 20261103) | 999 distinct questions of the ReASC Omni archive |
+
+Responses: at most 1,024 new tokens (2,048 for Omni-MATH), each model's official sampling defaults
+(`configs/models.json`). Correctness: pinned xVerify-3B-Ia, greedy. Cost: generated tokens plus both
+extraction outputs; input tokens and the teacher-forcing pass are reported separately in the
+evaluation files and excluded from the main cost.
+
+## Cells
+
+16 cells = 4 models × {`math`, `gsm8k`, `omnimath`, `math_to_omnimath`}. The first three are fitted
+and evaluated on the same dataset. `math_to_omnimath` replays the model's MATH policy (heads,
+calibrators, thresholds and ReASC offline calibration) on the Omni-MATH test bank without any Omni
+labels; it shares the test bank with the in-domain `omnimath` cell.

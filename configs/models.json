@@ -1,0 +1,30 @@
+{
+  "gemma4b": {
+    "name": "Gemma-3-4B-IT",
+    "model_id": "google/gemma-3-4b-it",
+    "revision": "093f9f388b31de276ce2de164bdc2081324b9767",
+    "rounded_parameters": 4e9,
+    "sampling": {"temperature": 1.0, "top_p": 0.95, "top_k": 64, "repetition_penalty": 1.0}
+  },
+  "qwen3b": {
+    "name": "Qwen2.5-3B-Instruct",
+    "model_id": "Qwen/Qwen2.5-3B-Instruct",
+    "revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+    "rounded_parameters": 3e9,
+    "sampling": {"temperature": 0.7, "top_p": 0.8, "top_k": 20, "repetition_penalty": 1.05}
+  },
+  "qwen7b": {
+    "name": "Qwen2.5-7B-Instruct",
+    "model_id": "Qwen/Qwen2.5-7B-Instruct",
+    "revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+    "rounded_parameters": 7e9,
+    "sampling": {"temperature": 0.7, "top_p": 0.8, "top_k": 20, "repetition_penalty": 1.05}
+  },
+  "llama8b": {
+    "name": "Llama-3.1-8B-Instruct",
+    "model_id": "meta-llama/Llama-3.1-8B-Instruct",
+    "revision": "0e9e39f249a16976918f6564b8830bc894c89659",
+    "rounded_parameters": 8e9,
+    "sampling": {"temperature": 0.6, "top_p": 0.9, "top_k": 0, "repetition_penalty": 1.0}
+  }
+}

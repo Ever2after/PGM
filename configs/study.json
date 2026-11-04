@@ -1,0 +1,82 @@
+{
+  "hub_dataset": "Ever2after/PGM-artifacts",
+  "samples_per_question": 16,
+  "capacity": 32,
+  "fit_splits": [
+    "calibration",
+    "train",
+    "dev"
+  ],
+  "train_seeds": [
+    42,
+    43,
+    44
+  ],
+  "primary_seed": 42,
+  "train": {
+    "epochs": 120,
+    "patience": 20,
+    "lr": 0.001,
+    "weight_decay": 0.001,
+    "question_batch": 32
+  },
+  "stopping": {
+    "minimum": 2,
+    "patience": 1,
+    "cap": 16
+  },
+  "gammas": [
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.85,
+    0.9,
+    0.925,
+    0.95,
+    0.975,
+    0.99,
+    0.995,
+    null
+  ],
+  "fixed_gamma": 0.95,
+  "dev_accuracy_tolerance": 0.01,
+  "datasets": {
+    "math": {
+      "name": "MATH500",
+      "max_new_tokens": 1024
+    },
+    "gsm8k": {
+      "name": "GSM8K",
+      "max_new_tokens": 1024
+    },
+    "omnimath": {
+      "name": "Omni-MATH",
+      "max_new_tokens": 2048
+    }
+  },
+  "tasks": {
+    "math": {
+      "fit": "math",
+      "evaluate": "math"
+    },
+    "gsm8k": {
+      "fit": "gsm8k",
+      "evaluate": "gsm8k"
+    },
+    "omnimath": {
+      "fit": "omnimath",
+      "evaluate": "omnimath"
+    },
+    "math_to_omnimath": {
+      "fit": "math",
+      "evaluate": "omnimath"
+    }
+  },
+  "judge": {
+    "model_id": "IAAR-Shanghai/xVerify-3B-Ia",
+    "revision": "67fdb1841f332753c2c9c597ea66e60e75476641",
+    "source_commit": "3f50a37912992ab89c51bdc8a83a655c85714079",
+    "max_tokens": 2048
+  }
+}

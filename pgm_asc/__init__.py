@@ -1,1 +1,2 @@
-"""Integrated PGM adaptive self-consistency research pipeline."""
+"""PGM aggregation heads for adaptive self-consistency."""
+__version__ = "1.0.0"
