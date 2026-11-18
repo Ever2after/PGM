@@ -27,3 +27,7 @@ slurm-*.out
 ._*
 ._dbindex_/
 *.swp
+
+# Crash dumps
+core
+core.[0-9]*

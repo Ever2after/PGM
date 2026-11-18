@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt  # noqa: E402
 from matplotlib.lines import Line2D  # noqa: E402
 from matplotlib.ticker import FixedLocator, FuncFormatter, MaxNLocator, NullLocator  # noqa: E402
 
-from pgm_asc.config import RESULTS  # noqa: E402
+from pgm_asc.config import RESULTS_V1 as RESULTS  # noqa: E402
 
 MODELS = (("gemma4b", "Gemma-3-4B-IT"), ("qwen3b", "Qwen2.5-3B-Instruct"), ("qwen7b", "Qwen2.5-7B-Instruct"),
           ("llama8b", "Llama-3.1-8B-Instruct"))

@@ -4,7 +4,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from pgm_asc.config import RESULTS, cells
+from pgm_asc.config import RESULTS_V1 as RESULTS, cells
 from pgm_asc.report.figures import load_evaluations
 
 TEMPLATE = Path(__file__).with_name("report_template.html")

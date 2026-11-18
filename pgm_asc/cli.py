@@ -50,7 +50,7 @@ def cmd_report(_):
     export()
     make_figures()
     make_report()
-    print("Wrote results/README.md, results/summary.csv, results/figures/, results/report.html")
+    print("Wrote results/v1/README.md, summary.csv, figures/, report.html")
 
 
 def cmd_manifest(_):
@@ -77,14 +77,58 @@ def cmd_collect(a):
         judge(a.model, a.dataset, a.split, a.follow, allow_test=a.allow_test, **kwargs)
 
 
+def cmd_v2(a):
+    from pgm_asc.v2 import CONFIG
+    models, datasets = a.models or CONFIG["models"], a.datasets or CONFIG["datasets"]
+    if a.stage == "prepare":
+        from multiprocessing import get_context
+        from pgm_asc.v2 import data_path
+        from pgm_asc.v2.data import prepare
+        todo = [(m, d) for m in models for d in datasets if a.overwrite or not data_path(m, d).exists()]
+        if todo:
+            with get_context("spawn").Pool(min(a.workers, len(todo))) as pool:
+                pool.starmap(prepare, todo)
+    elif a.stage == "run":
+        from pgm_asc.v2.run import run
+        run(models, datasets, a.workers)
+    elif a.stage == "rescore":
+        from pgm_asc.v2.run import rescore
+        for m in models:
+            for d in datasets:
+                rescore(m, d)
+    elif a.stage == "method":
+        from pgm_asc.v2.methods import REGISTRY, csv_method, evaluate, load_plugin
+        if bool(a.plugin) == bool(a.csv):
+            raise SystemExit("give exactly one of --plugin FILE_OR_MODULE or --csv FILE")
+        if a.plugin:
+            names = load_plugin(a.plugin)
+            methods = [REGISTRY[n] for n in names if a.name is None or n == a.name]
+        else:
+            if not a.name:
+                raise SystemExit("--csv needs --name")
+            methods = [csv_method(a.csv, a.name, a.label)]
+        for method in methods:
+            paths = evaluate(method, a.models, a.datasets)
+            print(f"{method.name}: {len(paths)} cells -> results/v2/methods/{method.name}/")
+    elif a.stage == "plot":
+        from pgm_asc.v2.report import plot
+        if not a.methods or not a.out:
+            raise SystemExit("plot needs --methods and --out")
+        path = plot(a.methods, a.out, a.cells, a.title or "accuracy vs output tokens (test)")
+        print(f"Wrote {path.with_suffix('.png')} and {path.with_suffix('.svg')}")
+    else:
+        from pgm_asc.v2.report import report
+        report(a.methods)
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(prog="pgm", description="PGM adaptive self-consistency: data, fitting, evaluation, reports.")
     sub = parser.add_subparsers(dest="command", required=True)
     sub.add_parser("status", help="which banks, policies and evaluations are present").set_defaults(run=cmd_status)
 
     p = sub.add_parser("download", help="fetch released artifacts from the Hugging Face Hub")
-    p.add_argument("--only", nargs="+", default=["cohorts", "banks", "policies", "decisions"],
-                   choices=["cohorts", "banks", "policies", "decisions", "logprobs"],
+    p.add_argument("--only", nargs="+", default=["cohorts", "banks", "policies", "decisions", "v2"],
+                   choices=["cohorts", "banks", "policies", "decisions", "v2", "logprobs"],
                    help="logprobs (per-token top-20 log-probabilities) is not downloaded unless listed")
     p.add_argument("--models", nargs="+", choices=list(MODELS))
     p.add_argument("--datasets", nargs="+", choices=DATASETS)
@@ -94,16 +138,16 @@ def main(argv=None):
 
     sub.add_parser("verify", help="check local artifacts against manifest.json").set_defaults(run=cmd_verify)
 
-    p = sub.add_parser("fit", help="train all heads of a cell and select thresholds on dev (CPU)")
+    p = sub.add_parser("fit", help="(v1) train all partition-mixture heads of a cell and select thresholds on dev (CPU)")
     p.add_argument("cell", choices=[c.name for c in cells() if not c.transfer])
     p.add_argument("--overwrite", action="store_true")
     p.set_defaults(run=cmd_fit)
 
-    p = sub.add_parser("evaluate", help="replay the saved policy and all baselines on the test bank (CPU)")
+    p = sub.add_parser("evaluate", help="(v1) replay the saved policy and all baselines on the test bank (CPU)")
     p.add_argument("cell", choices=CELL_NAMES + ["all"])
     p.set_defaults(run=cmd_evaluate)
 
-    sub.add_parser("report", help="tables, figures and report.html from results/evaluations").set_defaults(run=cmd_report)
+    sub.add_parser("report", help="(v1) tables, figures and report.html from results/v1/evaluations").set_defaults(run=cmd_report)
     sub.add_parser("manifest", help="(maintainers) hash artifacts into manifest.json before uploading").set_defaults(run=cmd_manifest)
 
     p = sub.add_parser("collect", help="build a new response bank on GPUs")
@@ -119,6 +163,25 @@ def main(argv=None):
     p.add_argument("--follow", action="store_true", help="keep polling for new responses until the split is complete")
     p.add_argument("--allow-test", action="store_true", help="collect a test bank before any policy is fitted")
     p.set_defaults(run=cmd_collect)
+
+    p = sub.add_parser("v2", help="PGM v2 (main study): prepare, run, rescore, method, plot, report (CPU)",
+                       description="prepare: compact inputs from the banks | run: fit + replay every arm and baseline | "
+                                   "rescore: re-run the evaluation protocol from saved traces | method: evaluate a new method "
+                                   "(--plugin or --csv) | plot: one accuracy-token figure | report: tables, figures, report.html")
+    p.add_argument("stage", choices=["prepare", "run", "rescore", "method", "plot", "report"])
+    p.add_argument("--models", nargs="+", choices=list(MODELS))
+    p.add_argument("--datasets", nargs="+", choices=DATASETS)
+    p.add_argument("--workers", type=int, default=8)
+    p.add_argument("--overwrite", action="store_true", help="prepare: rebuild existing .npz inputs")
+    p.add_argument("--plugin", help="method: Python file or module that registers methods with pgm_asc.v2.methods.register")
+    p.add_argument("--csv", help="method: decisions CSV (model,dataset,split,question_id,threshold,samples,response_index)")
+    p.add_argument("--name", help="method: name for a --csv method (or pick one method from a plugin)")
+    p.add_argument("--label", help="method: display label for a --csv method")
+    p.add_argument("--methods", nargs="+", help="plot: methods to draw | report: user methods to include (default: all evaluated)")
+    p.add_argument("--cells", nargs="+", help="plot: cells such as llama8b_math (default: all)")
+    p.add_argument("--out", help="plot: output path without extension")
+    p.add_argument("--title", help="plot: figure title")
+    p.set_defaults(run=cmd_v2)
 
     args = parser.parse_args(argv)
     if args.command == "collect" and args.stage in ("generate", "features", "judge") and not args.split:

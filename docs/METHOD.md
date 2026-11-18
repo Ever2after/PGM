@@ -1,110 +1,101 @@
-# Method and protocol
+# PGM v2: a small generative model of sampled answers
 
-An interactive version with diagrams is in [results/report.html](../results/report.html).
+This document describes the v2 model, its variants (arms), and why each part is there. The evaluation protocol shared by all methods is in [PROTOCOL.md](PROTOCOL.md), and the results are in [results/v2/README.md](../results/v2/README.md). An interactive version with equations and charts is [results/v2/report.html](../results/v2/report.html); a PDF version is [results/v2/report.pdf](../results/v2/report.pdf).
 
-## Setting
+v2 restarts from the simplest model that is still a probabilistic graphical model. It keeps from v1 only what v1 validated:
+- the shared response banks: 16 samples per question with xVerify labels;
+- the baselines and the cost definition;
+- the "OTHER" hypothesis (the correct answer has not been sampled yet);
+- threshold selection without test labels.
 
-For a question $q$ the language model is sampled up to 16 times. After each response $y_t$ a policy
-either stops and answers, or asks for one more response. All responses come from a fixed bank, so every
-method replays the same samples in the same order with the same labels; only the aggregation and the
-stopping rule differ. The language models are frozen. The learned part is a head with a few thousand
-parameters.
+It drops the learned neural heads and the semantic partitions, because v1 found no gain from them ([v1 summary](v1/README.md)).
 
-## Inputs per response
+## Lessons carried over from v1
 
-| Input | Definition |
+| v1 finding | v2 consequence |
 |---|---|
-| Answer $a_j$ | Final answer from the response or from two short extraction prompts (ReASC procedure). Candidates are exact-string groups in first-observed order. |
-| $x_j \in \mathbb{R}^9$ | Teacher-forcing features on the sampled tokens: mean log-prob and entropy of the reasoning span, mean log-prob of the boxed answer, three log lengths, truncation/empty-span flags. |
-| $e_j$ | Mean last-layer hidden state over reasoning tokens, L2-normalized. |
-| $w_t \in \mathbb{R}^{25}$ | Prefix statistics: 8 vote statistics (counts, leader/runner-up share, margin, answer entropy) and mean/std of four response features over all responses and the leader's responses, plus the truncation rate. |
+| Semantic partitions do not beat size-matched random grouping (1/48 Holm-significant contrasts) | No partition mixture. Redundancy between reasoning paths is one explicit node, tested against a permuted control |
+| Response confidence mostly tracks question difficulty (within-question AUC 0.53–0.69) | Confidence is a child of the latent difficulty q, with an optional per-response correctness effect. Both are ablated |
+| How wrong answers concentrate depends on difficulty | Wrong answers follow a Chinese restaurant process (CRP) whose concentration θ(q) depends on q |
+| Hard questions spend most tokens at the 16-sample cap, often with no correct answer (Omni-MATH: 70–83% of questions hit the cap) | Futility stopping from the model's own predictive distribution (VOI) |
+| DeepSets on embeddings gave no gain | Hidden states enter only as an alternative similarity for the redundancy node (ablation) |
 
-## The PGM head
+## Model
 
-**Partitions.** Responses are clustered online by cosine similarity of $e_j$ to running cluster centroids.
-Six partitions are kept: $\mathcal P_0$ all-one, $\mathcal P_{1..4}$ with thresholds at the 10/40/70/90 %
-quantiles of pairwise train similarities, and $\mathcal P_5$ singletons. $|C_m(j)|$ is the size of the
-cluster of response $j$ in partition $m$; duplicate partitions are masked.
+For one question with responses j = 1..16 in sampling order:
 
-**Candidate distribution per partition.**
+```
+q    ~ Beta(a, b)                              latent accuracy of the model on this question (difficulty)
+c    ~ H                                       the correct answer (continuous base measure)
+z_j  ~ Bernoulli(q)                            response j is correct
+a_j  = c                          if z_j = 1
+a_j  ~ CRP(θ(q)) over wrong answers  if z_j = 0:  an earlier wrong answer w with prob n_w / (m_j + θ),
+                                                  a new wrong answer with prob θ / (m_j + θ)
+log θ(q) = t0 + t1 (2q − 1)
+```
 
-$$s_j = \mathrm{softplus}(f_\text{sup}(x_j)),\qquad
-\ell_m(a) = \sum_{j\le t:\,a_j=a} |C_m(j)|^{\alpha-1} s_j,\qquad
-\ell(\texttt{OTHER}) = f_\text{oth}(w_t)$$
+Here n_w is the number of earlier responses with wrong answer w, and m_j is the number of earlier wrong responses. A small θ means wrong answers pile up on one or two values. Empty extractions count as wrong responses (z_j = 0) that join no cluster. The final model **M1** has four parameters: a, b, t0, t1.
 
-$$p_m(a) = \mathrm{softmax}_{a\in\mathcal A_t\cup\{\texttt{OTHER}\}}\,\ell_m(a),\qquad \alpha=\sigma(\beta).$$
+**Likelihood of a hypothesis.** Let D_t = a_1..t, n_a the votes for candidate a, and n_k the other votes. Then
 
-$\alpha<1$ discounts responses that fall in large clusters; for singletons or $\alpha=1$ the head is a
-confidence-weighted vote. `OTHER` is the probability that the correct answer has not been sampled yet.
+```
+p(D_t | c = a, q) ∝ q^{n_a} (1 − q)^{t − n_a} · θ(q)^{K_{−a}} ∏_{k≠a} Γ(n_k) · Γ(θ) / Γ(θ + t − n_a)
+```
 
-**Mixture.** $\pi_m = \mathrm{softmax}_m f_\text{gate}(g_m)$ with 12 structural features $g_m$ per
-partition, and $p_t(a)=\sum_m \pi_m p_m(a)$. $f_\text{sup}, f_\text{gate}, f_\text{oth}$ are 2-layer MLPs
-(width 32).
+The second factor is the Ewens probability of the wrong-answer partition, and K_{−a} is the number of distinct wrong answers. The base measure H contributes the same factor to every hypothesis and cancels.
 
-**Training.** Negative log-likelihood of the first correct candidate (or `OTHER` if none is correct) at
-every prefix $t=1..16$, weighted so that prefixes 1–2, 3–4, 5–8 and 9–16 each carry 0.4. AdamW
-(lr 1e-3, weight decay 1e-3), question batches of 32, gradient clipping 1, at most 120 epochs, early
-stopping on dev NLL with patience 20. Seeds 42/43/44; seed 42 is primary.
+**Posterior.** P(c = a | D_t) is exact:
+- q is integrated on an 80-node logit grid, q = σ(z), z ∈ [−7, 7];
+- c is enumerated over the observed candidates plus OTHER, the hypothesis that the correct answer has not been sampled yet.
 
-**Calibration and stopping.** A global temperature $T$ is fitted on the calibration cohort. With
-$\tilde p_t \propto p_t^{1/T}$ and $\hat a_t=\arg\max_a \tilde p_t(a)$, stop at the first
-$t\ge 2$ with $\tilde p_t(\hat a_t)\ge\gamma$ and $\tilde p_t(\hat a_t)>\tilde p_t(\texttt{OTHER})$; otherwise
-answer at $t=16$.
+**Fitting.** The parameters maximise the likelihood of the training banks including the labelled correct answer, Σ_i log ∫ p(q) p(a_{i,1:16}, c*_i | q) dq, where c* is the correct candidate (or OTHER if no response is correct). Training uses 800 questions and L-BFGS, and takes a few seconds per cell. a, b and θ are soft-bounded so that near-degenerate cells stay finite.
 
-**Operating points.** *Selected*: $\gamma\in\{.5,.6,.7,.8,.85,.9,.925,.95,.975,.99,.995,\text{never}\}$
-with the fewest dev output tokens among those with dev accuracy $\ge$ dev SC16 − 1 pp. *Fixed*:
-$\gamma=0.95$. Test data never selects anything.
+## Answer and stopping
 
-## Matched ablations
+The model decides **when to stop**. The **answer** is the plurality answer, with ties broken by the posterior:
 
-All arms share inputs, labels, optimizer, budget, calibration and stopping rule.
+```
+â_t = argmax_{a : n_a = max_b n_b} P(c = a | D_t),        A_t = P(c = â_t | D_t)
+VOI_t = max_{h ∈ {1, 2, 4, 8, 16 − t}} ( E[A_{t+h} | D_t] − A_t ) / h
+stop at t  ⇔  t ≥ 2  and  VOI_t < λ          (else continue; stop at 16)
+```
 
-| Arm | Change |
-|---|---|
-| `mixture` | Full model |
-| `uniform` | Gate fixed to uniform weights |
-| `random` | Clusters replaced by random groupings with the same cluster-size multiset at every prefix |
-| `alpha1` | $\alpha=1$ (no cluster-size discount); equals `singletons` |
-| `single_partition`, `all_one`, `singletons` | One partition only ($\mathcal P_1$, $\mathcal P_0$, $\mathcal P_5$), trained separately |
-| `same_head_single` | The trained mixture restricted to $\mathcal P_1$, without retraining |
-| `candidate_counts` | MLP on per-candidate vote counts only (no teacher forcing needed) |
-| `candidate_confidence` | MLP on per-candidate counts and mean confidence/length |
-| `deepsets_confidence` | DeepSets over response features with per-candidate and global sum pooling |
-| `deepsets_embedding` | Same, with the reasoning embeddings $e_j$ as additional inputs |
+E[A_{t+h} | D_t] is estimated with 48 Monte Carlo continuations:
+1. Draw (c, q) from the joint posterior.
+2. Generate h further answers from the model.
+3. Recompute the posterior exactly.
 
-Primary contrasts (per cell, Holm-adjusted over four): mixture vs `alpha1`, `random`,
-`candidate_confidence`, `deepsets_embedding`, at the selected operating point, paired by question
-(10,000 bootstrap replicates; exact McNemar).
+VOI is the best expected gain in accuracy per extra sample. Both easy questions (already certain) and hopeless questions (more samples will not help) stop early. Count-based rules (ASC, ESC, ReASC) have no predictive distribution, so they cannot compute it. λ is the single knob, swept to trace the accuracy–token curve.
 
-## Baselines
+The posterior argmax answer ("MAP answer") is kept as an ablation. On hard sets the fitted prior puts most of its mass near q ≈ 0. There the CRP over-predicts how strongly wrong answers cluster, so the MAP answer prefers singletons over a 3-vote answer. Before the plurality answer was introduced, this dropped the 16-sample accuracy on Omni-MATH below SC16 (Gemma 28.2 vs 31.6, Llama 13.2 vs 17.2).
 
-Implemented after the official ReASC notebooks (commit `8ee1c76`).
+## Variants (arms)
 
-| Method | Rule |
-|---|---|
-| `pass1`, `sc16` | First response; majority over 16 |
-| `asc` | Beta posterior of the top two vote counts ≥ 0.95 ([Aggarwal et al., 2023](https://aclanthology.org/2023.emnlp-main.761/)) |
-| `esc` | Stop at the first window of 4 identical answers ([Li et al., 2024](https://arxiv.org/abs/2401.10480)) |
-| `reasc_offline` | Votes weighted by $\max(1, e^{0.7z})$ of bottom-10 % windowed self-certainty; single-response gate; calibrated on the calibration cohort |
-| `reasc_online` | Same, calibrated label-free by a two-component GMM on the test questions' first responses |
-| `asc_dev_tuned`, `reasc_dev_tuned` | Same algorithms with the threshold chosen on dev by the PGM selection rule |
-
-## Cohorts
-
-| Dataset | Calibration / train / dev | Test |
+| Arm | Change from M1 | Question it answers |
 |---|---|---|
-| MATH | 128 (79 original-train, 49 original-test; disjoint from test) / 800 / 200 original-train questions | MATH500 |
-| GSM8K | 128 / 800 / 200 from the official train split (seed 20261103; test duplicates removed) | All 1,319 official test questions |
-| Omni-MATH | 128 / 800 / 200 from the full release (`KbsdJames/Omni-MATH` @ `40ba231`) after removing every test question by normalized text (seed 20261103) | 999 distinct questions of the ReASC Omni archive |
+| **M1** (primary) | q, θ(q), CRP, OTHER; VOI stop; plurality answer | |
+| M0 | Confidence stop instead of VOI: stop when P(c = â \| D) ≥ γ and it beats OTHER | Does the predictive distribution help? |
+| M1_map | Posterior argmax answer | Is the posterior a better answer selector than plurality? |
+| M1_no_other | No OTHER hypothesis | Is the unseen-answer mass needed? |
+| M1_theta_const | t1 = 0 | Does wrong-answer concentration need to depend on difficulty? |
+| M1_no_crp | Each wrong answer has a fixed probability ε (no clustering) | Is wrong-answer clustering needed? |
+| M2, M2_map | + confidence node: x_j ~ N(b0 + b1·logit(q)/7 + b2·z_j, s²) on the bottom-10% self-certainty | Does self-certainty help, as difficulty or as evidence? |
+| M1_copy | + copy node: a_j repeats the answer of its most similar earlier response k* with prob ρ·u_j^κ, u_j = train-pair CDF of sim(j, k*) | Does discounting redundant reasoning paths help? |
+| M1_copy_hidden | Copy node on hidden-state cosine instead of 3-gram Jaccard | Are embeddings needed? |
+| M1_copy_perm | Copy node on similarities permuted within each question | Control for M1_copy |
+| M3 | + confidence + copy | Full model |
 
-Responses: at most 1,024 new tokens (2,048 for Omni-MATH), each model's official sampling defaults
-(`configs/models.json`). Correctness: pinned xVerify-3B-Ia, greedy. Cost: generated tokens plus both
-extraction outputs; input tokens and the teacher-forcing pass are reported separately in the
-evaluation files and excluded from the main cost.
+The arms are defined in [configs/v2.json](../configs/v2.json) and implemented in `pgm_asc/v2/model.py` (likelihood, posterior, fit) and `pgm_asc/v2/voi.py` (VOI).
 
-## Cells
+## What the ablations show
 
-16 cells = 4 models × {`math`, `gsm8k`, `omnimath`, `math_to_omnimath`}. The first three are fitted
-and evaluated on the same dataset. `math_to_omnimath` replays the model's MATH policy (heads,
-calibrators, thresholds and ReASC offline calibration) on the Omni-MATH test bank without any Omni
-labels; it shares the test bank with the in-domain `omnimath` cell.
+Mean frontier score over the 9 cells (see [PROTOCOL.md](PROTOCOL.md#metrics)):
+
+| Change | Frontier change | Reading |
+|---|---:|---|
+| Remove CRP (independent wrong answers) | **−3.9 pp** | Needed: modelling how wrong answers cluster is the core of the graph |
+| VOI → confidence (γ) stop | −1.1 pp | Needed: the predictive distribution gives a better stopping rule |
+| Remove OTHER | −0.4 pp | Small; matters on hard sets (Llama Omni-MATH +1.8 pp for M1, p = 0.01) |
+| + confidence node | −0.7 pp | Not needed; the node is learned as a difficulty signal and makes the posterior over-confident |
+| + copy node (text, hidden or permuted) | ±0.0 pp | Not needed; real and permuted similarities give the same result, so reasoning-path redundancy carries no signal here, and neither do embeddings |
+| θ constant, MAP answer | ≤ 0.1 pp | Optional |

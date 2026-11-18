@@ -7,10 +7,12 @@ from pgm_asc.config import ARTIFACTS, MODELS, STUDY
 from pgm_asc.utils import file_sha256, read_json, utc_now, write_json
 
 HUB_DATASET = os.environ.get("PGM_HUB_DATASET", STUDY["hub_dataset"])
-FOLDERS = ("cohorts", "banks", "policies", "decisions")
+FOLDERS = ("cohorts", "banks", "policies", "decisions", "v2")
 # "logprobs" (per-token top-20 log-probabilities, 18 GB) is opt-in: nothing in the study reads it.
 KINDS = FOLDERS + ("logprobs",)
 DEFAULT_KINDS = FOLDERS
+# v2/<model>_<dataset>.npz: compact replay inputs (36 MB in all); v2/traces/: posterior/VOI traces of every arm.
+# `pgm download --only v2` is enough to evaluate a new method against the v2 results without the 7 GB banks.
 
 
 def patterns(kinds=DEFAULT_KINDS, models=None, datasets=None, embeddings=True):
@@ -28,6 +30,8 @@ def patterns(kinds=DEFAULT_KINDS, models=None, datasets=None, embeddings=True):
             out += [f"policies/{m}_{d}.*" for m in models for d in datasets]
         elif kind == "decisions":
             out += [f"decisions/{m}_*.parquet" for m in models]
+        elif kind == "v2":
+            out += [f"v2/{m}_{d}.npz" for m in models for d in datasets] + [f"v2/traces/{m}_{d}.npz" for m in models for d in datasets]
         elif kind == "logprobs":
             out += [f"banks/{m}_{d}.top_logprobs.parquet" for m in models for d in datasets]
     return out
@@ -44,9 +48,9 @@ def build_manifest():
     """Record size and SHA256 of every released file (run before uploading)."""
     files = {}
     for kind in FOLDERS:
-        for path in sorted((ARTIFACTS / kind).glob("*")):
+        for path in sorted((ARTIFACTS / kind).rglob("*")):
             if path.is_file():
-                files[f"{kind}/{path.name}"] = {"bytes": path.stat().st_size, "sha256": file_sha256(path)}
+                files[path.relative_to(ARTIFACTS).as_posix()] = {"bytes": path.stat().st_size, "sha256": file_sha256(path)}
     write_json(ARTIFACTS / "manifest.json", {"created_at": utc_now(), "files": files})
     return files
 

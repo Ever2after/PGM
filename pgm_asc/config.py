@@ -16,6 +16,7 @@ STUDY = read_json(ROOT / "configs" / "study.json")
 MODELS = read_json(ROOT / "configs" / "models.json")
 ARTIFACTS = Path(os.environ.get("PGM_ARTIFACTS", ROOT / "artifacts"))
 RESULTS = Path(os.environ.get("PGM_RESULTS", ROOT / "results"))
+RESULTS_V1 = RESULTS / "v1"   # v1 (partition-mixture heads) evaluations, tables, figures, report
 FIT_SPLITS = tuple(STUDY["fit_splits"])
 EVAL_SPLIT = "test"
 
@@ -93,4 +94,4 @@ def decisions_path(cell_name: str) -> Path:
 
 
 def evaluation_path(cell_name: str) -> Path:
-    return RESULTS / "evaluations" / f"{cell_name}.json"
+    return RESULTS_V1 / "evaluations" / f"{cell_name}.json"

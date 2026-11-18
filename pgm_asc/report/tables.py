@@ -4,7 +4,7 @@ from __future__ import annotations
 import csv
 
 from pgm_asc.baselines import METHODS
-from pgm_asc.config import MODELS, RESULTS, STUDY, cells
+from pgm_asc.config import MODELS, RESULTS_V1 as RESULTS, STUDY, cells
 from pgm_asc.model import ARMS
 from pgm_asc.report.figures import load_evaluations
 

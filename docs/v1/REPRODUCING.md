@@ -21,7 +21,7 @@ pgm report
 ```
 
 `evaluate` loads a saved policy, rebuilds the prefix features from the bank, replays all 36 heads at both
-operating points and all 8 baselines, and writes `results/evaluations/<cell>.json` and
+operating points and all 8 baselines, and writes `results/v1/evaluations/<cell>.json` and
 `artifacts/decisions/<cell>.parquet`.
 
 ## 2. Refit policies (CPU, ~10 min per cell)

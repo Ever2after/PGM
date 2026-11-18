@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PGM v2 · 오답 군집과 예측분포로 언제 멈출지 정하기</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;600&family=Noto+Serif+KR:wght@600;700&display=swap" rel="stylesheet">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body,{output:'mathml',delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+:root {
+  --bg: #f7f8fa; --surface: #fcfcfb; --ink: #12151b; --ink-2: #4c5260; --ink-3: #7a8090; --rule: #dde1e8;
+  --accent: #1c5cab; --soft: #eaf1fb;
+  --s1: #2a78d6; --s2: #eb6834; --s3: #1baf7a; --s4: #eda100; --s5: #e87ba4; --s6: #008300; --s7: #6250d6; --s8: #e34948; --sc: #8a8985;
+  --good: #0ca30c; --bad: #d03b3b;
+  --display: "Noto Serif KR", "Nanum Myeongjo", Georgia, serif;
+  --body: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme="light"])) {
+    --bg: #131416; --surface: #1a1a19; --ink: #f0efec; --ink-2: #c3c2b7; --ink-3: #8f9099; --rule: #34363b;
+    --accent: #86b6ef; --soft: #1d2a3b;
+    --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500; --s5: #d55181; --s6: #0ca30c; --s7: #9085e9; --s8: #e66767; --sc: #a8a79f;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #131416; --surface: #1a1a19; --ink: #f0efec; --ink-2: #c3c2b7; --ink-3: #8f9099; --rule: #34363b;
+  --accent: #86b6ef; --soft: #1d2a3b;
+  --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500; --s5: #d55181; --s6: #0ca30c; --s7: #9085e9; --s8: #e66767; --sc: #a8a79f;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.7 var(--body); }
+.wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px 80px; }
+.col { max-width: 76ch; }
+header.top { padding: 56px 0 28px; border-bottom: 1px solid var(--rule); }
+.kicker { font: 500 13px/1.4 var(--mono); color: var(--accent); }
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; line-height: 1.3; margin: 0; }
+h1 { font-size: clamp(28px, 4.2vw, 42px); margin: 10px 0 14px; }
+h2 { font-size: 26px; margin: 0 0 6px; }
+h3 { font-size: 18px; margin: 28px 0 8px; }
+p { margin: 0 0 14px; }
+.lede { font-size: 18px; color: var(--ink-2); }
+nav.toc { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 20px; font-size: 14px; }
+nav.toc a { color: var(--ink-2); text-decoration: none; border-bottom: 1px solid var(--rule); }
+nav.toc a:hover { color: var(--accent); border-color: var(--accent); }
+a { color: var(--accent); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+section { padding: 48px 0 8px; border-bottom: 1px solid var(--rule); }
+.secno { font: 500 13px var(--mono); color: var(--ink-3); margin-bottom: 4px; }
+.verdict { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; margin: 26px 0 8px; }
+.vcard { background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; padding: 16px 18px; }
+.vcard b { display: block; font: 600 26px/1.2 var(--mono); font-variant-numeric: tabular-nums; margin-bottom: 4px; }
+.vcard span { font-size: 14px; color: var(--ink-2); }
+.vcard.pos { border-left: 3px solid var(--good); }
+.vcard.neg { border-left: 3px solid var(--bad); }
+.eq { background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; padding: 6px 20px 14px; margin: 14px 0 18px; overflow-x: auto; }
+.eq .katex-display { margin: 12px 0; }
+.eq .where { font: 14px/1.7 var(--body); color: var(--ink-2); margin-top: 4px; border-top: 1px solid var(--rule); padding-top: 10px; }
+.eq .tag { float: right; font: 12px var(--mono); color: var(--ink-3); }
+/* Equations render as native MathML (no external KaTeX stylesheet or fonts needed). */
+math { font-family: "STIX Two Math", "Cambria Math", "Latin Modern Math", "STIXGeneral", serif; font-size: 1.12em; }
+math[display="block"] { margin: 12px 0; overflow-x: auto; overflow-y: hidden; }
+.diagram { background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; padding: 14px; margin: 16px 0 10px; overflow-x: auto; }
+.diagram svg { display: block; width: 100%; min-width: 820px; height: auto; }
+.cap { font-size: 13px; color: var(--ink-2); margin-top: 8px; }
+.dg-node { fill: var(--surface); stroke: var(--ink); stroke-width: 1.6; }
+.dg-node.obs { fill: var(--soft); stroke: var(--accent); }
+.dg-node.det { fill: var(--surface); stroke: var(--ink); stroke-dasharray: 0; }
+.dg-node.off { fill: none; stroke: var(--ink-3); stroke-dasharray: 4 3; }
+.dg-hyper { fill: var(--ink); }
+.dg-m { fill: var(--ink); font: italic 18px "KaTeX_Main", "Times New Roman", serif; }
+.dg-m.off { fill: var(--ink-3); }
+.dg-s { fill: var(--ink-2); font: 12px var(--body); }
+.dg-s.off { fill: var(--ink-3); }
+.dg-edge { fill: none; stroke: var(--ink-2); stroke-width: 1.4; }
+.dg-edge.off { stroke: var(--ink-3); stroke-dasharray: 4 3; }
+.dg-plate { fill: none; stroke: var(--rule); stroke-width: 1.5; }
+.dg-pl { fill: var(--ink-3); font: 500 12px var(--mono); }
+code { font: 14px var(--mono); background: var(--soft); padding: 1px 5px; border-radius: 4px; }
+.tbl { overflow-x: auto; margin: 12px 0 22px; background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th, td { padding: 7px 11px; text-align: left; border-bottom: 1px solid var(--rule); vertical-align: top; }
+th { font-weight: 600; color: var(--ink-2); font-size: 13px; background: var(--bg); }
+tr:last-child td { border-bottom: 0; }
+td.n, th.n { text-align: right; font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+td.best { font-weight: 600; color: var(--accent); }
+tr.mean td { font-weight: 600; background: var(--bg); }
+.tok { color: var(--ink-3); }
+.pos-t { color: var(--good); } .neg-t { color: var(--bad); }
+.note { font-size: 14px; color: var(--ink-2); }
+.controls { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; margin: 14px 0; font-size: 14px; }
+.seg { display: inline-flex; flex-wrap: wrap; border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; background: var(--surface); }
+.seg button { font: 500 13px var(--body); border: 0; background: transparent; color: var(--ink-2); padding: 7px 12px; cursor: pointer; border-right: 1px solid var(--rule); }
+.seg button:last-child { border-right: 0; }
+.seg button[aria-pressed="true"] { background: var(--accent); color: var(--surface); }
+select { font: 14px var(--body); padding: 6px 10px; border-radius: 8px; border: 1px solid var(--rule); background: var(--surface); color: var(--ink); }
+.chart { background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; padding: 10px 12px; position: relative; }
+.chart svg { display: block; width: 100%; height: auto; overflow: visible; }
+.chart h4 { margin: 2px 4px 2px; font: 600 13px var(--body); color: var(--ink); }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 13px; color: var(--ink-2); margin: 6px 4px 10px; }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.chart .legend svg { display: inline-block; width: auto; height: auto; overflow: visible; }
+.tip { position: absolute; pointer-events: none; background: var(--ink); color: var(--bg); font: 13px/1.5 var(--body); padding: 8px 10px; border-radius: 6px; opacity: 0; transition: opacity .1s; max-width: 260px; z-index: 5; white-space: nowrap; }
+.axis text { fill: var(--ink-3); font: 11px var(--mono); }
+.grid line { stroke: var(--rule); stroke-width: 1; }
+.axlabel { fill: var(--ink-2); font: 12px var(--body); }
+.rowlabel { fill: var(--ink-2); font: 12px var(--body); }
+.multi { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+@media (max-width: 900px) { .multi { grid-template-columns: 1fr; } }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 860px) { .grid2 { grid-template-columns: 1fr; } }
+ul.tight { margin: 0 0 14px; padding-left: 20px; }
+ul.tight li { margin-bottom: 6px; }
+details { background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; padding: 10px 14px; margin: 10px 0; }
+summary { cursor: pointer; font-weight: 500; }
+footer { padding: 30px 0; font-size: 13px; color: var(--ink-3); }
+@media print {
+  body { background: #fff; }
+  .wrap { max-width: none; padding: 0; }
+  header.top { padding-top: 8px; }
+  section { padding-top: 28px; }
+  .chart, .eq, .diagram, .vcard, .tbl, tr, .multi > div { break-inside: avoid; }
+  h2, h3, .secno { break-after: avoid; }
+  .tbl { overflow: visible; }
+  .tip, nav.toc { display: none; }
+  a { color: inherit; text-decoration: none; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <div class="kicker">연구 보고 · PGM v2 · 3 models × 3 datasets · CPU replay of the v1 response banks</div>
+  <h1>PGM v2: 오답이 뭉치는 방식과 예측분포로 언제 멈출지 정하기</h1>
+  <div class="col">
+    <p class="lede">v1의 학습형 partition mixture를 버리고, 파라미터 4개짜리 생성형 그래프 모델에서 다시 시작했습니다. 모델은 "응답을 하나 더 받으면 정답을 맞힐 확률이 얼마나 오를까"를 직접 계산해 생성을 멈추고, 답은 다수결로 냅니다. 구조를 하나씩 빼고 더하는 ablation으로 어떤 노드가 실제로 필요한지 확인했습니다.</p>
+  </div>
+  <nav class="toc" aria-label="목차">
+    <a href="#summary">요약</a><a href="#model">모델과 수식</a><a href="#setup">실험 설정</a><a href="#curves">토큰-정확도 곡선</a><a href="#explorer">곡선 탐색기</a><a href="#matched">운영점 비교</a><a href="#ablation">구조 필요성</a><a href="#diagnosis">진단</a><a href="#verdict">결론</a>
+  </nav>
+</header>
+
+<section id="summary">
+  <div class="secno">00</div>
+  <h2>요약</h2>
+  <div class="verdict" id="cards"></div>
+  <div class="col"><p class="note">정확도는 xVerify-3B-Ia 판정, 토큰은 응답 본문과 두 번의 정답 추출 출력을 합친 질문당 평균 출력 토큰(v1과 같은 정의)입니다. 그래프와 표의 토큰은 같은 셀 SC16 대비 비율로 표시합니다. 숫자는 이 페이지를 만든 결과 파일에서 직접 계산됩니다.</p></div>
+</section>
+
+<section id="model">
+  <div class="secno">01</div>
+  <h2>모델과 수식</h2>
+  <div class="col">
+    <p>v1에서 검증된 것만 남겼습니다. 응답 확신도는 대부분 문제 난이도를 반영하고(같은 질문 안 AUC 0.53–0.69), 오답이 뭉치는 정도는 난이도에 따라 다르며, 어려운 문제에서 토큰 대부분이 16개 cap까지 가는 질문에 쓰입니다. 그래서 질문 난이도 \(q\)를 잠재변수로 두고, 오답이 뭉치는 방식을 명시적으로 모델링한 뒤, 모델의 예측분포로 "더 받을 가치"를 계산합니다.</p>
+  </div>
+
+  <h3>1. 그래프 구조</h3>
+  <div class="diagram">
+    <svg viewBox="0 0 900 340" role="img" aria-label="PGM v2 plate diagram">
+      <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--ink-2)"/></marker>
+            <marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--ink-3)"/></marker></defs>
+      <rect class="dg-plate" x="395" y="24" width="480" height="300" rx="10"/>
+      <text class="dg-pl" x="860" y="314" text-anchor="end">j = 1, …, 16 (샘플링 순서)</text>
+      <!-- hyper -->
+      <circle class="dg-hyper" cx="70" cy="95" r="4"/><text class="dg-m" x="58" y="80">a, b</text>
+      <circle class="dg-hyper" cx="200" cy="30" r="4"/><text class="dg-m" x="212" y="35">t₀, t₁</text>
+      <!-- q -->
+      <circle class="dg-node" cx="190" cy="125" r="28"/><text class="dg-m" x="190" y="131" text-anchor="middle">q</text>
+      <text class="dg-s" x="190" y="172" text-anchor="middle">질문 난이도</text>
+      <!-- theta -->
+      <rect class="dg-node det" x="290" y="102" width="64" height="44" rx="4"/><text class="dg-m" x="322" y="130" text-anchor="middle">θ(q)</text>
+      <text class="dg-s" x="322" y="164" text-anchor="middle">오답 군집도</text>
+      <!-- c -->
+      <circle class="dg-node" cx="190" cy="262" r="28"/><text class="dg-m" x="190" y="268" text-anchor="middle">c</text>
+      <text class="dg-s" x="190" y="308" text-anchor="middle">정답 (미관측)</text>
+      <!-- z -->
+      <circle class="dg-node" cx="480" cy="125" r="28"/><text class="dg-m" x="480" y="131" text-anchor="middle">zⱼ</text>
+      <text class="dg-s" x="480" y="172" text-anchor="middle">응답 j가 정답?</text>
+      <!-- a_j -->
+      <circle class="dg-node obs" cx="640" cy="215" r="30"/><text class="dg-m" x="640" y="221" text-anchor="middle">aⱼ</text>
+      <text class="dg-s" x="640" y="263" text-anchor="middle">추출된 답 (관측)</text>
+      <!-- a_<j -->
+      <circle class="dg-node obs" cx="480" cy="262" r="24"/><text class="dg-m" x="480" y="268" text-anchor="middle">a&lt;ⱼ</text>
+      <text class="dg-s" x="480" y="304" text-anchor="middle">이전 답 (CRP 이력)</text>
+      <!-- ablated -->
+      <circle class="dg-node off" cx="800" cy="95" r="26"/><text class="dg-m off" x="800" y="101" text-anchor="middle">xⱼ</text>
+      <text class="dg-s off" x="800" y="138" text-anchor="middle">확신도 (M2: 효과 없음)</text>
+      <circle class="dg-node off" cx="800" cy="250" r="26"/><text class="dg-m off" x="800" y="256" text-anchor="middle">uⱼ</text>
+      <text class="dg-s off" x="800" y="293" text-anchor="middle">reasoning 중복 (효과 없음)</text>
+      <!-- edges -->
+      <path class="dg-edge" d="M74,97 L160,118" marker-end="url(#ar)"/>
+      <path class="dg-edge" d="M218,125 L288,125" marker-end="url(#ar)"/>
+      <path class="dg-edge" d="M204,34 L300,100" marker-end="url(#ar)"/>
+      <path class="dg-edge" d="M218,125 C300,60 400,80 450,118" marker-end="url(#ar)"/>
+      <path class="dg-edge" d="M354,138 C420,205 540,222 609,216" marker-end="url(#ar)"/>
+      <path class="dg-edge" d="M505,140 L614,198" marker-end="url(#ar)"/>
+      <path class="dg-edge" d="M218,256 C330,228 520,240 610,226" marker-end="url(#ar)"/>
+      <path class="dg-edge" d="M503,268 C560,268 600,250 618,236" marker-end="url(#ar)"/>
+      <path class="dg-edge off" d="M508,118 L772,98" marker-end="url(#ar2)"/>
+      <path class="dg-edge off" d="M776,240 L670,220" marker-end="url(#ar2)"/>
+    </svg>
+    <div class="cap">원은 확률변수, 사각형은 결정적 함수, 파란 원은 관측값, 점선은 ablation으로 시험했지만 이득이 없어 최종 모델(M1)에서 뺀 노드입니다. 판(plate) 안의 노드는 응답마다 반복됩니다.</div>
+  </div>
+
+  <h3>2. 생성 과정</h3>
+  <div class="eq">
+    <span class="tag">(1)</span>
+    \[ q \sim \mathrm{Beta}(a, b), \qquad z_j \mid q \sim \mathrm{Bernoulli}(q), \qquad j = 1, \dots, 16 \]
+    <span class="tag">(2)</span>
+    \[ a_j \mid z_j, c, a_{<j} = \begin{cases} c & z_j = 1 \\[2pt] w \ \text{(기존 오답)} & \text{w.p. } \dfrac{n^{-}_w}{m_j + \theta(q)} \\[8pt] \text{새 오답} & \text{w.p. } \dfrac{\theta(q)}{m_j + \theta(q)} \end{cases} \qquad \text{if } z_j = 0 \]
+    <span class="tag">(3)</span>
+    \[ \log \theta(q) = t_0 + t_1 (2q - 1) \]
+    <div class="where">\(c\): 정답(값 자체는 연속 base measure \(H\)에서 나온다고 보며, \(H\)는 모든 가설에 같은 인수로 들어가 사후확률에서 약분됩니다). \(n^{-}_w\): 이전 응답 중 오답 \(w\)를 낸 수, \(m_j\): 이전 오답 응답 수. 식 (2)의 오답 부분은 Chinese restaurant process(CRP)이며 \(\theta\)가 작을수록 오답이 한두 개로 몰립니다. 빈 답(추출 실패)은 \(z_j = 0\)인 응답으로만 셉니다. 파라미터는 \(a, b, t_0, t_1\) 4개입니다.</div>
+  </div>
+
+  <h3>3. 정확한 사후확률</h3>
+  <div class="col"><p>시점 \(t\)까지 관측한 답 \(D_t = a_{1:t}\)에서 후보 \(a\)의 득표를 \(n_a\), 나머지 득표를 \(n_k\)라 하면, "\(a\)가 정답"이라는 가설의 우도는 정답 부분과 오답 CRP(Ewens 분포) 부분의 곱이 됩니다.</p></div>
+  <div class="eq">
+    <span class="tag">(4)</span>
+    \[ p(D_t \mid c = a, q) \;\propto\; q^{\,n_a} (1-q)^{\,t - n_a} \cdot \theta(q)^{K_{-a}} \prod_{k \ne a} \Gamma(n_k) \cdot \frac{\Gamma(\theta(q))}{\Gamma(\theta(q) + t - n_a)} \]
+    <span class="tag">(5)</span>
+    \[ P(c = a \mid D_t) = \frac{\int_0^1 p(q)\, p(D_t \mid c = a, q)\, dq}{\sum_{a' \in \mathcal{A}_t \cup \{\texttt{OTHER}\}} \int_0^1 p(q)\, p(D_t \mid c = a', q)\, dq} \]
+    <div class="where">\(K_{-a}\): \(a\)를 뺀 서로 다른 오답의 수. \(\texttt{OTHER}\)는 "정답이 아직 안 나왔다"는 가설로 \(n_{\texttt{OTHER}} = 0\)입니다. 적분은 \(q = \sigma(z)\), \(z \in [-7, 7]\)의 80칸 grid에서 계산합니다. 근사 없이 닫힌 형태입니다.</div>
+  </div>
+
+  <h3>4. 답과 정지 규칙</h3>
+  <div class="eq">
+    <span class="tag">(6)</span>
+    \[ \hat a_t = \arg\max_{a \in \mathcal{A}_t:\; n_a = \max_{b} n_b} P(c = a \mid D_t), \qquad A_t = P(c = \hat a_t \mid D_t) \]
+    <span class="tag">(7)</span>
+    \[ \mathrm{VOI}_t = \max_{h \in \{1, 2, 4, 8, 16 - t\}} \frac{\mathbb{E}\big[A_{t+h} \mid D_t\big] - A_t}{h}, \qquad \text{stop at } t \iff t \ge 2 \;\wedge\; \mathrm{VOI}_t < \lambda \]
+    <div class="where">답은 다수결이고, 동률은 사후확률로 깹니다. \(A_t\)는 지금 멈추면 맞힐 확률입니다. \(\mathbb{E}[A_{t+h} \mid D_t]\)는 사후분포에서 \((c, q)\)를 48번 뽑고, 식 (1)–(3)으로 응답 \(h\)개를 더 생성한 뒤 식 (5)로 다시 계산한 \(A_{t+h}\)의 평균입니다. 즉 "응답 하나당 기대 정확도 상승"이 \(\lambda\)보다 작으면 멈춥니다. 쉬운 문제(이미 확실)와 너무 어려운 문제(더 받아도 소용없음)가 모두 일찍 멈춥니다. ASC·ESC·ReASC는 예측분포가 없어서 이 값을 계산할 수 없습니다.</div>
+  </div>
+
+  <h3>5. 학습</h3>
+  <div class="eq">
+    <span class="tag">(8)</span>
+    \[ \hat\phi = \arg\max_{\phi = (a, b, t_0, t_1)} \sum_{i \in \text{train}} \log \int_0^1 p_\phi(q)\, p_\phi\big(a_{i,1:16} \mid c = c^\star_i, q\big)\, dq \]
+    <div class="where">\(c^\star_i\): 16개 응답 중 정답으로 판정된 후보(없으면 \(\texttt{OTHER}\)). train 800문항, L-BFGS, 셀당 수 초. 신경망이나 hidden state는 쓰지 않습니다.</div>
+  </div>
+
+  <h3>6. 시험한 확장 노드 (ablation, 최종 모델에서 제외)</h3>
+  <div class="eq">
+    <span class="tag">(9)</span>
+    \[ x_j \mid q, z_j \sim \mathcal{N}\!\big(b_0 + b_1 \tfrac{\operatorname{logit} q}{7} + b_2 z_j,\; s^2\big) \qquad \text{(확신도 노드, M2)} \]
+    <span class="tag">(10)</span>
+    \[ a_j = a_{k^\star_j} \ \text{w.p. } r_j = \rho\, u_j^{\kappa}, \quad k^\star_j = \arg\max_{k<j} \mathrm{sim}(j, k), \quad u_j = F_{\text{train}}\big(\mathrm{sim}(j, k^\star_j)\big) \qquad \text{(중복 노드)} \]
+    <div class="where">\(x_j\): ReASC가 쓰는 bottom-10% self-certainty. \(\mathrm{sim}\): reasoning 텍스트의 단어 3-gram Jaccard, hidden state cosine, 또는 같은 질문 안에서 무작위로 섞은 통제군. 복사된 응답은 정답에 대한 증거가 되지 않으므로 중복된 추론을 할인합니다.</div>
+  </div>
+</section>
+
+<section id="setup">
+  <div class="secno">02</div>
+  <h2>실험 설정</h2>
+  <div class="tbl"><table>
+    <thead><tr><th>항목</th><th>설정</th></tr></thead>
+    <tbody>
+      <tr><td>모델</td><td>Gemma-3-4B-IT, Qwen2.5-7B-Instruct, Llama-3.1-8B-Instruct</td></tr>
+      <tr><td>벤치마크</td><td>MATH500 (test 500), GSM8K (test 1,319), Omni-MATH (test 999). 질문당 응답 16개를 미리 생성한 v1 bank를 그대로 재생합니다.</td></tr>
+      <tr><td>분할</td><td>train 800 (모델 적합), dev 200 (threshold 선택), calibration 128 (ReASC offline 보정), test (보고)</td></tr>
+      <tr><td>Baseline</td><td>SC@k (k = 1…16), ASC (Beta top-two ≥ β), ESC (window w), ReASC offline / online (β). 원 논문 기본값(SC16, β = .95, w = 4)과 같은 규칙으로 threshold를 고른 버전을 모두 비교합니다.</td></tr>
+      <tr><td>PGM 변형</td><td>M1(주 모델)과 11개 변형. 각 변형은 threshold 19개(λ) 또는 20개(γ)를 쓸어 곡선 하나를 만듭니다.</td></tr>
+      <tr><td>비용</td><td>질문당 평균 출력 토큰. 정지한 시점까지의 응답 본문 + 정답 추출 출력.</td></tr>
+    </tbody>
+  </table></div>
+  <h3>평가 지표</h3>
+  <div class="eq">
+    <span class="tag">(11)</span>
+    \[ \mathrm{Frontier} = \frac{1}{|B|} \sum_{\beta \in B} \max_{\tau:\; T(\tau) \le \beta} \mathrm{Acc}(\tau), \qquad B = 60 \text{ budgets in } [T_{\mathrm{SC@2}}, T_{\mathrm{SC16}}] \]
+    <span class="tag">(12)</span>
+    \[ \tau^\star = \arg\min_{\tau} \big\{ T(\tau) : \mathrm{Acc}(\tau) \ge \mathrm{Acc}_{\mathrm{SC16}} - 1\,\mathrm{pp} \big\} \quad \text{(matched accuracy)} \]
+    <div class="where">\(\tau\): 방법의 threshold, \(T(\tau)\), \(\mathrm{Acc}(\tau)\): 그 threshold의 평균 토큰과 정확도. Frontier는 곡선이 "왼쪽 위"에 있을수록 커지는 요약값으로, 모든 방법에 똑같이 적용하는 oracle 요약입니다. 실제 운영점 (12)는 정답을 보지 않고 고릅니다. dev(200문항)에서 고르는 방식과, test를 무작위로 반씩 나눠 한쪽에서 고른 threshold를 다른 쪽에 적용하는 <b>2-fold cross-fitting</b> 두 가지를 보고합니다. 이 데이터에서는 dev가 test보다 훨씬 쉬워서(예: Llama MATH SC16 dev 86% vs test 59%) cross-fitting이 주 지표입니다. 차이는 질문 단위 paired bootstrap(10,000회) 95% CI와 exact McNemar p로 검정합니다.</div>
+  </div>
+</section>
+
+<section id="curves">
+  <div class="secno">03</div>
+  <h2>토큰-정확도 곡선</h2>
+  <div class="col"><p>각 방법의 threshold를 쓸어서 얻은 test 곡선입니다. 왼쪽 위에 있을수록 같은 토큰으로 더 정확합니다. x축은 SC16 대비 토큰(log), ◆는 cross-fitting으로 고른 운영점(정확도 ≥ SC16 − 1 pp 중 최소 토큰; test의 두 절반이 서로 다른 threshold를 쓰므로 곡선에서 약간 벗어날 수 있음), ○는 baseline 기본값입니다. 점에 마우스를 올리면 수치가 보입니다.</p></div>
+  <div class="legend" id="leg-multi"></div>
+  <div class="multi" id="multi"></div>
+</section>
+
+<section id="explorer">
+  <div class="secno">04</div>
+  <h2>곡선 탐색기</h2>
+  <div class="controls">
+    <label>셀 <select id="ex-cell"></select></label>
+    <div class="seg" id="ex-set" role="group" aria-label="비교 묶음"></div>
+    <div class="seg" id="ex-op" role="group" aria-label="운영점"></div>
+  </div>
+  <div class="chart"><div class="legend" id="ex-leg"></div><div id="ex-chart"></div></div>
+  <div class="tbl" id="ex-table"></div>
+</section>
+
+<section id="matched">
+  <div class="secno">05</div>
+  <h2>운영점 비교</h2>
+  <div class="col"><p>실제로 쓸 하나의 threshold를 고정했을 때의 비교입니다. 아래 그림의 각 점은 한 셀에서 M1을 한 baseline과 비교한 것으로, x는 토큰 비율(M1 ÷ baseline), y는 정확도 차이(M1 − baseline, 95% CI)입니다. 왼쪽 위 음영 영역은 "더 적은 토큰으로 정확도 손실 없음"입니다.</p></div>
+  <div class="controls">
+    <div class="seg" id="mt-rule" role="group" aria-label="선택 방식"></div>
+    <div class="seg" id="mt-base" role="group" aria-label="baseline 종류"></div>
+  </div>
+  <div class="chart"><div class="legend" id="mt-leg"></div><div id="mt-chart"></div></div>
+  <h3>정확도 / SC16 대비 토큰 (matched accuracy)</h3>
+  <div class="tbl" id="mt-table"></div>
+  <h3>Frontier score (식 11)</h3>
+  <div class="tbl" id="fr-table"></div>
+</section>
+
+<section id="ablation">
+  <div class="secno">06</div>
+  <h2>구조 필요성 (ablation)</h2>
+  <div class="col"><p>M1에서 노드를 하나씩 빼거나 더했을 때 frontier score가 얼마나 변하는지입니다. 점 하나가 셀 하나이고(색은 벤치마크), 검은 막대는 9개 셀 평균입니다. 0보다 왼쪽이면 그 변경이 해롭다는 뜻, 즉 M1의 해당 구조가 필요하다는 뜻입니다.</p></div>
+  <div class="chart"><div class="legend" id="ab-leg"></div><div id="ab-chart"></div></div>
+  <h3>M1 대비 paired 비교 (cross-fitted matched accuracy)</h3>
+  <div class="col"><p class="note">Δ = M1 − 변형 (양수면 M1이 더 정확), 토큰 비율 = M1 ÷ 변형. 굵은 글씨는 McNemar p &lt; 0.05.</p></div>
+  <div class="tbl" id="ab-table"></div>
+</section>
+
+<section id="diagnosis">
+  <div class="secno">07</div>
+  <h2>진단</h2>
+  <h3>1. 사후확률 argmax vs 다수결</h3>
+  <div class="col">
+    <p>처음 버전은 식 (6) 대신 사후확률이 가장 큰 답을 냈습니다. Omni-MATH에서는 이 답이 16개 시점에서 다수결과 26–58% 달랐고, 정확도가 SC16보다 낮았습니다(Gemma 28.2 vs 31.6, Llama 13.2 vs 17.2). 어려운 셋에서는 적합된 사전분포가 \(q \approx 0\) 쪽에 몰리고(Gemma Omni \(a \approx 0.02\)), 그러면 3표를 받은 답을 "우연히 뭉친 오답"으로 해석해 1표짜리 답을 선호합니다. 낮은 \(q\)에서 CRP가 오답 군집을 실제보다 강하게 예측하는 오설정입니다.</p>
+    <p>그래서 모델은 <b>언제 멈출지</b>만 정하고 답은 다수결로 내도록 바꿨습니다. VOI도 실제로 낼 답 기준으로 계산합니다. 이렇게 바꾼 뒤에는 argmax를 쓰는 변형(MAP answer)과 frontier가 같아졌고, Omni 곡선이 끝에서 꺾이던 현상이 사라졌습니다.</p>
+  </div>
+  <h3>2. 확신도·중복 노드가 해로운 이유</h3>
+  <div class="col">
+    <p>확신도 노드는 거의 전부 난이도 신호로 학습됩니다: \(b_1 = 2.8\)–\(7.2\)로 크고, 정답 여부 효과 \(b_2\)는 \(-0.4\)–\(+0.4\)로 작고 부호도 셀마다 다릅니다. 응답 간 확신도 상관을 무시하고 독립 증거로 곱하기 때문에 사후확률이 과신하며, 보정 오차(ECE)가 9셀 중 7셀에서 M1보다 나빠집니다(Llama MATH 0.15 → 0.25). 중복 노드는 \(\rho = 0.33\)–\(0.99\)로 학습되고, GSM8K와 Llama MATH에서는 \(\rho \ge 0.9\)라 "같은 답의 반복은 대부분 복사"로 해석해 다수결 신호를 지웁니다. 실제 텍스트 유사도, hidden state, 무작위 통제군의 결과가 같으므로 reasoning path 중복 할인은 이 데이터에서 근거가 없습니다(v1과 같은 결론).</p>
+  </div>
+  <h3>3. 적합된 파라미터 (M1)</h3>
+  <div class="col"><p>사전분포 \(\mathrm{Beta}(a, b)\)의 한쪽 모수가 하한 근처(\(e^{-4} \approx 0.018\))에 붙은 셀이 많습니다. MATH·GSM8K는 \(b \approx 0.02\)(대부분 \(q \approx 1\)), Omni는 \(a \approx 0.02\)(대부분 \(q \approx 0\))입니다. 질문 난이도 분포가 Beta 하나로 표현하기 어려운 극단적 U자형이라는 뜻이고, 진단 1의 오설정과 같은 원인입니다. 다음 단계의 2성분 혼합 사전분포가 이것을 겨냥합니다.</p></div>
+  <div class="tbl" id="fit-table"></div>
+</section>
+
+<section id="verdict">
+  <div class="secno">08</div>
+  <h2>결론과 다음 단계</h2>
+  <div class="col">
+    <ul class="tight">
+      <li><b>필요한 구조:</b> 오답 CRP 군집과 생성모델 기반 VOI 정지. CRP를 빼면 frontier가 평균 3.9 pp 떨어지고, VOI를 확신도 threshold로 바꾸면 같은 정확도에 토큰이 크게 늘어납니다. 이 둘은 개수만 세는 ASC/ESC/ReASC에는 없는, 그래프 모델이 있어야 가능한 부분입니다.</li>
+      <li><b>필요 없는 구조:</b> 확신도 노드, reasoning 중복 노드, hidden state / embedding, 사후확률 argmax 답, \(\theta\)의 난이도 의존(평균 −0.1 pp).</li>
+      <li><b>성능:</b> threshold를 쓸어 얻는 곡선 전체로는 M1이 모든 baseline보다 왼쪽 위입니다. 하나의 운영점(SC16 − 1 pp, cross-fitting)에서는 같은 규칙으로 튜닝한 ASC보다 토큰을 11–51% 덜 쓰지만 정확도가 0.1–2.0 pp 낮고, Gemma·Qwen MATH에서는 그 차이가 유의합니다. "같은 정확도에서 우월"까지는 아직 아닙니다.</li>
+    </ul>
+    <p><b>다음 단계</b></p>
+    <ul class="tight">
+      <li>λ 격자를 촘촘히 하고, VOI와 확신도 정지를 결합해 목표 정확도 근처의 운영점을 개선</li>
+      <li>\(q\)의 사전분포를 "쉬움/어려움" 2성분 혼합으로 바꿔 낮은 \(q\) 오설정을 직접 교정 (+2 파라미터)</li>
+      <li>추가 벤치마크: GPQA-Diamond(4지선다, 우연 수준 정확도), MMLU-Pro STEM(10지선다), StrategyQA(예/아니오). 오답 공간 크기가 CRP에 미치는 영향을 시험</li>
+    </ul>
+  </div>
+</section>
+
+<footer>생성: <code>pgm v2 report</code> · 코드 <code>pgm_asc/v2/</code> · 설정 <code>configs/v2.json</code> · 방법 문서 <code>docs/METHOD.md</code></footer>
+</div>
+
+<script>
+const D = __DATA__;
+const N = D.names;
+const C = D.cells;
+const fmt = (x, k = 1) => (x == null ? "–" : Number(x).toFixed(k));
+const sgn = (x, k = 1) => (x > 0 ? "+" : x < 0 ? "−" : "±") + Math.abs(x).toFixed(k);
+const SLOTS = ["var(--s1)", "var(--s2)", "var(--s3)", "var(--s4)", "var(--s5)", "var(--s6)", "var(--s7)", "var(--s8)"];
+const EXTRA = D.extra || [];   // user methods evaluated with `pgm v2 method`, drawn after the built-in baselines
+const SETS = {
+  base:   {label: "baseline", methods: ["M1", "asc", "esc", "reasc_offline", "reasc_online", ...EXTRA].slice(0, 8)},
+  ladder: {label: "사다리 M0→M3", methods: ["M1", "M0", "M2", "M3"]},
+  struct: {label: "구조 제거", methods: ["M1", "M1_no_crp", "M1_no_other", "M1_theta_const", "M1_map"]},
+  copy:   {label: "중복·embedding", methods: ["M1", "M1_copy", "M1_copy_hidden", "M1_copy_perm"]},
+};
+const BASE = D.baselines.concat(EXTRA).slice(0, 7);
+const esc = s => String(s).replace(/[&<>]/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;"}[c]));
+const mean = a => a.reduce((s, x) => s + x, 0) / a.length;
+const median = a => { const b = [...a].sort((x, y) => x - y); const m = b.length >> 1; return b.length % 2 ? b[m] : (b[m - 1] + b[m]) / 2; };
+
+/* ---------- summary cards (computed from data) ---------- */
+(function cards() {
+  const fr = m => mean(C.map(c => c.frontier[m]));
+  const bestBase = Math.max(...BASE.map(fr), fr("sc"));
+  const ratioASC = C.map(c => c.cf.asc[3]);
+  const dASC = C.map(c => c.cf.asc[0]);
+  const ratioDef = C.map(c => c["sel"].cf.M1[0]);
+  const crp = mean(C.map(c => c.frontier.M1_no_crp - c.frontier.M1));
+  const copy = Math.max(...["M1_copy", "M1_copy_hidden", "M1_copy_perm"].map(m => Math.abs(mean(C.map(c => c.frontier[m] - c.frontier.M1)))));
+  const html = [
+    ["pos", fmt(fr("M1")), `M1의 평균 frontier score (9셀). 가장 좋은 baseline ${fmt(bestBase)}보다 ${sgn(fr("M1") - bestBase)} pp.`],
+    ["", `${Math.round(100 * Math.min(...ratioASC))}–${Math.round(100 * Math.max(...ratioASC))}%`, `하나의 운영점(SC16 − 1 pp, cross-fitting)에서 M1이 쓰는 토큰, 같은 규칙으로 튜닝한 ASC 대비. 정확도 차이는 ${sgn(Math.min(...dASC))} ~ ${sgn(Math.max(...dASC))} pp. SC16 대비 토큰은 중앙값 ${Math.round(100 * median(ratioDef))}%.`],
+    ["neg", sgn(crp) + " pp", "오답 CRP를 빼고 오답을 서로 독립으로 볼 때 frontier 변화. 그래프 구조가 필요하다는 가장 큰 근거."],
+    ["", "≤ " + fmt(copy, 2) + " pp", "reasoning 중복 노드(텍스트·hidden state·무작위 통제군)의 frontier 변화. 효과 없음."],
+  ];
+  document.getElementById("cards").innerHTML = html.map(([k, b, s]) => `<div class="vcard ${k}"><b>${b}</b><span>${s}</span></div>`).join("");
+})();
+
+/* ---------- line chart ---------- */
+function curveChart(host, cell, methods, opts = {}) {
+  const W = opts.w || 640, H = opts.h || 400, compact = !!opts.compact;
+  const m = {l: compact ? 40 : 52, r: 12, t: compact ? 8 : 12, b: compact ? 32 : 44};
+  const sel = opts.op || "cf";
+  const all = methods.concat(["sc"]);
+  const pts = all.flatMap(k => cell.curves[k] || []);
+  const sc1 = cell.curves.sc[0];
+  let x0 = Math.max(0.035, Math.min(...pts.map(p => p[0])) * 0.85), x1 = 1.12;
+  let ys = pts.filter(p => p[0] >= x0).map(p => p[1]);
+  let y0 = Math.min(...ys, sc1[1]) - 0.6, y1 = Math.max(...ys) + 0.6;
+  const X = v => m.l + (Math.log(v) - Math.log(x0)) / (Math.log(x1) - Math.log(x0)) * (W - m.l - m.r);
+  const Y = v => H - m.b - (v - y0) / (y1 - y0) * (H - m.t - m.b);
+  const ticksX = [0.05, 0.1, 0.2, 0.3, 0.5, 1].filter(v => v >= x0 && v <= x1);
+  const step = (y1 - y0) > 12 ? 4 : (y1 - y0) > 6 ? 2 : (y1 - y0) > 3 ? 1 : 0.5;
+  const ticksY = []; for (let v = Math.ceil(y0 / step) * step; v <= y1; v += step) ticksY.push(+v.toFixed(2));
+  const id = "c" + Math.random().toString(36).slice(2, 8);
+  let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(cell.model + " " + cell.dataset)} accuracy vs tokens"><defs><clipPath id="${id}"><rect x="${m.l}" y="${m.t}" width="${W - m.l - m.r}" height="${H - m.t - m.b}"/></clipPath></defs>`;
+  s += `<g class="grid">${ticksX.map(v => `<line x1="${X(v)}" x2="${X(v)}" y1="${m.t}" y2="${H - m.b}"/>`).join("")}${ticksY.map(v => `<line x1="${m.l}" x2="${W - m.r}" y1="${Y(v)}" y2="${Y(v)}"/>`).join("")}</g>`;
+  s += `<g class="axis">${ticksX.map(v => `<text x="${X(v)}" y="${H - m.b + 15}" text-anchor="middle">${Math.round(v * 100)}%</text>`).join("")}${ticksY.map(v => `<text x="${m.l - 6}" y="${Y(v) + 4}" text-anchor="end">${v}</text>`).join("")}</g>`;
+  if (!compact) s += `<text class="axlabel" x="${(W + m.l) / 2}" y="${H - 6}" text-anchor="middle">출력 토큰 (SC16 대비, log)</text><text class="axlabel" transform="translate(13 ${(H + m.t - m.b) / 2}) rotate(-90)" text-anchor="middle">test 정확도 (%)</text>`;
+  const hit = [];
+  s += `<g clip-path="url(#${id})">`;
+  const sc = cell.curves.sc;
+  s += `<polyline fill="none" stroke="var(--sc)" stroke-width="1.5" points="${sc.map(p => X(p[0]) + "," + Y(p[1])).join(" ")}"/>`;
+  sc.forEach(p => { s += `<circle cx="${X(p[0])}" cy="${Y(p[1])}" r="${compact ? 2.2 : 3}" fill="var(--sc)"/>`; hit.push(["SC@k", "k = " + p[4], p]); });
+  methods.slice().reverse().forEach(k => {
+    const i = methods.indexOf(k), col = SLOTS[i], c = cell.curves[k];
+    s += `<polyline fill="none" stroke="${col}" stroke-width="${i === 0 ? 2.6 : 1.7}" stroke-linejoin="round" points="${c.map(p => X(p[0]) + "," + Y(p[1])).join(" ")}"/>`;
+    c.forEach(p => hit.push([N[k] || k, (k.startsWith("M") ? (["M0"].includes(k) ? "γ = " : "λ = ") : (k === "esc" ? "w = " : "β = ")) + p[4], p]));
+  });
+  s += `</g>`;
+  methods.forEach((k, i) => {
+    const d = cell.sel.def[k];
+    if (d) s += `<circle cx="${X(d[0])}" cy="${Y(d[1])}" r="${compact ? 3.5 : 5}" fill="var(--surface)" stroke="${SLOTS[i]}" stroke-width="2"/>`;
+    const p = cell.sel[sel][k];
+    if (p && p[1] >= y0) { const r = compact ? 5 : 7, cx = X(p[0]), cy = Y(p[1]);
+      s += `<path d="M${cx},${cy - r} L${cx + r},${cy} L${cx},${cy + r} L${cx - r},${cy} Z" fill="${SLOTS[i]}" stroke="var(--surface)" stroke-width="2"/>`; }
+  });
+  s += `<line class="cross" x1="0" x2="0" y1="${m.t}" y2="${H - m.b}" stroke="var(--ink-3)" stroke-dasharray="3 3" opacity="0"/></svg><div class="tip"></div>`;
+  host.innerHTML = s;
+  const svg = host.querySelector("svg"), tip = host.querySelector(".tip"), cross = host.querySelector(".cross");
+  svg.addEventListener("mousemove", ev => {
+    const r = svg.getBoundingClientRect(), sx = W / r.width;
+    const mx = (ev.clientX - r.left) * sx, my = (ev.clientY - r.top) * sx;
+    let best = null, bd = 1e9;
+    hit.forEach(h => { const dx = X(h[2][0]) - mx, dy = Y(h[2][1]) - my, d = dx * dx + dy * dy; if (d < bd) { bd = d; best = h; } });
+    if (!best || bd > 900) { tip.style.opacity = 0; cross.setAttribute("opacity", 0); return; }
+    const p = best[2];
+    cross.setAttribute("x1", X(p[0])); cross.setAttribute("x2", X(p[0])); cross.setAttribute("opacity", 0.6);
+    tip.innerHTML = `<b>${esc(best[0])}</b> · ${esc(best[1])}<br>정확도 ${fmt(p[1])}% · 토큰 ${Math.round(p[0] * 100)}% (${p[3].toLocaleString()})<br>평균 응답 ${fmt(p[2], 2)}개`;
+    const hr = host.getBoundingClientRect();
+    let left = ev.clientX - hr.left + 14, top = ev.clientY - hr.top + 10;
+    if (left > hr.width - 220) left -= 240;
+    tip.style.left = left + "px"; tip.style.top = top + "px"; tip.style.opacity = 1;
+  });
+  svg.addEventListener("mouseleave", () => { tip.style.opacity = 0; cross.setAttribute("opacity", 0); });
+}
+
+function legend(host, methods, extra = true) {
+  host.innerHTML = methods.map((k, i) => `<span><svg width="22" height="10"><line x1="1" x2="21" y1="5" y2="5" stroke="${SLOTS[i]}" stroke-width="${i ? 2 : 3}"/></svg>${esc(N[k] || k)}</span>`).join("") +
+    `<span><svg width="22" height="10"><line x1="1" x2="21" y1="5" y2="5" stroke="var(--sc)" stroke-width="1.5"/><circle cx="11" cy="5" r="3" fill="var(--sc)"/></svg>SC@k</span>` +
+    (extra ? `<span><svg width="14" height="14"><path d="M7,1 L13,7 L7,13 L1,7 Z" fill="var(--ink-2)"/></svg>선택된 운영점</span><span><svg width="14" height="14"><circle cx="7" cy="7" r="4.5" fill="none" stroke="var(--ink-2)" stroke-width="2"/></svg>baseline 기본값</span>` : "");
+}
+
+/* ---------- 3x3 small multiples ---------- */
+(function multi() {
+  const methods = ["M1", "asc", "esc", "reasc_offline", ...EXTRA].slice(0, 8);
+  legend(document.getElementById("leg-multi"), methods);
+  const host = document.getElementById("multi");
+  host.innerHTML = C.map((c, i) => `<div class="chart"><h4>${esc(c.model)} · ${esc(c.dataset)}</h4><div id="mm${i}"></div></div>`).join("");
+  C.forEach((c, i) => curveChart(document.getElementById("mm" + i), c, methods, {w: 360, h: 260, compact: true}));
+})();
+
+/* ---------- explorer ---------- */
+const ex = {cell: 0, set: "base", op: "cf"};
+function seg(host, items, current, onPick) {
+  host.innerHTML = items.map(([k, l]) => `<button type="button" data-k="${k}" aria-pressed="${k === current}">${esc(l)}</button>`).join("");
+  host.querySelectorAll("button").forEach(b => b.addEventListener("click", () => {
+    host.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", x === b)); onPick(b.dataset.k);
+  }));
+}
+function drawExplorer() {
+  const c = C[ex.cell], methods = SETS[ex.set].methods;
+  legend(document.getElementById("ex-leg"), methods);
+  curveChart(document.getElementById("ex-chart"), c, methods, {op: ex.op});
+  const rows = methods.concat(["sc"]).map(k => {
+    const p = c.sel[ex.op][k], d = c.sel.def[k];
+    return `<tr><td>${esc(N[k] || k)}</td><td class="n">${fmt(c.frontier[k])}</td><td class="n">${p ? fmt(p[1]) : "–"}</td><td class="n">${p ? Math.round(p[0] * 100) + "%" : "–"}</td><td class="n">${p ? fmt(p[2], 2) : "–"}</td><td class="n">${d ? fmt(d[1]) + " / " + Math.round(d[0] * 100) + "%" : "–"}</td></tr>`;
+  }).join("");
+  document.getElementById("ex-table").innerHTML = `<table><thead><tr><th>방법</th><th class="n">frontier</th><th class="n">운영점 정확도</th><th class="n">토큰 (SC16 대비)</th><th class="n">평균 응답 수</th><th class="n">기본값 정확도 / 토큰</th></tr></thead><tbody>${rows}</tbody></table>
+    <p class="note" style="margin:8px 12px">SC16: 정확도 ${fmt(c.sc16[0])}%, 질문당 ${c.sc16[1].toLocaleString()} 토큰 · test ${c.n.toLocaleString()}문항 · dev SC16 ${fmt(c.sc16_dev)}%</p>`;
+}
+(function initExplorer() {
+  const s = document.getElementById("ex-cell");
+  s.innerHTML = C.map((c, i) => `<option value="${i}">${esc(c.model)} · ${esc(c.dataset)}</option>`).join("");
+  s.value = String(C.findIndex(c => c.key === "llama8b_math") >= 0 ? C.findIndex(c => c.key === "llama8b_math") : 0);
+  ex.cell = +s.value;
+  s.addEventListener("change", () => { ex.cell = +s.value; drawExplorer(); });
+  seg(document.getElementById("ex-set"), Object.entries(SETS).map(([k, v]) => [k, v.label]), ex.set, k => { ex.set = k; drawExplorer(); });
+  seg(document.getElementById("ex-op"), [["cf", "cross-fit 운영점"], ["dev", "dev 운영점"], ["cf_b0.3", "30% 예산 운영점"]], ex.op, k => { ex.op = k; drawExplorer(); });
+  drawExplorer();
+})();
+
+/* ---------- matched-accuracy scatter + tables ---------- */
+const mt = {rule: "cf", base: "tuned"};
+function drawMatched() {
+  const keys = mt.base === "tuned" ? BASE : BASE.map(b => b + "@default");   // methods without a default are skipped
+  const W = 900, H = 420, m = {l: 60, r: 16, t: 14, b: 46};
+  const pts = [];
+  C.forEach(c => keys.forEach((k, i) => { const v = c[mt.rule][k]; if (v) pts.push({c, k: BASE[i], i, v}); }));
+  if (!pts.length) { document.getElementById("mt-chart").innerHTML = "<p class=note>비교할 점이 없습니다.</p>"; return; }
+  const xs = pts.map(p => p.v[3]), ys = pts.flatMap(p => [p.v[1], p.v[2]]);
+  const x0 = Math.min(...xs) * 0.85, x1 = Math.max(1.15, ...xs) * 1.08;
+  const y0 = Math.min(-1, ...ys) - 0.4, y1 = Math.max(1, ...ys) + 0.4;
+  const X = v => m.l + (Math.log(v) - Math.log(x0)) / (Math.log(x1) - Math.log(x0)) * (W - m.l - m.r);
+  const Y = v => H - m.b - (v - y0) / (y1 - y0) * (H - m.t - m.b);
+  const tx = [0.1, 0.15, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 1, 1.2, 1.5, 2].filter(v => v >= x0 && v <= x1);
+  const ty = []; for (let v = Math.ceil(y0); v <= y1; v += 1) ty.push(v);
+  let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="accuracy difference vs token ratio">`;
+  s += `<rect x="${m.l}" y="${m.t}" width="${X(1) - m.l}" height="${Y(0) - m.t}" fill="var(--good)" opacity="0.07"/>`;
+  s += `<g class="grid">${tx.map(v => `<line x1="${X(v)}" x2="${X(v)}" y1="${m.t}" y2="${H - m.b}"/>`).join("")}${ty.map(v => `<line x1="${m.l}" x2="${W - m.r}" y1="${Y(v)}" y2="${Y(v)}"/>`).join("")}</g>`;
+  s += `<line x1="${X(1)}" x2="${X(1)}" y1="${m.t}" y2="${H - m.b}" stroke="var(--ink-3)"/><line x1="${m.l}" x2="${W - m.r}" y1="${Y(0)}" y2="${Y(0)}" stroke="var(--ink-3)"/>`;
+  s += `<g class="axis">${tx.map(v => `<text x="${X(v)}" y="${H - m.b + 15}" text-anchor="middle">×${v}</text>`).join("")}${ty.map(v => `<text x="${m.l - 6}" y="${Y(v) + 4}" text-anchor="end">${v > 0 ? "+" : ""}${v}</text>`).join("")}</g>`;
+  s += `<text class="axlabel" x="${(W + m.l) / 2}" y="${H - 8}" text-anchor="middle">토큰 비율 M1 ÷ baseline (log, 왼쪽일수록 M1이 적게 씀)</text><text class="axlabel" transform="translate(14 ${(H + m.t - m.b) / 2}) rotate(-90)" text-anchor="middle">정확도 차이 M1 − baseline (pp)</text>`;
+  s += `<text class="axlabel" x="${m.l + 8}" y="${m.t + 16}">M1이 더 싸고 더 정확</text>`;
+  const jit = (p) => (p.i - 1.5) * 0.012;
+  pts.forEach(p => {
+    const x = X(p.v[3] * (1 + jit(p)));
+    s += `<line x1="${x}" x2="${x}" y1="${Y(p.v[1])}" y2="${Y(p.v[2])}" stroke="${SLOTS[p.i + 1]}" stroke-width="1.4" opacity="0.7"/>`;
+    s += `<circle class="pt" cx="${x}" cy="${Y(p.v[0])}" r="5" fill="${SLOTS[p.i + 1]}" stroke="var(--surface)" stroke-width="2"/>`;
+  });
+  s += `</svg><div class="tip"></div>`;
+  const host = document.getElementById("mt-chart");
+  host.innerHTML = s;
+  const svg = host.querySelector("svg"), tip = host.querySelector(".tip");
+  svg.addEventListener("mousemove", ev => {
+    const r = svg.getBoundingClientRect(), sx = W / r.width, mx = (ev.clientX - r.left) * sx, my = (ev.clientY - r.top) * sx;
+    let best = null, bd = 1e9;
+    pts.forEach(p => { const dx = X(p.v[3] * (1 + jit(p))) - mx, dy = Y(p.v[0]) - my, d = dx * dx + dy * dy; if (d < bd) { bd = d; best = p; } });
+    if (!best || bd > 600) { tip.style.opacity = 0; return; }
+    const v = best.v;
+    tip.innerHTML = `<b>${esc(best.c.model)} · ${esc(best.c.dataset)}</b><br>vs ${esc(N[best.k])}${mt.base === "tuned" ? "" : " (기본값)"}<br>Δ정확도 ${sgn(v[0])} pp [${sgn(v[1])}, ${sgn(v[2])}]<br>토큰 ×${fmt(v[3], 2)} [${fmt(v[4], 2)}, ${fmt(v[5], 2)}] · p = ${fmt(v[6], 3)}`;
+    const hr = host.getBoundingClientRect(); let left = ev.clientX - hr.left + 14; if (left > hr.width - 240) left -= 260;
+    tip.style.left = left + "px"; tip.style.top = (ev.clientY - hr.top + 10) + "px"; tip.style.opacity = 1;
+  });
+  svg.addEventListener("mouseleave", () => tip.style.opacity = 0);
+  document.getElementById("mt-leg").innerHTML = BASE.map((k, i) => `<span><svg width="12" height="12"><circle cx="6" cy="6" r="5" fill="${SLOTS[i + 1]}"/></svg>vs ${esc(N[k])}</span>`).join("") + `<span class="note">세로선 = 95% bootstrap CI</span>`;
+  const methods = ["M1", "M0", "M2", "M3", ...BASE];
+  const head = `<tr><th>셀</th><th class="n">SC16</th>${methods.map(k => `<th class="n">${esc(N[k])}</th>`).join("")}</tr>`;
+  const rows = C.map(c => `<tr><td>${esc(c.model)} ${esc(c.dataset)}</td><td class="n">${fmt(c.sc16[0])}</td>${methods.map(k => { const p = c.sel[mt.rule][k]; return p ? `<td class="n">${fmt(p[1])} <span class="tok">/ ${Math.round(p[0] * 100)}%</span></td>` : `<td class="n">–</td>`; }).join("")}</tr>`).join("");
+  document.getElementById("mt-table").innerHTML = `<table><thead>${head}</thead><tbody>${rows}</tbody></table>`;
+}
+(function initMatched() {
+  seg(document.getElementById("mt-rule"), [["cf", "cross-fitting (주)"], ["dev", "dev 선택"]], mt.rule, k => { mt.rule = k; drawMatched(); });
+  seg(document.getElementById("mt-base"), [["tuned", "baseline: 같은 규칙으로 튜닝"], ["default", "baseline: 논문 기본값"]], mt.base, k => { mt.base = k; drawMatched(); });
+  drawMatched();
+  const methods = ["M1", "M0", "M2", "M3", ...BASE, "sc"];
+  const head = `<tr><th>셀</th>${methods.map(k => `<th class="n">${esc(N[k])}</th>`).join("")}</tr>`;
+  const rows = C.map(c => { const best = Math.max(...methods.map(k => c.frontier[k]));
+    return `<tr><td>${esc(c.model)} ${esc(c.dataset)}</td>${methods.map(k => `<td class="n${c.frontier[k] === best ? " best" : ""}">${fmt(c.frontier[k])}</td>`).join("")}</tr>`; }).join("");
+  const means = methods.map(k => mean(C.map(c => c.frontier[k]))), bm = Math.max(...means);
+  document.getElementById("fr-table").innerHTML = `<table><thead>${head}</thead><tbody>${rows}<tr class="mean"><td>평균</td>${means.map(v => `<td class="n${v === bm ? " best" : ""}">${fmt(v)}</td>`).join("")}</tr></tbody></table>`;
+})();
+
+/* ---------- ablation dot plot + table ---------- */
+(function ablation() {
+  const rows = [["M0", "VOI → 확신도(γ) 정지"], ["M1_no_crp", "오답 CRP 제거 (독립 오답)"], ["M1_no_other", "OTHER 제거"], ["M1_theta_const", "θ 상수 (난이도 무관)"],
+                ["M1_map", "답: 사후확률 argmax"], ["M2", "+ 확신도 노드"], ["M3", "+ 확신도 + 중복"], ["M1_copy", "+ 중복 노드 (텍스트)"],
+                ["M1_copy_hidden", "+ 중복 노드 (hidden state)"], ["M1_copy_perm", "+ 중복 노드 (무작위 통제)"]];
+  const dsets = [...new Set(C.map(c => c.dataset))];
+  const W = 900, rowH = 30, m = {l: 230, r: 20, t: 10, b: 40}, H = m.t + m.b + rows.length * rowH;
+  const vals = rows.flatMap(([k]) => C.map(c => c.frontier[k] - c.frontier.M1));
+  const x0 = Math.min(-1, ...vals) - 0.5, x1 = Math.max(1, ...vals) + 0.5;
+  const X = v => m.l + (v - x0) / (x1 - x0) * (W - m.l - m.r);
+  const ticks = []; const st = (x1 - x0) > 8 ? 2 : 1; for (let v = Math.ceil(x0 / st) * st; v <= x1; v += st) ticks.push(v);
+  let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="ablation frontier differences">`;
+  s += `<g class="grid">${ticks.map(v => `<line x1="${X(v)}" x2="${X(v)}" y1="${m.t}" y2="${H - m.b}"/>`).join("")}</g>`;
+  s += `<line x1="${X(0)}" x2="${X(0)}" y1="${m.t}" y2="${H - m.b}" stroke="var(--ink-2)" stroke-width="1.4"/>`;
+  s += `<g class="axis">${ticks.map(v => `<text x="${X(v)}" y="${H - m.b + 15}" text-anchor="middle">${v > 0 ? "+" : ""}${v}</text>`).join("")}</g>`;
+  s += `<text class="axlabel" x="${(W + m.l) / 2}" y="${H - 6}" text-anchor="middle">frontier 변화 (변형 − M1, pp) · 왼쪽 = 변형이 나쁨 = M1의 구조가 필요</text>`;
+  const hits = [];
+  rows.forEach(([k, label], r) => {
+    const y = m.t + r * rowH + rowH / 2;
+    s += `<text class="rowlabel" x="${m.l - 10}" y="${y + 4}" text-anchor="end">${esc(label)}</text>`;
+    C.forEach(c => { const v = c.frontier[k] - c.frontier.M1, di = dsets.indexOf(c.dataset);
+      const yy = y + (di - 1) * 6;
+      s += `<circle cx="${X(v)}" cy="${yy}" r="5" fill="${SLOTS[di]}" stroke="var(--surface)" stroke-width="1.5" opacity="0.9"/>`;
+      hits.push({x: X(v), y: yy, t: `<b>${esc(label)}</b><br>${esc(c.model)} · ${esc(c.dataset)}<br>${sgn(v, 2)} pp (M1 ${fmt(c.frontier.M1)} → ${fmt(c.frontier[k])})`}); });
+    const mv = mean(C.map(c => c.frontier[k] - c.frontier.M1));
+    s += `<line x1="${X(mv)}" x2="${X(mv)}" y1="${y - 11}" y2="${y + 11}" stroke="var(--ink)" stroke-width="3"/>`;
+    hits.push({x: X(mv), y, t: `<b>${esc(label)}</b><br>9셀 평균 ${sgn(mv, 2)} pp`});
+  });
+  s += `</svg><div class="tip"></div>`;
+  const host = document.getElementById("ab-chart"); host.innerHTML = s;
+  const svg = host.querySelector("svg"), tip = host.querySelector(".tip");
+  svg.addEventListener("mousemove", ev => {
+    const r = svg.getBoundingClientRect(), sx = W / r.width, mx = (ev.clientX - r.left) * sx, my = (ev.clientY - r.top) * sx;
+    let best = null, bd = 1e9; hits.forEach(h => { const d = (h.x - mx) ** 2 + (h.y - my) ** 2; if (d < bd) { bd = d; best = h; } });
+    if (!best || bd > 300) { tip.style.opacity = 0; return; }
+    tip.innerHTML = best.t; const hr = host.getBoundingClientRect(); let left = ev.clientX - hr.left + 14; if (left > hr.width - 240) left -= 260;
+    tip.style.left = left + "px"; tip.style.top = (ev.clientY - hr.top + 10) + "px"; tip.style.opacity = 1;
+  });
+  svg.addEventListener("mouseleave", () => tip.style.opacity = 0);
+  document.getElementById("ab-leg").innerHTML = dsets.map((d, i) => `<span><svg width="12" height="12"><circle cx="6" cy="6" r="5" fill="${SLOTS[i]}"/></svg>${esc(d)}</span>`).join("") +
+    `<span><svg width="12" height="14"><line x1="6" x2="6" y1="1" y2="13" stroke="var(--ink)" stroke-width="3"/></svg>9셀 평균</span>`;
+  const head = `<tr><th>셀</th>${rows.map(([k, l]) => `<th class="n">${esc(l)}</th>`).join("")}</tr>`;
+  const body = C.map(c => `<tr><td>${esc(c.model)} ${esc(c.dataset)}</td>${rows.map(([k]) => { const v = c.cf[k]; if (!v) return `<td class="n">–</td>`;
+      const sig = v[6] < 0.05; return `<td class="n">${sig ? "<b>" : ""}${sgn(v[0])}${sig ? "</b>" : ""} <span class="tok">×${fmt(v[3], 2)}</span></td>`; }).join("")}</tr>`).join("");
+  document.getElementById("ab-table").innerHTML = `<table><thead>${head}</thead><tbody>${body}</tbody></table>`;
+})();
+
+/* ---------- fitted parameters ---------- */
+(function fits() {
+  const rows = C.map(c => { const f = c.fitted.M0;
+    return `<tr><td>${esc(c.model)} ${esc(c.dataset)}</td><td class="n">${fmt(f.a, 2)}</td><td class="n">${fmt(f.b, 2)}</td><td class="n">${fmt(f.a / (f.a + f.b), 2)}</td><td class="n">${fmt(f["theta(q=0.1)"], 2)}</td><td class="n">${fmt(f["theta(q=0.5)"], 2)}</td><td class="n">${fmt(f["theta(q=0.9)"], 2)}</td><td class="n">${fmt(c.ece.M1, 3)}</td><td class="n">${fmt(c.ece.M2, 3)}</td></tr>`; }).join("");
+  document.getElementById("fit-table").innerHTML = `<table><thead><tr><th>셀</th><th class="n">a</th><th class="n">b</th><th class="n">E[q]</th><th class="n">θ(q=.1)</th><th class="n">θ(q=.5)</th><th class="n">θ(q=.9)</th><th class="n">ECE M1</th><th class="n">ECE M2</th></tr></thead><tbody>${rows}</tbody></table>
+  <p class="note" style="margin:8px 12px">E[q] = a/(a+b): 사전 평균 정확도. θ가 작을수록 오답이 한두 개로 몰림. ECE: 모든 test prefix에서 보고된 사후확률의 10-bin 보정 오차.</p>`;
+})();
+</script>
+</body>
+</html>

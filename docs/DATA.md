@@ -2,7 +2,7 @@
 
 Everything needed to replay, refit or extend the study is in the Hugging Face dataset
 [`Ever2after/PGM-artifacts`](https://huggingface.co/datasets/Ever2after/PGM-artifacts). The layout on the Hub and
-under the local `artifacts/` directory is identical, so `pgm download` simply mirrors it. There are 79
+under the local `artifacts/` directory is identical, so `pgm download` simply mirrors it. There are 97
 files instead of one file per response.
 
 ```text
@@ -13,11 +13,48 @@ banks/<model>_<dataset>.embeddings.npy  float32 [n_responses, hidden], row-align
 banks/<model>_<dataset>.top_logprobs.parquet  per-token top-20 log-probabilities (optional download)
 policies/<model>_<dataset>.json       fitted policy: representation, scalers, calibrators, thresholds, baselines
 policies/<model>_<dataset>.checkpoints.pt  state dicts of the 36 heads
-decisions/<cell>.parquet              per-question decision of every method in an evaluation
+decisions/<cell>.parquet              (v1) per-question decision of every method in an evaluation
+v2/<model>_<dataset>.npz              (v2) compact replay inputs built from the bank by `pgm v2 prepare`
+v2/traces/<model>_<dataset>.npz       (v2) per-prefix posterior traces of every arm (chosen answer, confidence, OTHER, VOI)
 ```
 
-`<model>` ∈ `gemma4b qwen3b qwen7b llama8b`, `<dataset>` ∈ `math gsm8k omnimath`,
-`<cell>` = `<model>_<task>` with `<task>` ∈ `math gsm8k omnimath math_to_omnimath`.
+`<model>` ∈ `gemma4b qwen3b qwen7b llama8b` (v2 uses `gemma4b qwen7b llama8b`), `<dataset>` ∈ `math gsm8k omnimath`,
+`<cell>` = `<model>_<task>` with `<task>` ∈ `math gsm8k omnimath math_to_omnimath` (v1).
+
+| Download | Command | Size |
+|---|---|---|
+| Score a new method against v2 | `pgm download --only v2` | 37 MB |
+| Rebuild the v2 inputs / replay v1 | `pgm download --only cohorts banks` | ~7 GB |
+| Everything except log-probabilities | `pgm download` | ~7 GB |
+| Per-token top-20 log-probabilities | `pgm download --only logprobs` | 18 GB |
+
+## v2 inputs and traces
+
+`v2/<model>_<dataset>.npz` holds, for each split (`calibration`, `train`, `dev`, `test`) and question in cohort
+order, arrays named `<split>.<name>`:
+
+| Name | Shape | Meaning |
+|---|---|---|
+| `question_id` | [Q] | cohort question ids |
+| `ids` | [Q,16] int8 | exact-string answer candidate of each response, numbered in first-observed order (identical to the v1 grouping) |
+| `valid` | [Q,16] | non-empty extracted answer |
+| `correct` | [Q,16] | xVerify label of candidate slot k (padded False) |
+| `raw_correct` | [Q,16] | xVerify label of the raw response (ReASC reference metric) |
+| `x` | [Q,16,3] | `bottom10_confidence`, `lowest_confidence`, log(1 + generated tokens) (`x_names`) |
+| `tokens` | [Q,16] | output tokens per response (body + both extraction outputs) |
+| `sim_text` | [Q,16,16] | Jaccard similarity of word 3-gram sets of the reasoning (text before the last `\boxed`) |
+| `sim_hidden` | [Q,16,16] | cosine of the mean last-layer hidden state, centered on the train mean (NaN for invalid embeddings) |
+
+`v2/traces/<model>_<dataset>.npz` holds `<arm>.<split>.<name>` for the dev and test splits: `chosen` [Q,16]
+(answer slot given after t responses, −1 if none), `confidence` [Q,16] (its posterior probability), `other`
+[Q,16] (posterior of OTHER) and, for VOI arms, `voi` [Q,15]. `pgm v2 rescore` and `pgm v2 method` replay the
+evaluation from these traces without refitting.
+
+```python
+from pgm_asc.v2.data import load
+data = load("llama8b", "math")              # {split: {name: array}}
+data["test"]["ids"].shape                   # (500, 16)
+```
 
 ## Cohorts
 
@@ -92,12 +129,12 @@ load with `torch.load(path, weights_only=True)` and rebuild with `pgm_asc.model.
 
 One row per (method, question) with the stop index (`samples`), chosen answer, `correct`,
 `reference_correct`, and the cost breakdown. The aggregate of these rows is
-`results/evaluations/<cell>.json` in the GitHub repository.
+`results/v1/evaluations/<cell>.json` in the GitHub repository.
 
 ## Provenance
 
 The banks were produced by the original pipeline (GPU collection 2026-11-02 to 11-04) and repacked
 without changing any value: every reported number is reproduced from them (see
-[REPRODUCING.md](REPRODUCING.md#verification)). Not included: the duplicated pre-feature response files, the MATH confirm500 / previous-fresh banks that are
+[v1/REPRODUCING.md](v1/REPRODUCING.md#verification)). Not included: the duplicated pre-feature response files, the MATH confirm500 / previous-fresh banks that are
 not part of the reported results, and the earlier V2/V5 experiments (code at git tag `v0-archive`; the
 complete original archive is in `Ever2after/PGM-experiment-artifacts`).
