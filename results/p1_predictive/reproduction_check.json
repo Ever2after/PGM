@@ -1,0 +1,8 @@
+{
+  "experiment_id": "4f6bbc209f6b42ca",
+  "cells": 9,
+  "executable_training_ast_unchanged": true,
+  "max_summary_mean_difference": 0.0,
+  "max_parameter_difference": 0.0,
+  "comparison": "Independent full rerun after documentation clarification; all numerical training/evaluation code unchanged"
+}

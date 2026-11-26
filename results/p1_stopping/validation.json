@@ -1,0 +1,10 @@
+{
+  "cells": 9,
+  "heads": 54,
+  "methods": 8,
+  "frozen_baseline_max_difference": 0.0,
+  "max_count_lookup_posterior_error": 4.440892098500626e-15,
+  "max_count_space_log_evidence_error": 0.0005256192382105951,
+  "fit_locks_precede_evaluation": true,
+  "v2_score_families_unchanged": true
+}

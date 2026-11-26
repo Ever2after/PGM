@@ -1,0 +1,131 @@
+{
+  "experiment_id": "3548a67bbf0b1218",
+  "study": {
+    "models": [
+      "gemma4b",
+      "qwen7b",
+      "llama8b"
+    ],
+    "datasets": [
+      "math",
+      "gsm8k",
+      "omnimath"
+    ],
+    "variants": [
+      "M1",
+      "constant_theta",
+      "P1_independent",
+      "P1_linked",
+      "quadratic_theta"
+    ],
+    "training": {
+      "objective": "joint_nll_per_response",
+      "unique_correct_only": true,
+      "restart_seeds": [
+        0,
+        43,
+        44
+      ],
+      "initialization_sd": 0.5,
+      "sigma_starts": [
+        0.25,
+        0.75,
+        1.5
+      ],
+      "max_iter": 300,
+      "ridge": 6.25e-06,
+      "tolerance_grad": 1e-07,
+      "tolerance_change": 1e-10
+    },
+    "integration": {
+      "normal_nodes": [
+        61,
+        121,
+        181,
+        241
+      ],
+      "tolerance": 0.001,
+      "sigma_bound": 3.0,
+      "q_grid": "released M1: 80 nodes, logits [-7,7]"
+    },
+    "evaluation": {
+      "splits": [
+        "dev",
+        "test"
+      ],
+      "prefixes": [
+        1,
+        2,
+        4,
+        8,
+        16
+      ],
+      "horizons": [
+        1,
+        2,
+        4,
+        8
+      ],
+      "simulations_per_seed": 256,
+      "mc_seeds": [
+        20261125,
+        20261126,
+        20261127
+      ],
+      "bootstrap_replicates": 1000,
+      "bootstrap_seed": 20261125,
+      "paired_gain": true,
+      "reference": "valid-answer plurality, earliest observed answer wins ties"
+    }
+  },
+  "code_sha256": {
+    "pgm_asc/hierarchical/model.py": "c2595ace0357e812455506e11a208c2df2b893496e3b722157ae0e9d3a61a103",
+    "pgm_asc/hierarchical/train.py": "74f754c6b7ba09eb4faa0cf3ef2235ebf3f24cdda08888188d09876b882c90fd",
+    "pgm_asc/hierarchical/run.py": "7ab4e5b818bd26260c914e9b28b7d9a5ee014baaa112a625684ae04fd81046ba",
+    "pgm_asc/diagnostics/metrics.py": "9945eec239e503a61ee552144c992997ee4f50744c7c7e21d55cd641fcc930a7",
+    "pgm_asc/diagnostics/predictive.py": "a09a295d5c1aef22f514cb0221a14618f4ad9d56b87f26ec17eced994f118546",
+    "pgm_asc/v2/model.py": "05dd3ee73def1828f6ce341e23003c00e4e8561837dbfd2c464e791a36acc8c2",
+    "pgm_asc/objectives/run.py": "0018a9c87a7c73a1c68be879d6facfeb890ab1d0f9dd82a1994f17f0c117287c",
+    "pgm_asc/objectives/train.py": "39d5e8799891e2b884a67e547ddd0f06f4637429bf08fbb38160404a1e3a14f2"
+  },
+  "inputs": [
+    "answer ids",
+    "valid"
+  ],
+  "parameters": {
+    "M1": [
+      "log_a",
+      "log_b",
+      "t0",
+      "t1"
+    ],
+    "constant_theta": [
+      "log_a",
+      "log_b",
+      "t0"
+    ],
+    "P1_independent": [
+      "log_a",
+      "log_b",
+      "t0",
+      "sigma_raw"
+    ],
+    "P1_linked": [
+      "log_a",
+      "log_b",
+      "t0",
+      "t1",
+      "sigma_raw"
+    ],
+    "quadratic_theta": [
+      "log_a",
+      "log_b",
+      "t0",
+      "t1",
+      "t2"
+    ]
+  },
+  "graph": "q~Beta(a,b); u~Normal(0,1); logtheta=clip(t0+t1*(2q-1)[+t2*(2q-1)^2],-8,8)+sigma*u",
+  "sigma": "abs(3*tanh(sigma_raw/3)); signed loading is equivalent under symmetric Normal quadrature",
+  "sampling": "same uniforms per question/prefix/seed; c,q,theta drawn jointly once and held across future responses"
+}

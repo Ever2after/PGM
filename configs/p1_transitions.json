@@ -1,0 +1,131 @@
+{
+  "models": [
+    "gemma4b",
+    "qwen7b",
+    "llama8b"
+  ],
+  "datasets": [
+    "math",
+    "gsm8k",
+    "omnimath"
+  ],
+  "training": {
+    "unique_correct_only": true,
+    "lambda_grid": [
+      0.1,
+      1.0,
+      10.0
+    ],
+    "weightings": [
+      "uniform",
+      "v1"
+    ],
+    "restart_seeds": [
+      0,
+      43,
+      44
+    ],
+    "initialization_sd": 0.5,
+    "max_iter": 300,
+    "ridge": 6.25e-06,
+    "tolerance_grad": 1e-07,
+    "tolerance_change": 1e-10,
+    "dev_selection": "unique_nll_equal_evaluation_prefixes",
+    "mixed_objective": "(joint_nll_per_response + lambda * weighted_prefix_nll) / (1 + lambda)",
+    "sigma_starts": [
+      0.25,
+      0.75,
+      1.5
+    ],
+    "predictive_weights": [
+      0.1,
+      1.0,
+      10.0
+    ],
+    "predictive_prefixes": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "predictive_objective": "(previous_normalized_mixed + gamma * mean_next_answer_nll) / (1 + gamma)",
+    "lambda_selection": "frozen previous dev-selected Mixed lambda per graph/cell/weighting",
+    "gamma_selection": "none; report every prespecified gamma, without test selection",
+    "transition_weights": [
+      0.1,
+      1.0,
+      10.0
+    ],
+    "transition_prefixes": [
+      1,
+      2,
+      4,
+      8
+    ],
+    "transition_horizons": [
+      1,
+      2,
+      4,
+      8
+    ],
+    "transition_loss": "categorical NLL of repair/damage/stay; native predictive probabilities, no gold conditioning",
+    "transition_objective": "(previous normalized Mixed + beta * transition_nll) / (1 + beta)",
+    "beta_selection": "none; report all prespecified coefficients"
+  },
+  "evaluation": {
+    "splits": [
+      "dev",
+      "test"
+    ],
+    "prefixes": [
+      1,
+      2,
+      4,
+      8,
+      16
+    ],
+    "horizons": [
+      1,
+      2,
+      4,
+      8
+    ],
+    "simulations_per_seed": 256,
+    "mc_seeds": [
+      20261125,
+      20261126,
+      20261127
+    ],
+    "bootstrap_replicates": 1000,
+    "bootstrap_seed": 20261125,
+    "paired_gain": true,
+    "reference": "valid-answer plurality, earliest observed answer wins ties"
+  },
+  "variants": [
+    "P1_independent",
+    "P1_linked"
+  ],
+  "integration": {
+    "normal_nodes": [
+      61,
+      121,
+      181,
+      241
+    ],
+    "tolerance": 0.001,
+    "sigma_bound": 3.0,
+    "q_grid": "released M1: 80 nodes, logits [-7,7]"
+  },
+  "baseline": "frozen previous Mixed and all next-answer predictive arms from p1_predictive"
+}

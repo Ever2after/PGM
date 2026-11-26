@@ -1,0 +1,14 @@
+{
+  "experiment_id": "3548a67bbf0b1218",
+  "cells": 9,
+  "model_split_evaluations": 90,
+  "max_posterior_normalization_error": 3.774758283725532e-15,
+  "max_next_normalization_error": 1.3100631690576847e-14,
+  "max_gain_identity_error": 7.632783294297951e-17,
+  "max_M1_previous_posterior_difference": 6.106226635438361e-15,
+  "max_M1_previous_next_difference": 3.9968028886505635e-15,
+  "max_M1_previous_MC_difference": 0.0,
+  "fit_locks_precede_evaluation": true,
+  "split_question_ids_disjoint": true,
+  "shared_train_cohorts": true
+}

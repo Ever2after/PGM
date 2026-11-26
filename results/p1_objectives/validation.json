@@ -1,0 +1,10 @@
+{
+  "cells": 9,
+  "joint_arrays_identical": true,
+  "joint_summary_max_difference": 0.0,
+  "max_posterior_normalization_error": 3.6637359812630166e-15,
+  "max_next_normalization_error": 1.9984014443252818e-15,
+  "max_gain_identity_error": 7.632783294297951e-17,
+  "fit_locks_precede_evaluation": true,
+  "lambda_ranking_stable": true
+}

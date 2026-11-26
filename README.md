@@ -11,6 +11,12 @@ The study replays 16 frozen responses per question for **Gemma-3-4B-IT, Qwen2.5-
 
 [Method](docs/METHOD.md) · [Protocol & adding methods](docs/PROTOCOL.md) · [All results](results/v2/README.md) · [Interactive report](results/v2/report.html) · [PDF report](results/v2/report.pdf) · [Data](docs/DATA.md) · [v1 (archived)](docs/v1/README.md) · [Artifacts on 🤗](https://huggingface.co/datasets/Ever2after/PGM-artifacts)
 
+**P1 follow-up:** question-level variation in wrong-answer concentration, followed
+by objective, predictive, transition, Brier and stopping experiments. The
+[P1 guide](docs/P1.md) links all six designs and results, explains the compact
+result snapshot, and gives reproduction commands. P1 uses the existing v2 banks
+and stopping evaluation; its results are separate from the original v2 report.
+
 ![PGM v2 vs baselines: test accuracy vs output tokens](results/v2/figures/accuracy_vs_tokens.png)
 
 ## Results

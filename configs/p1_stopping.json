@@ -1,0 +1,10 @@
+{
+  "source_dir": "results/p1_objectives",
+  "variants": ["P1_independent", "P1_linked"],
+  "training_methods": ["joint", "mixed_uniform", "mixed_v1"],
+  "confidence_controls": ["mixed_uniform"],
+  "integration_tolerance": 0.001,
+  "seed_key": "P1_stopping",
+  "model_selection": "none; reuse all six fixed Joint/Mixed heads, including previous dev-selected Mixed lambda",
+  "evaluation": "unchanged configs/v2.json and pgm_asc.v2.run.score_families; report primary Mixed-uniform and Joint, v1 sensitivity separately"
+}

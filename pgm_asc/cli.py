@@ -121,6 +121,25 @@ def cmd_v2(a):
         report(a.methods)
 
 
+def cmd_p1_study(a):
+    from importlib import import_module
+    from pgm_asc.utils import read_json
+    study = read_json(a.config) if a.config else None
+    result = import_module(f"pgm_asc.{a.study_module}.run").run(
+        a.models, a.datasets, a.workers, a.out, a.stage, a.overwrite, study)
+    print(f"{a.command} {a.stage} complete: {result}")
+
+
+def cmd_p1_stop(a):
+    if a.stage == "trace":
+        from pgm_asc.p1_stopping.run import run
+        result = run(a.models, a.datasets, a.workers, a.overwrite)
+    else:
+        from pgm_asc.p1_stopping.report import report
+        result = report()
+    print(f"P1 stopping {a.stage} complete: {result}")
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(prog="pgm", description="PGM adaptive self-consistency: data, fitting, evaluation, reports.")
     sub = parser.add_subparsers(dest="command", required=True)
@@ -183,7 +202,35 @@ def main(argv=None):
     p.add_argument("--title", help="plot: figure title")
     p.set_defaults(run=cmd_v2)
 
+    studies = {
+        "hierarchical": ("hierarchical", "hierarchical_crp", "P1 hierarchical CRP structure ablation"),
+        "p1-objective": ("p1_objectives", "p1_objectives", "P1 joint/prefix/mixed objective ablation"),
+        "p1-predictive": ("p1_predictive", "p1_predictive", "P1 Mixed plus next-answer NLL"),
+        "p1-transition": ("p1_transitions", "p1_transitions", "P1 Mixed plus repair/damage transition NLL"),
+        "p1-brier": ("p1_brier", "p1_brier", "P1 Mixed plus repair/damage Brier loss"),
+    }
+    for name, (module, output, description) in studies.items():
+        p = sub.add_parser(name, help=description)
+        p.add_argument("stage", choices=["fit", "run", "report"])
+        p.add_argument("--models", nargs="+", choices=list(MODELS))
+        p.add_argument("--datasets", nargs="+", choices=DATASETS)
+        p.add_argument("--workers", type=int, default=2)
+        p.add_argument("--out", help=f"default: results/{output}")
+        p.add_argument("--config", help=f"default: configs/{module}.json")
+        p.add_argument("--overwrite", action="store_true")
+        p.set_defaults(run=cmd_p1_study, study_module=module)
+
+    p = sub.add_parser("p1-stop", help="frozen P1 heads with the standard v2 stopping protocol")
+    p.add_argument("stage", choices=["trace", "report"])
+    p.add_argument("--models", nargs="+", choices=list(MODELS))
+    p.add_argument("--datasets", nargs="+", choices=DATASETS)
+    p.add_argument("--workers", type=int, default=4)
+    p.add_argument("--overwrite", action="store_true")
+    p.set_defaults(run=cmd_p1_stop)
+
     args = parser.parse_args(argv)
+    if args.command in (*studies, "p1-stop") and args.workers < 1:
+        parser.error("workers must be positive")
     if args.command == "collect" and args.stage in ("generate", "features", "judge") and not args.split:
         parser.error("--split is required for this stage")
     args.run(args)

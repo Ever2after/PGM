@@ -165,6 +165,9 @@ pgm v2 plot --methods M1 M0 M1_no_crp --cells llama8b_math qwen7b_omnimath --out
 - ◆ marks the cross-fitted matched-accuracy point.
 
 `report.html` draws user methods on the 3×3 overview, the curve explorer ("baseline" group), the operating-point scatter and the tables.
+With more than four user methods, the static report splits the overview into
+additional figures to retain its eight-color palette. The interactive curve
+explorer also provides "추가 방법" groups so every user method remains accessible.
 
 **Available method names:**
 - `sc`, `asc`, `esc`, `reasc_offline`, `reasc_online`;

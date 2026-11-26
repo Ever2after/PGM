@@ -102,6 +102,8 @@ def table_fits(rs):
 
 
 def figure(rs, series, path, title):
+    if len(series) > len(SLOTS):
+        raise ValueError(f"Draw at most {len(SLOTS)} methods per figure; split the method list")
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
@@ -135,10 +137,11 @@ def figure(rs, series, path, title):
         ax.set_xlabel("output tokens (share of SC16)")
         ax.set_ylabel("test accuracy (%)")
     handles, labels = axes[0][0].get_legend_handles_labels()
-    fig.legend(handles, labels, loc="upper center", ncol=len(labels), frameon=False, bbox_to_anchor=(.5, 1.0))
+    legend_columns = min(4, len(labels))
+    fig.legend(handles, labels, loc="upper center", ncol=legend_columns, frameon=False, bbox_to_anchor=(.5, 1.0))
     fig.suptitle(title + "  (◆ = operating point by 2-fold cross-fitting: fewest tokens with accuracy ≥ SC16 − 1 pp)",
                  y=1.035, fontsize=9.5, color=INK)
-    fig.tight_layout(rect=(0, 0, 1, .96))
+    fig.tight_layout(rect=(0, 0, 1, .90 if len(labels) > legend_columns else .96))
     path.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(path.with_suffix(".png"), dpi=170, bbox_inches="tight")
     fig.savefig(path.with_suffix(".svg"), bbox_inches="tight")
@@ -166,6 +169,13 @@ def plot(methods, out, cells_filter=None, title="accuracy vs output tokens (test
     return Path(out)
 
 
+def overview_groups(extra):
+    """Keep the published palette while allowing any number of plugin methods."""
+    base=["M1", "asc", "esc", "reasc_offline"]
+    width=len(SLOTS)-len(base)
+    return [base+extra[i:i+width] for i in range(0,len(extra),width)] or [base]
+
+
 def report(methods=None):
     rs, extra = load_all(methods)
     out = RESULTS / "v2"
@@ -173,7 +183,11 @@ def report(methods=None):
     ablations = [a for a in CONFIG["arms"] if a not in ladder]
     main = [primary] + [m for m in ladder if m != primary]
     base = ["asc", "esc", "reasc_offline", "reasc_online"] + extra
-    figure(rs, [primary, "asc", "esc", "reasc_offline"] + extra, out / "figures" / "accuracy_vs_tokens", "PGM v2 (M1) vs baselines")
+    overview=[]
+    for i,group in enumerate(overview_groups(extra)):
+        stem='accuracy_vs_tokens'+(f'_{i+1}' if i else '')
+        figure(rs, group, out / "figures" / stem, "PGM v2 (M1) vs baselines")
+        overview.append(f"![accuracy vs tokens](figures/{stem}.png)")
     figure(rs, main, out / "figures" / "ladder", "PGM v2 ladder")
     with (out / "summary.csv").open("w", newline="") as f:
         w = csv.writer(f, lineterminator="\n")
@@ -194,7 +208,7 @@ def report(methods=None):
         f"Primary model: **{NAMES[primary]}**. Method and protocol: `docs/METHOD.md`.", "",
         "Operating points are selected two ways, never using a question's own label: on **dev** (200 questions; easier than test "
         "on these benchmarks), and by **2-fold cross-fitting on test** (threshold chosen on one half, applied to the other).", "",
-        "![accuracy vs tokens](figures/accuracy_vs_tokens.png)", "",
+        *overview, "",
         "## 1. Frontier score", "",
         "Mean, over 60 budgets from SC@2 to SC16 tokens, of the best test accuracy within the budget (oracle summary, identical for every method).", "",
         table_frontier(rs, main + base + ["sc"]), "",

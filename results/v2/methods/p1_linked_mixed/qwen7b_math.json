@@ -1,0 +1,1185 @@
+{
+  "method": "p1_linked_mixed",
+  "label": "P1 linked Mixed",
+  "source": "pgm_asc.p1_stopping.plugin",
+  "model": "qwen7b",
+  "dataset": "math",
+  "created_at": "2026-11-25T05:38:34.753333+00:00",
+  "thresholds": [
+    0.3,
+    0.2,
+    0.15,
+    0.1,
+    0.07,
+    0.05,
+    0.035,
+    0.025,
+    0.018,
+    0.012,
+    0.008,
+    0.005,
+    0.0035,
+    0.0025,
+    0.0015,
+    0.001,
+    0.0005,
+    0.0002,
+    0.0001
+  ],
+  "default": null,
+  "sc16": {
+    "dev": {
+      "threshold": 16,
+      "accuracy": 0.85,
+      "mean_tokens": 9254.405,
+      "mean_samples": 16.0
+    },
+    "test": {
+      "threshold": 16,
+      "accuracy": 0.798,
+      "mean_tokens": 9110.788,
+      "mean_samples": 16.0
+    }
+  },
+  "frontier_budgets": [
+    1134.82,
+    9110.788
+  ],
+  "curves": {
+    "dev": {
+      "sc": [
+        {
+          "threshold": 1,
+          "accuracy": 0.8,
+          "mean_tokens": 585.345,
+          "mean_samples": 1.0
+        },
+        {
+          "threshold": 2,
+          "accuracy": 0.8,
+          "mean_tokens": 1167.175,
+          "mean_samples": 2.0
+        },
+        {
+          "threshold": 3,
+          "accuracy": 0.82,
+          "mean_tokens": 1745.48,
+          "mean_samples": 3.0
+        },
+        {
+          "threshold": 4,
+          "accuracy": 0.81,
+          "mean_tokens": 2326.9,
+          "mean_samples": 4.0
+        },
+        {
+          "threshold": 5,
+          "accuracy": 0.83,
+          "mean_tokens": 2909.515,
+          "mean_samples": 5.0
+        },
+        {
+          "threshold": 6,
+          "accuracy": 0.83,
+          "mean_tokens": 3483.07,
+          "mean_samples": 6.0
+        },
+        {
+          "threshold": 7,
+          "accuracy": 0.83,
+          "mean_tokens": 4064.965,
+          "mean_samples": 7.0
+        },
+        {
+          "threshold": 8,
+          "accuracy": 0.845,
+          "mean_tokens": 4641.27,
+          "mean_samples": 8.0
+        },
+        {
+          "threshold": 9,
+          "accuracy": 0.845,
+          "mean_tokens": 5221.075,
+          "mean_samples": 9.0
+        },
+        {
+          "threshold": 10,
+          "accuracy": 0.85,
+          "mean_tokens": 5793.105,
+          "mean_samples": 10.0
+        },
+        {
+          "threshold": 11,
+          "accuracy": 0.85,
+          "mean_tokens": 6367.445,
+          "mean_samples": 11.0
+        },
+        {
+          "threshold": 12,
+          "accuracy": 0.85,
+          "mean_tokens": 6946.06,
+          "mean_samples": 12.0
+        },
+        {
+          "threshold": 13,
+          "accuracy": 0.85,
+          "mean_tokens": 7517.76,
+          "mean_samples": 13.0
+        },
+        {
+          "threshold": 14,
+          "accuracy": 0.845,
+          "mean_tokens": 8096.485,
+          "mean_samples": 14.0
+        },
+        {
+          "threshold": 15,
+          "accuracy": 0.85,
+          "mean_tokens": 8679.25,
+          "mean_samples": 15.0
+        },
+        {
+          "threshold": 16,
+          "accuracy": 0.85,
+          "mean_tokens": 9254.405,
+          "mean_samples": 16.0
+        }
+      ],
+      "M1": [
+        {
+          "threshold": 0.3,
+          "accuracy": 0.8,
+          "mean_tokens": 1167.175,
+          "mean_samples": 2.0
+        },
+        {
+          "threshold": 0.2,
+          "accuracy": 0.8,
+          "mean_tokens": 1174.665,
+          "mean_samples": 2.01
+        },
+        {
+          "threshold": 0.15,
+          "accuracy": 0.805,
+          "mean_tokens": 1201.235,
+          "mean_samples": 2.04
+        },
+        {
+          "threshold": 0.1,
+          "accuracy": 0.82,
+          "mean_tokens": 1347.51,
+          "mean_samples": 2.2
+        },
+        {
+          "threshold": 0.07,
+          "accuracy": 0.82,
+          "mean_tokens": 1496.975,
+          "mean_samples": 2.35
+        },
+        {
+          "threshold": 0.05,
+          "accuracy": 0.825,
+          "mean_tokens": 1599.995,
+          "mean_samples": 2.45
+        },
+        {
+          "threshold": 0.035,
+          "accuracy": 0.825,
+          "mean_tokens": 1697.91,
+          "mean_samples": 2.555
+        },
+        {
+          "threshold": 0.025,
+          "accuracy": 0.825,
+          "mean_tokens": 1901.46,
+          "mean_samples": 2.765
+        },
+        {
+          "threshold": 0.018,
+          "accuracy": 0.83,
+          "mean_tokens": 2054.245,
+          "mean_samples": 2.97
+        },
+        {
+          "threshold": 0.012,
+          "accuracy": 0.85,
+          "mean_tokens": 2295.28,
+          "mean_samples": 3.29
+        },
+        {
+          "threshold": 0.008,
+          "accuracy": 0.85,
+          "mean_tokens": 2449.675,
+          "mean_samples": 3.495
+        },
+        {
+          "threshold": 0.005,
+          "accuracy": 0.845,
+          "mean_tokens": 2798.03,
+          "mean_samples": 3.95
+        },
+        {
+          "threshold": 0.0035,
+          "accuracy": 0.84,
+          "mean_tokens": 3121.405,
+          "mean_samples": 4.36
+        },
+        {
+          "threshold": 0.0025,
+          "accuracy": 0.845,
+          "mean_tokens": 3204.53,
+          "mean_samples": 4.48
+        },
+        {
+          "threshold": 0.0015,
+          "accuracy": 0.845,
+          "mean_tokens": 3477.195,
+          "mean_samples": 4.885
+        },
+        {
+          "threshold": 0.001,
+          "accuracy": 0.845,
+          "mean_tokens": 3729.17,
+          "mean_samples": 5.24
+        },
+        {
+          "threshold": 0.0005,
+          "accuracy": 0.845,
+          "mean_tokens": 4015.42,
+          "mean_samples": 5.695
+        },
+        {
+          "threshold": 0.0002,
+          "accuracy": 0.845,
+          "mean_tokens": 4271.665,
+          "mean_samples": 6.165
+        },
+        {
+          "threshold": 0.0001,
+          "accuracy": 0.845,
+          "mean_tokens": 4478.405,
+          "mean_samples": 6.595
+        }
+      ],
+      "p1_linked_mixed": [
+        {
+          "threshold": 0.3,
+          "accuracy": 0.8,
+          "mean_tokens": 1167.175,
+          "mean_samples": 2.0
+        },
+        {
+          "threshold": 0.2,
+          "accuracy": 0.8,
+          "mean_tokens": 1167.175,
+          "mean_samples": 2.0
+        },
+        {
+          "threshold": 0.15,
+          "accuracy": 0.805,
+          "mean_tokens": 1200.545,
+          "mean_samples": 2.04
+        },
+        {
+          "threshold": 0.1,
+          "accuracy": 0.81,
+          "mean_tokens": 1313.63,
+          "mean_samples": 2.17
+        },
+        {
+          "threshold": 0.07,
+          "accuracy": 0.82,
+          "mean_tokens": 1465.56,
+          "mean_samples": 2.33
+        },
+        {
+          "threshold": 0.05,
+          "accuracy": 0.825,
+          "mean_tokens": 1616.535,
+          "mean_samples": 2.48
+        },
+        {
+          "threshold": 0.035,
+          "accuracy": 0.83,
+          "mean_tokens": 1867.685,
+          "mean_samples": 2.735
+        },
+        {
+          "threshold": 0.025,
+          "accuracy": 0.845,
+          "mean_tokens": 2076.37,
+          "mean_samples": 2.955
+        },
+        {
+          "threshold": 0.018,
+          "accuracy": 0.845,
+          "mean_tokens": 2290.205,
+          "mean_samples": 3.18
+        },
+        {
+          "threshold": 0.012,
+          "accuracy": 0.845,
+          "mean_tokens": 2560.595,
+          "mean_samples": 3.5
+        },
+        {
+          "threshold": 0.008,
+          "accuracy": 0.845,
+          "mean_tokens": 2800.62,
+          "mean_samples": 3.895
+        },
+        {
+          "threshold": 0.005,
+          "accuracy": 0.845,
+          "mean_tokens": 3014.83,
+          "mean_samples": 4.19
+        },
+        {
+          "threshold": 0.0035,
+          "accuracy": 0.85,
+          "mean_tokens": 3208.52,
+          "mean_samples": 4.47
+        },
+        {
+          "threshold": 0.0025,
+          "accuracy": 0.85,
+          "mean_tokens": 3443.06,
+          "mean_samples": 4.86
+        },
+        {
+          "threshold": 0.0015,
+          "accuracy": 0.85,
+          "mean_tokens": 3648.425,
+          "mean_samples": 5.175
+        },
+        {
+          "threshold": 0.001,
+          "accuracy": 0.845,
+          "mean_tokens": 3911.55,
+          "mean_samples": 5.63
+        },
+        {
+          "threshold": 0.0005,
+          "accuracy": 0.845,
+          "mean_tokens": 4177.015,
+          "mean_samples": 6.075
+        },
+        {
+          "threshold": 0.0002,
+          "accuracy": 0.845,
+          "mean_tokens": 4495.735,
+          "mean_samples": 6.685
+        },
+        {
+          "threshold": 0.0001,
+          "accuracy": 0.845,
+          "mean_tokens": 4640.92,
+          "mean_samples": 6.985
+        }
+      ]
+    },
+    "test": {
+      "sc": [
+        {
+          "threshold": 1,
+          "accuracy": 0.746,
+          "mean_tokens": 566.838,
+          "mean_samples": 1.0
+        },
+        {
+          "threshold": 2,
+          "accuracy": 0.746,
+          "mean_tokens": 1134.82,
+          "mean_samples": 2.0
+        },
+        {
+          "threshold": 3,
+          "accuracy": 0.766,
+          "mean_tokens": 1708.584,
+          "mean_samples": 3.0
+        },
+        {
+          "threshold": 4,
+          "accuracy": 0.77,
+          "mean_tokens": 2278.628,
+          "mean_samples": 4.0
+        },
+        {
+          "threshold": 5,
+          "accuracy": 0.776,
+          "mean_tokens": 2848.622,
+          "mean_samples": 5.0
+        },
+        {
+          "threshold": 6,
+          "accuracy": 0.79,
+          "mean_tokens": 3414.282,
+          "mean_samples": 6.0
+        },
+        {
+          "threshold": 7,
+          "accuracy": 0.802,
+          "mean_tokens": 3982.474,
+          "mean_samples": 7.0
+        },
+        {
+          "threshold": 8,
+          "accuracy": 0.8,
+          "mean_tokens": 4551.75,
+          "mean_samples": 8.0
+        },
+        {
+          "threshold": 9,
+          "accuracy": 0.804,
+          "mean_tokens": 5124.51,
+          "mean_samples": 9.0
+        },
+        {
+          "threshold": 10,
+          "accuracy": 0.806,
+          "mean_tokens": 5699.168,
+          "mean_samples": 10.0
+        },
+        {
+          "threshold": 11,
+          "accuracy": 0.804,
+          "mean_tokens": 6266.806,
+          "mean_samples": 11.0
+        },
+        {
+          "threshold": 12,
+          "accuracy": 0.804,
+          "mean_tokens": 6831.616,
+          "mean_samples": 12.0
+        },
+        {
+          "threshold": 13,
+          "accuracy": 0.804,
+          "mean_tokens": 7398.976,
+          "mean_samples": 13.0
+        },
+        {
+          "threshold": 14,
+          "accuracy": 0.8,
+          "mean_tokens": 7971.6,
+          "mean_samples": 14.0
+        },
+        {
+          "threshold": 15,
+          "accuracy": 0.8,
+          "mean_tokens": 8544.104,
+          "mean_samples": 15.0
+        },
+        {
+          "threshold": 16,
+          "accuracy": 0.798,
+          "mean_tokens": 9110.788,
+          "mean_samples": 16.0
+        }
+      ],
+      "M1": [
+        {
+          "threshold": 0.3,
+          "accuracy": 0.746,
+          "mean_tokens": 1134.82,
+          "mean_samples": 2.0
+        },
+        {
+          "threshold": 0.2,
+          "accuracy": 0.746,
+          "mean_tokens": 1148.808,
+          "mean_samples": 2.014
+        },
+        {
+          "threshold": 0.15,
+          "accuracy": 0.75,
+          "mean_tokens": 1200.03,
+          "mean_samples": 2.076
+        },
+        {
+          "threshold": 0.1,
+          "accuracy": 0.762,
+          "mean_tokens": 1304.258,
+          "mean_samples": 2.198
+        },
+        {
+          "threshold": 0.07,
+          "accuracy": 0.77,
+          "mean_tokens": 1429.796,
+          "mean_samples": 2.346
+        },
+        {
+          "threshold": 0.05,
+          "accuracy": 0.772,
+          "mean_tokens": 1551.076,
+          "mean_samples": 2.48
+        },
+        {
+          "threshold": 0.035,
+          "accuracy": 0.776,
+          "mean_tokens": 1651.614,
+          "mean_samples": 2.59
+        },
+        {
+          "threshold": 0.025,
+          "accuracy": 0.786,
+          "mean_tokens": 1798.016,
+          "mean_samples": 2.766
+        },
+        {
+          "threshold": 0.018,
+          "accuracy": 0.794,
+          "mean_tokens": 1937.708,
+          "mean_samples": 2.952
+        },
+        {
+          "threshold": 0.012,
+          "accuracy": 0.8,
+          "mean_tokens": 2170.732,
+          "mean_samples": 3.278
+        },
+        {
+          "threshold": 0.008,
+          "accuracy": 0.802,
+          "mean_tokens": 2370.942,
+          "mean_samples": 3.532
+        },
+        {
+          "threshold": 0.005,
+          "accuracy": 0.804,
+          "mean_tokens": 2696.584,
+          "mean_samples": 4.02
+        },
+        {
+          "threshold": 0.0035,
+          "accuracy": 0.802,
+          "mean_tokens": 2920.18,
+          "mean_samples": 4.318
+        },
+        {
+          "threshold": 0.0025,
+          "accuracy": 0.802,
+          "mean_tokens": 3086.23,
+          "mean_samples": 4.562
+        },
+        {
+          "threshold": 0.0015,
+          "accuracy": 0.8,
+          "mean_tokens": 3328.884,
+          "mean_samples": 4.944
+        },
+        {
+          "threshold": 0.001,
+          "accuracy": 0.8,
+          "mean_tokens": 3611.232,
+          "mean_samples": 5.35
+        },
+        {
+          "threshold": 0.0005,
+          "accuracy": 0.796,
+          "mean_tokens": 3833.476,
+          "mean_samples": 5.758
+        },
+        {
+          "threshold": 0.0002,
+          "accuracy": 0.796,
+          "mean_tokens": 4090.842,
+          "mean_samples": 6.248
+        },
+        {
+          "threshold": 0.0001,
+          "accuracy": 0.796,
+          "mean_tokens": 4317.588,
+          "mean_samples": 6.686
+        }
+      ],
+      "p1_linked_mixed": [
+        {
+          "threshold": 0.3,
+          "accuracy": 0.746,
+          "mean_tokens": 1134.82,
+          "mean_samples": 2.0
+        },
+        {
+          "threshold": 0.2,
+          "accuracy": 0.746,
+          "mean_tokens": 1134.82,
+          "mean_samples": 2.0
+        },
+        {
+          "threshold": 0.15,
+          "accuracy": 0.75,
+          "mean_tokens": 1144.25,
+          "mean_samples": 2.016
+        },
+        {
+          "threshold": 0.1,
+          "accuracy": 0.754,
+          "mean_tokens": 1253.918,
+          "mean_samples": 2.148
+        },
+        {
+          "threshold": 0.07,
+          "accuracy": 0.768,
+          "mean_tokens": 1394.062,
+          "mean_samples": 2.316
+        },
+        {
+          "threshold": 0.05,
+          "accuracy": 0.772,
+          "mean_tokens": 1557.652,
+          "mean_samples": 2.486
+        },
+        {
+          "threshold": 0.035,
+          "accuracy": 0.782,
+          "mean_tokens": 1734.068,
+          "mean_samples": 2.66
+        },
+        {
+          "threshold": 0.025,
+          "accuracy": 0.784,
+          "mean_tokens": 1896.172,
+          "mean_samples": 2.836
+        },
+        {
+          "threshold": 0.018,
+          "accuracy": 0.784,
+          "mean_tokens": 2015.978,
+          "mean_samples": 2.984
+        },
+        {
+          "threshold": 0.012,
+          "accuracy": 0.786,
+          "mean_tokens": 2141.956,
+          "mean_samples": 3.162
+        },
+        {
+          "threshold": 0.008,
+          "accuracy": 0.794,
+          "mean_tokens": 2403.248,
+          "mean_samples": 3.542
+        },
+        {
+          "threshold": 0.005,
+          "accuracy": 0.8,
+          "mean_tokens": 2703.726,
+          "mean_samples": 3.986
+        },
+        {
+          "threshold": 0.0035,
+          "accuracy": 0.804,
+          "mean_tokens": 2900.28,
+          "mean_samples": 4.28
+        },
+        {
+          "threshold": 0.0025,
+          "accuracy": 0.802,
+          "mean_tokens": 3098.934,
+          "mean_samples": 4.624
+        },
+        {
+          "threshold": 0.0015,
+          "accuracy": 0.802,
+          "mean_tokens": 3335.068,
+          "mean_samples": 5.016
+        },
+        {
+          "threshold": 0.001,
+          "accuracy": 0.804,
+          "mean_tokens": 3647.812,
+          "mean_samples": 5.544
+        },
+        {
+          "threshold": 0.0005,
+          "accuracy": 0.804,
+          "mean_tokens": 3831.734,
+          "mean_samples": 5.886
+        },
+        {
+          "threshold": 0.0002,
+          "accuracy": 0.804,
+          "mean_tokens": 4079.36,
+          "mean_samples": 6.39
+        },
+        {
+          "threshold": 0.0001,
+          "accuracy": 0.804,
+          "mean_tokens": 4221.154,
+          "mean_samples": 6.69
+        }
+      ]
+    }
+  },
+  "selected": {
+    "accuracy": {
+      "sc": {
+        "threshold": 8,
+        "dev": {
+          "threshold": 8,
+          "accuracy": 0.845,
+          "mean_tokens": 4641.27,
+          "mean_samples": 8.0
+        },
+        "test": {
+          "accuracy": 0.8,
+          "mean_tokens": 4551.75,
+          "mean_samples": 8.0
+        }
+      },
+      "M1": {
+        "threshold": 0.012,
+        "dev": {
+          "threshold": 0.012,
+          "accuracy": 0.85,
+          "mean_tokens": 2295.28,
+          "mean_samples": 3.29
+        },
+        "test": {
+          "accuracy": 0.8,
+          "mean_tokens": 2170.732,
+          "mean_samples": 3.278
+        }
+      },
+      "p1_linked_mixed": {
+        "threshold": 0.025,
+        "dev": {
+          "threshold": 0.025,
+          "accuracy": 0.845,
+          "mean_tokens": 2076.37,
+          "mean_samples": 2.955
+        },
+        "test": {
+          "accuracy": 0.784,
+          "mean_tokens": 1896.172,
+          "mean_samples": 2.836
+        }
+      }
+    },
+    "budget_0.2": {
+      "sc": {
+        "threshold": 3,
+        "dev": {
+          "threshold": 3,
+          "accuracy": 0.82,
+          "mean_tokens": 1745.48,
+          "mean_samples": 3.0
+        },
+        "test": {
+          "accuracy": 0.766,
+          "mean_tokens": 1708.584,
+          "mean_samples": 3.0
+        }
+      },
+      "M1": {
+        "threshold": 0.05,
+        "dev": {
+          "threshold": 0.05,
+          "accuracy": 0.825,
+          "mean_tokens": 1599.995,
+          "mean_samples": 2.45
+        },
+        "test": {
+          "accuracy": 0.772,
+          "mean_tokens": 1551.076,
+          "mean_samples": 2.48
+        }
+      },
+      "p1_linked_mixed": {
+        "threshold": 0.05,
+        "dev": {
+          "threshold": 0.05,
+          "accuracy": 0.825,
+          "mean_tokens": 1616.535,
+          "mean_samples": 2.48
+        },
+        "test": {
+          "accuracy": 0.772,
+          "mean_tokens": 1557.652,
+          "mean_samples": 2.486
+        }
+      }
+    },
+    "budget_0.3": {
+      "sc": {
+        "threshold": 3,
+        "dev": {
+          "threshold": 3,
+          "accuracy": 0.82,
+          "mean_tokens": 1745.48,
+          "mean_samples": 3.0
+        },
+        "test": {
+          "accuracy": 0.766,
+          "mean_tokens": 1708.584,
+          "mean_samples": 3.0
+        }
+      },
+      "M1": {
+        "threshold": 0.012,
+        "dev": {
+          "threshold": 0.012,
+          "accuracy": 0.85,
+          "mean_tokens": 2295.28,
+          "mean_samples": 3.29
+        },
+        "test": {
+          "accuracy": 0.8,
+          "mean_tokens": 2170.732,
+          "mean_samples": 3.278
+        }
+      },
+      "p1_linked_mixed": {
+        "threshold": 0.025,
+        "dev": {
+          "threshold": 0.025,
+          "accuracy": 0.845,
+          "mean_tokens": 2076.37,
+          "mean_samples": 2.955
+        },
+        "test": {
+          "accuracy": 0.784,
+          "mean_tokens": 1896.172,
+          "mean_samples": 2.836
+        }
+      }
+    },
+    "budget_0.5": {
+      "sc": {
+        "threshold": 5,
+        "dev": {
+          "threshold": 5,
+          "accuracy": 0.83,
+          "mean_tokens": 2909.515,
+          "mean_samples": 5.0
+        },
+        "test": {
+          "accuracy": 0.776,
+          "mean_tokens": 2848.622,
+          "mean_samples": 5.0
+        }
+      },
+      "M1": {
+        "threshold": 0.012,
+        "dev": {
+          "threshold": 0.012,
+          "accuracy": 0.85,
+          "mean_tokens": 2295.28,
+          "mean_samples": 3.29
+        },
+        "test": {
+          "accuracy": 0.8,
+          "mean_tokens": 2170.732,
+          "mean_samples": 3.278
+        }
+      },
+      "p1_linked_mixed": {
+        "threshold": 0.0035,
+        "dev": {
+          "threshold": 0.0035,
+          "accuracy": 0.85,
+          "mean_tokens": 3208.52,
+          "mean_samples": 4.47
+        },
+        "test": {
+          "accuracy": 0.804,
+          "mean_tokens": 2900.28,
+          "mean_samples": 4.28
+        }
+      }
+    },
+    "cf_accuracy": {
+      "sc": {
+        "threshold": [
+          7,
+          6
+        ],
+        "test": {
+          "accuracy": 0.794,
+          "mean_tokens": 3693.998,
+          "mean_samples": 6.5
+        }
+      },
+      "M1": {
+        "threshold": [
+          0.018,
+          0.05
+        ],
+        "test": {
+          "accuracy": 0.776,
+          "mean_tokens": 1724.4,
+          "mean_samples": 2.696
+        }
+      },
+      "p1_linked_mixed": {
+        "threshold": [
+          0.008,
+          0.035
+        ],
+        "test": {
+          "accuracy": 0.782,
+          "mean_tokens": 2048.242,
+          "mean_samples": 3.072
+        }
+      }
+    },
+    "cf_budget_0.2": {
+      "sc": {
+        "threshold": [
+          3,
+          3
+        ],
+        "test": {
+          "accuracy": 0.766,
+          "mean_tokens": 1708.584,
+          "mean_samples": 3.0
+        }
+      },
+      "M1": {
+        "threshold": [
+          0.035,
+          0.025
+        ],
+        "test": {
+          "accuracy": 0.784,
+          "mean_tokens": 1743.342,
+          "mean_samples": 2.698
+        }
+      },
+      "p1_linked_mixed": {
+        "threshold": [
+          0.035,
+          0.035
+        ],
+        "test": {
+          "accuracy": 0.782,
+          "mean_tokens": 1734.068,
+          "mean_samples": 2.66
+        }
+      }
+    },
+    "cf_budget_0.3": {
+      "sc": {
+        "threshold": [
+          4,
+          3
+        ],
+        "test": {
+          "accuracy": 0.762,
+          "mean_tokens": 1989.602,
+          "mean_samples": 3.5
+        }
+      },
+      "M1": {
+        "threshold": [
+          0.008,
+          0.005
+        ],
+        "test": {
+          "accuracy": 0.802,
+          "mean_tokens": 2557.992,
+          "mean_samples": 3.79
+        }
+      },
+      "p1_linked_mixed": {
+        "threshold": [
+          0.008,
+          0.005
+        ],
+        "test": {
+          "accuracy": 0.796,
+          "mean_tokens": 2551.108,
+          "mean_samples": 3.764
+        }
+      }
+    },
+    "cf_budget_0.5": {
+      "sc": {
+        "threshold": [
+          7,
+          7
+        ],
+        "test": {
+          "accuracy": 0.802,
+          "mean_tokens": 3982.474,
+          "mean_samples": 7.0
+        }
+      },
+      "M1": {
+        "threshold": [
+          0.008,
+          0.005
+        ],
+        "test": {
+          "accuracy": 0.802,
+          "mean_tokens": 2557.992,
+          "mean_samples": 3.79
+        }
+      },
+      "p1_linked_mixed": {
+        "threshold": [
+          0.0035,
+          0.0015
+        ],
+        "test": {
+          "accuracy": 0.8,
+          "mean_tokens": 3141.708,
+          "mean_samples": 4.674
+        }
+      }
+    },
+    "default": {
+      "sc": {
+        "threshold": 16,
+        "test": {
+          "accuracy": 0.798,
+          "mean_tokens": 9110.788,
+          "mean_samples": 16.0
+        }
+      }
+    }
+  },
+  "frontier_score": {
+    "sc": 0.7919333333333332,
+    "M1": 0.799566666666667,
+    "p1_linked_mixed": 0.7983666666666669
+  },
+  "contrasts": {
+    "accuracy": {
+      "p1_linked_mixed": {
+        "accuracy_difference": 0.016,
+        "accuracy_difference_ci95": [
+          0.006,
+          0.028
+        ],
+        "token_ratio": 1.1447969909902689,
+        "token_ratio_ci95": [
+          1.0978017200632593,
+          1.1965304048571705
+        ],
+        "only_a_correct": 8,
+        "only_b_correct": 0,
+        "mcnemar_exact_p": 0.0078125
+      }
+    },
+    "budget_0.2": {
+      "p1_linked_mixed": {
+        "accuracy_difference": 0.0,
+        "accuracy_difference_ci95": [
+          -0.008,
+          0.008
+        ],
+        "token_ratio": 0.9957782611263619,
+        "token_ratio_ci95": [
+          0.9708365035386209,
+          1.0221329350315227
+        ],
+        "only_a_correct": 2,
+        "only_b_correct": 2,
+        "mcnemar_exact_p": 1.0
+      }
+    },
+    "budget_0.3": {
+      "p1_linked_mixed": {
+        "accuracy_difference": 0.016,
+        "accuracy_difference_ci95": [
+          0.006,
+          0.028
+        ],
+        "token_ratio": 1.1447969909902689,
+        "token_ratio_ci95": [
+          1.0978017200632593,
+          1.1965304048571705
+        ],
+        "only_a_correct": 8,
+        "only_b_correct": 0,
+        "mcnemar_exact_p": 0.0078125
+      }
+    },
+    "budget_0.5": {
+      "p1_linked_mixed": {
+        "accuracy_difference": -0.004,
+        "accuracy_difference_ci95": [
+          -0.018,
+          0.01
+        ],
+        "token_ratio": 0.7484560111437516,
+        "token_ratio_ci95": [
+          0.7140491619550282,
+          0.7865432164822873
+        ],
+        "only_a_correct": 5,
+        "only_b_correct": 7,
+        "mcnemar_exact_p": 0.7744140625
+      }
+    },
+    "cf_accuracy": {
+      "p1_linked_mixed": {
+        "accuracy_difference": -0.006,
+        "accuracy_difference_ci95": [
+          -0.016,
+          0.004
+        ],
+        "token_ratio": 0.8418927060376654,
+        "token_ratio_ci95": [
+          0.8024586629096839,
+          0.8839436134291311
+        ],
+        "only_a_correct": 2,
+        "only_b_correct": 5,
+        "mcnemar_exact_p": 0.453125
+      }
+    },
+    "cf_budget_0.2": {
+      "p1_linked_mixed": {
+        "accuracy_difference": 0.002,
+        "accuracy_difference_ci95": [
+          -0.01,
+          0.014
+        ],
+        "token_ratio": 1.0053481178362096,
+        "token_ratio_ci95": [
+          0.9720589846633304,
+          1.040924160209811
+        ],
+        "only_a_correct": 6,
+        "only_b_correct": 5,
+        "mcnemar_exact_p": 1.0
+      }
+    },
+    "cf_budget_0.3": {
+      "p1_linked_mixed": {
+        "accuracy_difference": 0.006,
+        "accuracy_difference_ci95": [
+          -0.004,
+          0.016
+        ],
+        "token_ratio": 1.002698435346524,
+        "token_ratio_ci95": [
+          0.9524725220534714,
+          1.0588574623205445
+        ],
+        "only_a_correct": 5,
+        "only_b_correct": 2,
+        "mcnemar_exact_p": 0.453125
+      }
+    },
+    "cf_budget_0.5": {
+      "p1_linked_mixed": {
+        "accuracy_difference": 0.002,
+        "accuracy_difference_ci95": [
+          -0.012,
+          0.016
+        ],
+        "token_ratio": 0.8142042481350908,
+        "token_ratio_ci95": [
+          0.7729723156494044,
+          0.855355999888755
+        ],
+        "only_a_correct": 7,
+        "only_b_correct": 6,
+        "mcnemar_exact_p": 1.0
+      }
+    }
+  }
+}

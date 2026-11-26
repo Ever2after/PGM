@@ -1,0 +1,274 @@
+{
+  "study": {
+    "source_dir": "results/p1_objectives",
+    "variants": [
+      "P1_independent",
+      "P1_linked"
+    ],
+    "training_methods": [
+      "joint",
+      "mixed_uniform",
+      "mixed_v1"
+    ],
+    "confidence_controls": [
+      "mixed_uniform"
+    ],
+    "integration_tolerance": 0.001,
+    "seed_key": "P1_stopping",
+    "model_selection": "none; reuse all six fixed Joint/Mixed heads, including previous dev-selected Mixed lambda",
+    "evaluation": "unchanged configs/v2.json and pgm_asc.v2.run.score_families; report primary Mixed-uniform and Joint, v1 sensitivity separately"
+  },
+  "v2": {
+    "models": [
+      "gemma4b",
+      "qwen7b",
+      "llama8b"
+    ],
+    "datasets": [
+      "math",
+      "gsm8k",
+      "omnimath"
+    ],
+    "fit_split": "train",
+    "select_split": "dev",
+    "eval_split": "test",
+    "grid_size": 80,
+    "grid_logit_range": [
+      -7.0,
+      7.0
+    ],
+    "x_features": [
+      "bottom10_confidence"
+    ],
+    "stopping": {
+      "minimum": 2,
+      "cap": 16
+    },
+    "gammas": [
+      0.5,
+      0.6,
+      0.7,
+      0.75,
+      0.8,
+      0.85,
+      0.875,
+      0.9,
+      0.92,
+      0.94,
+      0.95,
+      0.96,
+      0.97,
+      0.98,
+      0.985,
+      0.99,
+      0.993,
+      0.995,
+      0.997,
+      0.999
+    ],
+    "lambdas": [
+      0.3,
+      0.2,
+      0.15,
+      0.1,
+      0.07,
+      0.05,
+      0.035,
+      0.025,
+      0.018,
+      0.012,
+      0.008,
+      0.005,
+      0.0035,
+      0.0025,
+      0.0015,
+      0.001,
+      0.0005,
+      0.0002,
+      0.0001
+    ],
+    "esc_windows": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      8
+    ],
+    "voi": {
+      "simulations": 48,
+      "horizons": [
+        1,
+        2,
+        4,
+        8,
+        16
+      ],
+      "seed": 20261116
+    },
+    "selection": {
+      "accuracy_tolerance": 0.01,
+      "budgets": [
+        0.2,
+        0.3,
+        0.5
+      ]
+    },
+    "bootstrap": {
+      "replicates": 10000,
+      "seed": 20261116
+    },
+    "arms": {
+      "M0": {
+        "theta": "q",
+        "wrong": "crp",
+        "x": "none",
+        "copy": "none",
+        "other": true,
+        "stop": "confidence",
+        "decision": "plurality",
+        "fit_as": "M0"
+      },
+      "M1": {
+        "theta": "q",
+        "wrong": "crp",
+        "x": "none",
+        "copy": "none",
+        "other": true,
+        "stop": "voi",
+        "decision": "plurality",
+        "fit_as": "M0"
+      },
+      "M1_map": {
+        "theta": "q",
+        "wrong": "crp",
+        "x": "none",
+        "copy": "none",
+        "other": true,
+        "stop": "voi",
+        "decision": "map",
+        "fit_as": "M0"
+      },
+      "M1_no_other": {
+        "theta": "q",
+        "wrong": "crp",
+        "x": "none",
+        "copy": "none",
+        "other": false,
+        "stop": "voi",
+        "decision": "plurality",
+        "fit_as": "M0"
+      },
+      "M1_theta_const": {
+        "theta": "const",
+        "wrong": "crp",
+        "x": "none",
+        "copy": "none",
+        "other": true,
+        "stop": "voi",
+        "decision": "plurality",
+        "fit_as": "M1_theta_const"
+      },
+      "M1_no_crp": {
+        "theta": "q",
+        "wrong": "flat",
+        "x": "none",
+        "copy": "none",
+        "other": true,
+        "stop": "voi",
+        "decision": "plurality",
+        "fit_as": "M1_no_crp"
+      },
+      "M2": {
+        "theta": "q",
+        "wrong": "crp",
+        "x": "both",
+        "copy": "none",
+        "other": true,
+        "stop": "voi",
+        "decision": "plurality",
+        "fit_as": "M2"
+      },
+      "M2_map": {
+        "theta": "q",
+        "wrong": "crp",
+        "x": "both",
+        "copy": "none",
+        "other": true,
+        "stop": "voi",
+        "decision": "map",
+        "fit_as": "M2"
+      },
+      "M1_copy": {
+        "theta": "q",
+        "wrong": "crp",
+        "x": "none",
+        "copy": "text",
+        "other": true,
+        "stop": "voi",
+        "decision": "plurality",
+        "fit_as": "M1_copy"
+      },
+      "M1_copy_hidden": {
+        "theta": "q",
+        "wrong": "crp",
+        "x": "none",
+        "copy": "hidden",
+        "other": true,
+        "stop": "voi",
+        "decision": "plurality",
+        "fit_as": "M1_copy_hidden"
+      },
+      "M1_copy_perm": {
+        "theta": "q",
+        "wrong": "crp",
+        "x": "none",
+        "copy": "perm",
+        "other": true,
+        "stop": "voi",
+        "decision": "plurality",
+        "fit_as": "M1_copy_perm"
+      },
+      "M3": {
+        "theta": "q",
+        "wrong": "crp",
+        "x": "both",
+        "copy": "text",
+        "other": true,
+        "stop": "voi",
+        "decision": "plurality",
+        "fit_as": "M3"
+      }
+    },
+    "primary": "M1",
+    "ladder": [
+      "M0",
+      "M1",
+      "M2",
+      "M3"
+    ],
+    "baselines": [
+      "sc",
+      "asc",
+      "esc",
+      "reasc_offline",
+      "reasc_online"
+    ],
+    "crossfit": {
+      "folds": 2,
+      "seed": 20261117
+    }
+  },
+  "code_sha256": {
+    "p1_stopping/model.py": "9258fd6513c3482bf50c9aac4adb477f270d40597992ae07fc391d1aba86695a",
+    "p1_stopping/run.py": "d0e2f87201045b80efd24428120f94dc438d05d013f5c802062bdd4ca942e4f0",
+    "p1_stopping/plugin.py": "455c5e61c8c903f109ee6685f345fdcc2ccb9b40092ce09f2ae453dcc7db8f39",
+    "hierarchical/model.py": "c2595ace0357e812455506e11a208c2df2b893496e3b722157ae0e9d3a61a103",
+    "v2/model.py": "05dd3ee73def1828f6ce341e23003c00e4e8561837dbfd2c464e791a36acc8c2",
+    "v2/voi.py": "db0c9f59f61af82c2aea15f9572e3f7294054353f049241253f41d97e6194509",
+    "v2/run.py": "82e9c0ef86d9dcd0514ba791f78d8a53f70528764ca9dd79837ac4098a7b7a65",
+    "v2/methods.py": "0e02456c874c56261bfb2ec3eb52aea7db5f9b2a7005afd7dd5419f91a9eab7b",
+    "v2/baselines.py": "d69206633941c105e3da1c5803048f56f8ada118cf9b94d6e74b37bfe1ecba22"
+  },
+  "experiment_id": "31e9d2ff48949127"
+}

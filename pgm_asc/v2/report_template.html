@@ -378,7 +378,10 @@ const SETS = {
   struct: {label: "구조 제거", methods: ["M1", "M1_no_crp", "M1_no_other", "M1_theta_const", "M1_map"]},
   copy:   {label: "중복·embedding", methods: ["M1", "M1_copy", "M1_copy_hidden", "M1_copy_perm"]},
 };
-const BASE = D.baselines.concat(EXTRA).slice(0, 7);
+for (let i = 0; i < EXTRA.length; i += 7) {
+  SETS["user" + (i / 7 + 1)] = {label: "추가 방법 " + (i / 7 + 1), methods: ["M1", ...EXTRA.slice(i, i + 7)]};
+}
+const BASE = D.baselines.concat(EXTRA);
 const esc = s => String(s).replace(/[&<>]/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;"}[c]));
 const mean = a => a.reduce((s, x) => s + x, 0) / a.length;
 const median = a => { const b = [...a].sort((x, y) => x - y); const m = b.length >> 1; return b.length % 2 ? b[m] : (b[m - 1] + b[m]) / 2; };
@@ -527,11 +530,11 @@ function drawMatched() {
   s += `<g class="axis">${tx.map(v => `<text x="${X(v)}" y="${H - m.b + 15}" text-anchor="middle">×${v}</text>`).join("")}${ty.map(v => `<text x="${m.l - 6}" y="${Y(v) + 4}" text-anchor="end">${v > 0 ? "+" : ""}${v}</text>`).join("")}</g>`;
   s += `<text class="axlabel" x="${(W + m.l) / 2}" y="${H - 8}" text-anchor="middle">토큰 비율 M1 ÷ baseline (log, 왼쪽일수록 M1이 적게 씀)</text><text class="axlabel" transform="translate(14 ${(H + m.t - m.b) / 2}) rotate(-90)" text-anchor="middle">정확도 차이 M1 − baseline (pp)</text>`;
   s += `<text class="axlabel" x="${m.l + 8}" y="${m.t + 16}">M1이 더 싸고 더 정확</text>`;
-  const jit = (p) => (p.i - 1.5) * 0.012;
+  const jit = (p) => BASE.length > 1 ? (p.i / (BASE.length - 1) - 0.5) * 0.036 : 0;
   pts.forEach(p => {
     const x = X(p.v[3] * (1 + jit(p)));
-    s += `<line x1="${x}" x2="${x}" y1="${Y(p.v[1])}" y2="${Y(p.v[2])}" stroke="${SLOTS[p.i + 1]}" stroke-width="1.4" opacity="0.7"/>`;
-    s += `<circle class="pt" cx="${x}" cy="${Y(p.v[0])}" r="5" fill="${SLOTS[p.i + 1]}" stroke="var(--surface)" stroke-width="2"/>`;
+    s += `<line x1="${x}" x2="${x}" y1="${Y(p.v[1])}" y2="${Y(p.v[2])}" stroke="${SLOTS[(p.i + 1) % SLOTS.length]}" stroke-width="1.4" opacity="0.7"/>`;
+    s += `<circle class="pt" cx="${x}" cy="${Y(p.v[0])}" r="5" fill="${SLOTS[(p.i + 1) % SLOTS.length]}" stroke="var(--surface)" stroke-width="2"/>`;
   });
   s += `</svg><div class="tip"></div>`;
   const host = document.getElementById("mt-chart");
@@ -548,7 +551,7 @@ function drawMatched() {
     tip.style.left = left + "px"; tip.style.top = (ev.clientY - hr.top + 10) + "px"; tip.style.opacity = 1;
   });
   svg.addEventListener("mouseleave", () => tip.style.opacity = 0);
-  document.getElementById("mt-leg").innerHTML = BASE.map((k, i) => `<span><svg width="12" height="12"><circle cx="6" cy="6" r="5" fill="${SLOTS[i + 1]}"/></svg>vs ${esc(N[k])}</span>`).join("") + `<span class="note">세로선 = 95% bootstrap CI</span>`;
+  document.getElementById("mt-leg").innerHTML = BASE.map((k, i) => `<span><svg width="12" height="12"><circle cx="6" cy="6" r="5" fill="${SLOTS[(i + 1) % SLOTS.length]}"/></svg>vs ${esc(N[k])}</span>`).join("") + `<span class="note">세로선 = 95% bootstrap CI</span>`;
   const methods = ["M1", "M0", "M2", "M3", ...BASE];
   const head = `<tr><th>셀</th><th class="n">SC16</th>${methods.map(k => `<th class="n">${esc(N[k])}</th>`).join("")}</tr>`;
   const rows = C.map(c => `<tr><td>${esc(c.model)} ${esc(c.dataset)}</td><td class="n">${fmt(c.sc16[0])}</td>${methods.map(k => { const p = c.sel[mt.rule][k]; return p ? `<td class="n">${fmt(p[1])} <span class="tok">/ ${Math.round(p[0] * 100)}%</span></td>` : `<td class="n">–</td>`; }).join("")}</tr>`).join("");

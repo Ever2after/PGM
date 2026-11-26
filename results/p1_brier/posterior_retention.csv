@@ -1,0 +1,17 @@
+variant,weighting,beta,posterior_gain_retained_fraction,posterior_below_joint_cells,mc_gain_below_mixed_cells,exact_gain_below_mixed_cells,exact_brier_below_mixed_cells,cells
+P1_independent,uniform,0.1,0.9993848542457813,9,3,3,1,9
+P1_independent,uniform,1.0,0.9944308610830325,9,2,2,1,9
+P1_independent,uniform,10.0,0.9593955919699949,9,3,2,2,9
+P1_independent,uniform,100.0,0.7483388259501135,7,3,1,1,9
+P1_independent,v1,0.1,0.9993735658668879,9,3,4,2,9
+P1_independent,v1,1.0,0.9945593964788619,9,6,4,3,9
+P1_independent,v1,10.0,0.9688882369131658,9,4,4,3,9
+P1_independent,v1,100.0,0.8152201481693493,8,4,3,3,9
+P1_linked,uniform,0.1,0.9993655859138784,9,4,2,3,9
+P1_linked,uniform,1.0,0.9940510896351585,9,2,2,3,9
+P1_linked,uniform,10.0,0.9539854055261938,8,4,2,3,9
+P1_linked,uniform,100.0,0.6885806507675855,6,3,3,3,9
+P1_linked,v1,0.1,0.9992192188860998,9,4,3,4,9
+P1_linked,v1,1.0,0.99308393256085,9,5,3,4,9
+P1_linked,v1,10.0,0.9580988318226988,9,3,3,4,9
+P1_linked,v1,100.0,0.7678602499408438,9,3,3,4,9

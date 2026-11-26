@@ -1,0 +1,211 @@
+{
+  "experiment_id": "70be0a58f544fb26",
+  "study": {
+    "models": [
+      "gemma4b",
+      "qwen7b",
+      "llama8b"
+    ],
+    "datasets": [
+      "math",
+      "gsm8k",
+      "omnimath"
+    ],
+    "training": {
+      "unique_correct_only": true,
+      "lambda_grid": [
+        0.1,
+        1.0,
+        10.0
+      ],
+      "weightings": [
+        "uniform",
+        "v1"
+      ],
+      "restart_seeds": [
+        0,
+        43,
+        44
+      ],
+      "initialization_sd": 0.5,
+      "max_iter": 300,
+      "ridge": 6.25e-06,
+      "tolerance_grad": 1e-07,
+      "tolerance_change": 1e-10,
+      "dev_selection": "unique_nll_equal_evaluation_prefixes",
+      "mixed_objective": "(joint_nll_per_response + lambda * weighted_prefix_nll) / (1 + lambda)",
+      "sigma_starts": [
+        0.25,
+        0.75,
+        1.5
+      ],
+      "predictive_weights": [
+        0.1,
+        1.0,
+        10.0
+      ],
+      "predictive_prefixes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "predictive_objective": "(previous_normalized_mixed + gamma * mean_next_answer_nll) / (1 + gamma)",
+      "lambda_selection": "frozen previous dev-selected Mixed lambda per graph/cell/weighting",
+      "gamma_selection": "none; report every prespecified gamma, without test selection",
+      "transition_weights": [
+        0.1,
+        1.0,
+        10.0
+      ],
+      "transition_prefixes": [
+        1,
+        2,
+        4,
+        8
+      ],
+      "transition_horizons": [
+        1,
+        2,
+        4,
+        8
+      ],
+      "transition_loss": "categorical NLL of repair/damage/stay; native predictive probabilities, no gold conditioning",
+      "transition_objective": "(previous normalized Mixed + beta * transition_nll) / (1 + beta)",
+      "beta_selection": "none; report all prespecified coefficients"
+    },
+    "evaluation": {
+      "splits": [
+        "dev",
+        "test"
+      ],
+      "prefixes": [
+        1,
+        2,
+        4,
+        8,
+        16
+      ],
+      "horizons": [
+        1,
+        2,
+        4,
+        8
+      ],
+      "simulations_per_seed": 256,
+      "mc_seeds": [
+        20261125,
+        20261126,
+        20261127
+      ],
+      "bootstrap_replicates": 1000,
+      "bootstrap_seed": 20261125,
+      "paired_gain": true,
+      "reference": "valid-answer plurality, earliest observed answer wins ties"
+    },
+    "variants": [
+      "P1_independent",
+      "P1_linked"
+    ],
+    "integration": {
+      "normal_nodes": [
+        61,
+        121,
+        181,
+        241
+      ],
+      "tolerance": 0.001,
+      "sigma_bound": 3.0,
+      "q_grid": "released M1: 80 nodes, logits [-7,7]"
+    },
+    "baseline": "frozen previous Mixed and all next-answer predictive arms from p1_predictive"
+  },
+  "code_sha256": {
+    "p1_transitions/train.py": "cee4f8b9d8f2d0cc21ac7cc7a2ae6501ad7e9141aa4a55061ac6ce7cb430124d",
+    "p1_transitions/run.py": "5456ad7bab403b195ed2e862fe5f7914a54e84495d075ca11d73ff4773d45d02",
+    "p1_transitions/kernel.py": "1090f0e140a740f5508765e36fc43cae8b8a407e0327a923ad37c6c31d3aa9ed",
+    "p1_transitions/evaluation.py": "70f129011a10a2bc292bf962a2c8e85bbae712398ec4e5c8120ac93d89f5037d",
+    "p1_predictive/train.py": "b3cae73194fb4a963a429375869f7027debb54e1c1dbcc291aa90e7fae7b7325",
+    "p1_predictive/run.py": "dd2b1f158845750594b0beaf8a169ad78a6b2ca9d879b743e0e9cc569ddb381b",
+    "hierarchical/model.py": "c2595ace0357e812455506e11a208c2df2b893496e3b722157ae0e9d3a61a103",
+    "p1_objectives/train.py": "f34e89fe396e61e251311fa21cfa7fa56529628f91b1f185999b161586027ddb",
+    "p1_objectives/run.py": "e37ef8d2ad3ec7e9323a941df798fe51e91512a7a6063535bdd08c873b3262a4",
+    "objectives/train.py": "39d5e8799891e2b884a67e547ddd0f06f4637429bf08fbb38160404a1e3a14f2",
+    "objectives/run.py": "0018a9c87a7c73a1c68be879d6facfeb890ab1d0f9dd82a1994f17f0c117287c",
+    "diagnostics/metrics.py": "9945eec239e503a61ee552144c992997ee4f50744c7c7e21d55cd641fcc930a7",
+    "diagnostics/predictive.py": "a09a295d5c1aef22f514cb0221a14618f4ad9d56b87f26ec17eced994f118546",
+    "v2/model.py": "05dd3ee73def1828f6ce341e23003c00e4e8561837dbfd2c464e791a36acc8c2"
+  },
+  "parameters": {
+    "P1_independent": [
+      "log_a",
+      "log_b",
+      "t0",
+      "sigma_raw"
+    ],
+    "P1_linked": [
+      "log_a",
+      "log_b",
+      "t0",
+      "t1",
+      "sigma_raw"
+    ]
+  },
+  "inputs": [
+    "answer ids",
+    "valid"
+  ],
+  "prefix_weights": {
+    "uniform": [
+      0.0625,
+      0.0625,
+      0.0625,
+      0.0625,
+      0.0625,
+      0.0625,
+      0.0625,
+      0.0625,
+      0.0625,
+      0.0625,
+      0.0625,
+      0.0625,
+      0.0625,
+      0.0625,
+      0.0625,
+      0.0625
+    ],
+    "v1": [
+      0.2,
+      0.2,
+      0.1,
+      0.1,
+      0.05,
+      0.05,
+      0.05,
+      0.05,
+      0.025,
+      0.025,
+      0.025,
+      0.025,
+      0.025,
+      0.025,
+      0.025,
+      0.025
+    ]
+  },
+  "loss": "M=(J+lambda*C)/(1+lambda); L=(M+beta*T)/(1+beta)+ridge; T=mean categorical NLL of repair/damage/stay",
+  "beta_selection": "none; all prespecified beta arms evaluated",
+  "baseline": "Frozen Mixed and all next-answer predictive weights; gamma=1 fixed for paired contrasts",
+  "transition": "Native multi-step events by exact restricted CRP partitions and q/Normal quadrature; gold current/future labels are targets only"
+}
